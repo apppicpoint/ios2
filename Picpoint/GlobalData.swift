@@ -8,3 +8,4 @@ var passwordRegister: [String] = []
 //Arrays login hardcoded
 var emailLogin: [String] = []
 var passwordLogin: [String] = []
+var checkLoginTrue: [String] = []

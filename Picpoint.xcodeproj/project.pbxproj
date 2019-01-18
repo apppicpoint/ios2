@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1744CC4C5382D7568141763C /* Pods_Picpoint.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E5DABCEB6E2279A2BA6280E /* Pods_Picpoint.framework */; };
 		D2C2EAB421EC7D1500D547BD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C2EAB321EC7D1500D547BD /* AppDelegate.swift */; };
 		D2C2EAB621EC7D1500D547BD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C2EAB521EC7D1500D547BD /* ViewController.swift */; };
 		D2C2EAB921EC7D1500D547BD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D2C2EAB721EC7D1500D547BD /* Main.storyboard */; };
@@ -18,6 +19,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2C7CBB10648258A8C8C8A197 /* Pods-Picpoint.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Picpoint.release.xcconfig"; path = "Pods/Target Support Files/Pods-Picpoint/Pods-Picpoint.release.xcconfig"; sourceTree = "<group>"; };
+		7E5DABCEB6E2279A2BA6280E /* Pods_Picpoint.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Picpoint.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C05BA933E4DAAB37B56E6706 /* Pods-Picpoint.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Picpoint.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Picpoint/Pods-Picpoint.debug.xcconfig"; sourceTree = "<group>"; };
 		D2C2EAB021EC7D1500D547BD /* Picpoint.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Picpoint.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2C2EAB321EC7D1500D547BD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D2C2EAB521EC7D1500D547BD /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -35,17 +39,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1744CC4C5382D7568141763C /* Pods_Picpoint.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		544DCEB6A3EE3ECEFB8A9F55 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				C05BA933E4DAAB37B56E6706 /* Pods-Picpoint.debug.xcconfig */,
+				2C7CBB10648258A8C8C8A197 /* Pods-Picpoint.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		C56A70AE010E6CD43AD7729B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				7E5DABCEB6E2279A2BA6280E /* Pods_Picpoint.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		D2C2EAA721EC7D1500D547BD = {
 			isa = PBXGroup;
 			children = (
 				D2C2EAB221EC7D1500D547BD /* Picpoint */,
 				D2C2EAB121EC7D1500D547BD /* Products */,
+				544DCEB6A3EE3ECEFB8A9F55 /* Pods */,
+				C56A70AE010E6CD43AD7729B /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -61,10 +85,10 @@
 			isa = PBXGroup;
 			children = (
 				D2C2EAB321EC7D1500D547BD /* AppDelegate.swift */,
+				D2C2EAC521EC82B200D547BD /* RegisterViewController.swift */,
+				D2C2EACB21EC86C600D547BD /* LoginViewController.swift */,
 				D2C2EAB521EC7D1500D547BD /* ViewController.swift */,
 				D2C2EAB721EC7D1500D547BD /* Main.storyboard */,
-				D2C2EACB21EC86C600D547BD /* LoginViewController.swift */,
-				D2C2EAC521EC82B200D547BD /* RegisterViewController.swift */,
 				D2C2EABA21EC7D1600D547BD /* Assets.xcassets */,
 				D2C2EABC21EC7D1600D547BD /* LaunchScreen.storyboard */,
 				D2C2EABF21EC7D1600D547BD /* Info.plist */,
@@ -80,9 +104,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D2C2EAC221EC7D1600D547BD /* Build configuration list for PBXNativeTarget "Picpoint" */;
 			buildPhases = (
+				CCDDD13988B8AB69AA7BBF95 /* [CP] Check Pods Manifest.lock */,
 				D2C2EAAC21EC7D1500D547BD /* Sources */,
 				D2C2EAAD21EC7D1500D547BD /* Frameworks */,
 				D2C2EAAE21EC7D1500D547BD /* Resources */,
+				D3B6D59D0D8D09279A6F2BDF /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -138,6 +164,53 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		CCDDD13988B8AB69AA7BBF95 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Picpoint-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D3B6D59D0D8D09279A6F2BDF /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Picpoint/Pods-Picpoint-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Picpoint/Pods-Picpoint-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		D2C2EAAC21EC7D1500D547BD /* Sources */ = {
@@ -292,11 +365,13 @@
 		};
 		D2C2EAC321EC7D1600D547BD /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C05BA933E4DAAB37B56E6706 /* Pods-Picpoint.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = M6UL89LB74;
 				INFOPLIST_FILE = Picpoint/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -310,11 +385,13 @@
 		};
 		D2C2EAC421EC7D1600D547BD /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2C7CBB10648258A8C8C8A197 /* Pods-Picpoint.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = M6UL89LB74;
 				INFOPLIST_FILE = Picpoint/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

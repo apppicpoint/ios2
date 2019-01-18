@@ -1,4 +1,5 @@
 import UIKit
+import Alamofire
 
 class RegisterViewController: UIViewController {
     
@@ -9,33 +10,103 @@ class RegisterViewController: UIViewController {
     @IBOutlet weak var confirmPasswordField: UITextField!
     @IBOutlet weak var registerBtn: UIButton!
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+    override func viewDidLoad() {super.viewDidLoad()}
+    
+    @IBAction func register(_ sender: Any){
+        emptyFields()
+        checkPassword()
+        checkLengthPassword()
+        emailValidation()
+        registerLogic()
     }
-    func registerLogic(){
-        
-        if registerBtn.isTouchInside && (!(emailField.text?.isEmpty)!) && (!(nameField.text?.isEmpty)!) && (!(passwordField.text?.isEmpty)!)
+    
+    func requestRegister()
+    {
+        request("http://192.168.6.162/api/public/index.php/api/register",
+                method: .post,
+                parameters: ["name":nameField.text!, "email":emailField.text!, "password":passwordField.text! , "nickName":nickNameField.text!],
+                encoding: URLEncoding.httpBody).responseJSON { (respuesta) in
+                    print(respuesta.response?.statusCode ?? 0)
+                    print(respuesta.result.value!)
+                    
+                    if((respuesta.response?.statusCode) != 200)
+                    {
+                        let alert = UIAlertController(title: "An error ocurred", message:
+                            "Plis try it again", preferredStyle: .alert)
+                        
+                        alert.addAction(UIAlertAction(title: "ok", style:
+                            .cancel, handler: { (accion) in}))
+                        self.present(alert, animated: true, completion: nil)
+                    }
+        }
+    }
+    
+    
+    func registerLogic()
+    {
+            if registerBtn.isTouchInside && (!(nameField.text?.isEmpty)!) && (!(nickNameField.text?.isEmpty)!) && (!(emailField.text?.isEmpty)!)  && (!(passwordField.text?.isEmpty)!) && (!(confirmPasswordField.text?.isEmpty)!)
+            {
+                requestRegister()
+                let alert = UIAlertController(title: "Thank you for registering \(nickNameField.text ?? "nickName") ", message:
+                    "we hope you enjoy the app", preferredStyle: .alert)
+                
+                alert.addAction(UIAlertAction(title: "ok", style:
+                    .cancel, handler: { (accion) in
+                        self.performSegue(withIdentifier: "registerOK", sender: nil)
+
+                }))
+                present(alert, animated: true, completion: nil)
+            }
+    }
+    
+    func checkPassword()
+    {
+        if passwordField.text != confirmPasswordField.text
         {
-            
-            let alert = UIAlertController(title: "Thank you for registering \(nameField.text ?? "nameUser") ", message:
-                "we hope you enjoy the app", preferredStyle: .alert)
+            let alert = UIAlertController(title: "Passwords don´t match", message:
+                "Try it again", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "ok", style: .cancel, handler: { (accion) in}))
+            present(alert, animated: true, completion: nil)
+        }
+    }
+    
+    func checkLengthPassword()
+    {
+        if (passwordField.text?.count)! < 8
+        {
+            let alert = UIAlertController(title: "Password must be at least 8 characters long", message:
+                "Try it again", preferredStyle: .alert)
             
             alert.addAction(UIAlertAction(title: "ok", style:
-                .cancel, handler: { (accion) in
-                    nameRegister.append(self.emailField.text!)
-                    emailRegister.append(self.nameField.text!)
-                    passwordRegister.append(self.passwordField.text!)
-            }))
+                .cancel, handler: { (accion) in}))
             present(alert, animated: true, completion: nil)
-
         }
-        
     }
-
-    @IBAction func register(_ sender: Any) {
-        registerLogic()
+    
+    func emptyFields()
+    {
+        if ((nameField.text?.isEmpty)! && (nickNameField.text?.isEmpty)! && (emailField.text?.isEmpty)! && (passwordField.text?.isEmpty)! && (confirmPasswordField.text?.isEmpty)!)
+        {
+            let alert = UIAlertController(title: "There can be no empty fields", message:
+                "Try it again", preferredStyle: .alert)
+            
+            alert.addAction(UIAlertAction(title: "ok", style:
+                .cancel, handler: { (accion) in}))
+            present(alert, animated: true, completion: nil)
+        }
+    }
+    
+    func emailValidation()
+    {
+        if (!(emailField.text?.contains("@"))!)
+        {
+            let alert = UIAlertController(title: "The mail must contain @", message:
+                "Try it again", preferredStyle: .alert)
+            
+            alert.addAction(UIAlertAction(title: "ok", style:
+                .cancel, handler: { (accion) in}))
+            present(alert, animated: true, completion: nil)
+        }
     }
     
 }
