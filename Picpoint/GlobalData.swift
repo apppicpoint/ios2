@@ -1,14 +1,5 @@
 import Foundation
-//Arrays registro hardcoded
-var emailRegister: [String] = []
-var nameRegister: [String] = []
-var passwordRegister: [String] = []
-
-//Arrays login hardcoded
-var emailLogin: [String] = []
-var passwordLogin: [String] = []
-var checkLoginTrue: [String] = []
-
+//Funciones relacionadas con el guardado y carga de datos
 var token = String()
 
 func saveInDefaults(value: String, key: String)

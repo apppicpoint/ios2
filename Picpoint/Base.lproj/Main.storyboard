@@ -18,7 +18,7 @@
         <!--Register View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="RegisterViewController" customModule="Picpoint" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="register" id="BYZ-38-t0r" customClass="RegisterViewController" customModule="Picpoint" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -496,7 +496,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="plm-o2-hZ4">
             <objects>
-                <tabBarController id="TVd-Fc-7sI" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="app" id="TVd-Fc-7sI" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Oii-6Z-B5P">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -824,7 +824,7 @@
         <image name="ok" width="48" height="48.5"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="f1Y-vh-H2y"/>
+        <segue reference="fOT-Tv-ZUK"/>
         <segue reference="LHQ-Wi-Wg0"/>
     </inferredMetricsTieBreakers>
 </document>
