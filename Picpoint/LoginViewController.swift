@@ -10,7 +10,9 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {super.viewDidLoad()}
     //Botón de login
     @IBAction func login(_ sender: Any) {
+        emptyFields()
         emailValidation()
+        checkLengthPassword()
         loginLogic()
     }
     //Botón de usuario sin registro
@@ -116,6 +118,48 @@ class LoginViewController: UIViewController {
         if (!(emailFieldL.text?.contains("@"))!)
         {
             let alert = UIAlertController(title: "The mail must contain @", message:
+                "Try it again", preferredStyle: .alert)
+            
+            alert.addAction(UIAlertAction(title: "ok", style:
+                .cancel, handler: { (accion) in}))
+            present(alert, animated: true, completion: nil)
+        }
+    }
+    func emptyFields()
+    {
+        if ((emailFieldL.text?.isEmpty)! && (passwordFieldL.text?.isEmpty)!)
+        {
+            let alert = UIAlertController(title: "There can be no empty fields", message:
+                "Try it again", preferredStyle: .alert)
+            
+            alert.addAction(UIAlertAction(title: "ok", style:
+                .cancel, handler: { (accion) in}))
+            present(alert, animated: true, completion: nil)
+        }
+        if ((emailFieldL.text?.isEmpty)!)
+        {
+            let alert = UIAlertController(title: "There can be no empty fields", message:
+                "Try it again", preferredStyle: .alert)
+            
+            alert.addAction(UIAlertAction(title: "ok", style:
+                .cancel, handler: { (accion) in}))
+            present(alert, animated: true, completion: nil)
+        }
+        if ((passwordFieldL.text?.isEmpty)!)
+        {
+            let alert = UIAlertController(title: "There can be no empty fields", message:
+                "Try it again", preferredStyle: .alert)
+            
+            alert.addAction(UIAlertAction(title: "ok", style:
+                .cancel, handler: { (accion) in}))
+            present(alert, animated: true, completion: nil)
+        }
+    }
+    func checkLengthPassword()
+    {
+        if (passwordFieldL.text?.count)! < 8
+        {
+            let alert = UIAlertController(title: "Password must be at least 8 characters long", message:
                 "Try it again", preferredStyle: .alert)
             
             alert.addAction(UIAlertAction(title: "ok", style:

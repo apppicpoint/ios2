@@ -8,6 +8,7 @@ class RecoverPasswordViewController: UIViewController {
     override func viewDidLoad() {super.viewDidLoad()}
 //Botón recuperar contraseña
     @IBAction func actionRecoverPassword(_ sender: Any) {
+        emailValidation()
         requestRegister()
     }
     //Petición con la api de recuperación de contraseña
@@ -37,6 +38,18 @@ class RecoverPasswordViewController: UIViewController {
             let alert = UIAlertController(title: "No connection", message:
                 "Try it again", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "ok", style: .cancel, handler: { (accion) in}))
+            present(alert, animated: true, completion: nil)
+        }
+    }
+    func emailValidation()
+    {
+        if (!(emailFieldRP.text?.contains("@"))!)
+        {
+            let alert = UIAlertController(title: "The mail must contain @", message:
+                "Try it again", preferredStyle: .alert)
+            
+            alert.addAction(UIAlertAction(title: "ok", style:
+                .cancel, handler: { (accion) in}))
             present(alert, animated: true, completion: nil)
         }
     }
