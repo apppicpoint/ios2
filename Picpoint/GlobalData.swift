@@ -15,3 +15,4 @@ func loadFromDefaults(key: String) -> String
     value = UserLoad.object(forKey: key) as! String
     return value
 }
+//borrar :)

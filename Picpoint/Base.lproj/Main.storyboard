@@ -278,7 +278,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="136.875" y="22.183098591549296"/>
+            <point key="canvasLocation" x="-3866" y="1827"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="vkd-zW-4qm">
@@ -518,7 +518,7 @@
         <!--Login View Controller-->
         <scene sceneID="sPm-Vm-yJe">
             <objects>
-                <viewController id="hxT-2T-A3e" customClass="LoginViewController" customModule="Picpoint" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="login" id="hxT-2T-A3e" customClass="LoginViewController" customModule="Picpoint" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="nky-Su-C87">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -698,7 +698,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hfv-lB-qRn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="950.625" y="25.35211267605634"/>
+            <point key="canvasLocation" x="-3051" y="1831"/>
         </scene>
         <!--Recover Password View Controller-->
         <scene sceneID="mzY-xM-WHY">
@@ -814,7 +814,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VjL-ky-5Ud" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1749.375" y="25.35211267605634"/>
+            <point key="canvasLocation" x="-2252" y="1831"/>
         </scene>
     </scenes>
     <resources>
@@ -824,7 +824,7 @@
         <image name="ok" width="48" height="48.5"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="fOT-Tv-ZUK"/>
+        <segue reference="f1Y-vh-H2y"/>
         <segue reference="LHQ-Wi-Wg0"/>
     </inferredMetricsTieBreakers>
 </document>

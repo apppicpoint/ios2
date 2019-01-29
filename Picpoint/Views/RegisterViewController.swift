@@ -11,13 +11,15 @@ class RegisterViewController: UIViewController {
     @IBOutlet weak var passwordField: UITextField!
     @IBOutlet weak var confirmPasswordField: UITextField!
     @IBOutlet weak var registerBtn: UIButton!
+    let validator = Validator()
     override func viewDidLoad() {super.viewDidLoad()}
+    
+    
     @IBAction func register(_ sender: Any){
-        emptyFields()
-        checkPassword()
-        checkLengthPassword()
-        emailValidation()
-        requestRegister()
+        if validateInputs()
+        {
+            requestRegister()
+        }
     }
     //Botón de usuario sin registrarse
     @IBAction func enterWithoutRegistration(_ sender: Any) {
@@ -58,6 +60,7 @@ class RegisterViewController: UIViewController {
             present(alert, animated: true, completion: nil)
         }
     }
+    
     //Petición con la api del registro
     func requestRegister()
     {
@@ -99,63 +102,50 @@ class RegisterViewController: UIViewController {
         }
         
     }
-    //Requisitos básicos del registro
-    func registerLogic()
-    {
-        if registerBtn.isTouchInside && (!(nameField.text?.isEmpty)!) && (!(nickNameField.text?.isEmpty)!) && (!(emailField.text?.isEmpty)!)  && (!(passwordField.text?.isEmpty)!) && (!(confirmPasswordField.text?.isEmpty)!) && (passwordField.text) == (confirmPasswordField.text)
-        {
-            requestRegister()
-        }
+   
+   
+    
+    //Esta función se encarga de ocultar el teclado
+    @IBAction func textExit(_ sender: UITextField) {
+        sender.resignFirstResponder()
     }
-    //Algunos requisitos que tiene que cumplir el registro...
-    func checkPassword()
+    
+    // Valida los datos
+    func validateInputs() -> Bool
     {
+        if ((emailField.text?.isEmpty)! || (passwordField.text?.isEmpty)! || (nickNameField.text?.isEmpty)!)        {
+            let alert = UIAlertController(title: "There can be no empty fields", message:
+                "Try it again", preferredStyle: .alert)
+            
+            alert.addAction(UIAlertAction(title: "ok", style:
+                .cancel, handler: { (accion) in}))
+            present(alert, animated: true, completion: nil)
+            return false
+        }
+        if !validator.isValidPassword(string: passwordField.text!){
+            let alert = UIAlertController(title: "Invalid password", message:
+                "8 - 16 caracters length and at least one letter and one number", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "ok", style:
+                .cancel, handler: { (accion) in}))
+            present(alert, animated: true, completion: nil)
+            return false
+        }
+        if !validator.isValidNickName(string: nickNameField.text!){
+            let alert = UIAlertController(title: "Invalid nick", message:
+                "3 - 16 characters length. Don't use special characters", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "ok", style:
+                .cancel, handler: { (accion) in}))
+            present(alert, animated: true, completion: nil)
+            return false
+        }
         if passwordField.text != confirmPasswordField.text
         {
             let alert = UIAlertController(title: "Passwords don´t match", message:
                 "Try it again", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "ok", style: .cancel, handler: { (accion) in}))
             present(alert, animated: true, completion: nil)
+            return false
         }
-    }
-    func checkLengthPassword()
-    {
-        if (passwordField.text?.count)! < 8
-        {
-            let alert = UIAlertController(title: "Password must be at least 8 characters long", message:
-                "Try it again", preferredStyle: .alert)
-
-            alert.addAction(UIAlertAction(title: "ok", style:
-                .cancel, handler: { (accion) in}))
-            present(alert, animated: true, completion: nil)
-        }
-    }
-    func emptyFields()
-    {
-        if ((nameField.text?.isEmpty)! && (nickNameField.text?.isEmpty)! && (emailField.text?.isEmpty)! && (passwordField.text?.isEmpty)! && (confirmPasswordField.text?.isEmpty)!)
-        {
-            let alert = UIAlertController(title: "There can be no empty fields", message:
-                "Try it again", preferredStyle: .alert)
-
-            alert.addAction(UIAlertAction(title: "ok", style:
-                .cancel, handler: { (accion) in}))
-            present(alert, animated: true, completion: nil)
-        }
-    }
-    func emailValidation()
-    {
-        if (!(emailField.text?.contains("@"))!)
-        {
-            let alert = UIAlertController(title: "The mail must contain @", message:
-                "Try it again", preferredStyle: .alert)
-
-            alert.addAction(UIAlertAction(title: "ok", style:
-                .cancel, handler: { (accion) in}))
-            present(alert, animated: true, completion: nil)
-        }
-    }
-    //Esta función se encarga de ocultar el teclado
-    @IBAction func textExit(_ sender: UITextField) {
-        sender.resignFirstResponder()
+        return true
     }
 }
