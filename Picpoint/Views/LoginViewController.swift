@@ -27,18 +27,18 @@ class LoginViewController: UIViewController {
     func requestLogin()
     {
         if Connectivity.isConnectedToInternet() {
-            request("http://192.168.6.162/api/public/index.php/api/login",
+            request(Constants.url+"login",
                     method: .post,
                     parameters: ["email":emailFieldL.text!, "password":passwordFieldL.text!],
                     encoding: URLEncoding.httpBody).responseJSON { (replyQuestL) in
                         print(replyQuestL.response?.statusCode ?? 0)
                         print(replyQuestL.result.value!)
 
-                        var ResponseL = replyQuestL.result.value as! [String:Any]
+                        var jsonResponse = replyQuestL.result.value as! [String:Any]
                         
                         if((replyQuestL.response?.statusCode) != 200)
                         {
-                            let alert = UIAlertController(title: "\(ResponseL["message"] ?? "email") ", message:
+                            let alert = UIAlertController(title: "\(jsonResponse["message"] ?? "email") ", message:
                                 "Try it again", preferredStyle: .alert)
                             
                             alert.addAction(UIAlertAction(title: "ok", style:
@@ -48,8 +48,11 @@ class LoginViewController: UIViewController {
                         
                         if((replyQuestL.response?.statusCode) == 200)
                         {
-                            saveInDefaults(value: ResponseL["token"] as! String, key: "token")
-                            print(loadFromDefaults(key: "token"))
+                            UserDefaults.standard.set(jsonResponse["token"]!, forKey: "token")
+                            UserDefaults.standard.set(jsonResponse["user_id"]!, forKey: "user_id")
+                            UserDefaults.standard.set(jsonResponse["role_id"]!, forKey: "role_id")
+
+                            print(UserDefaults.standard.string(forKey: "token")!)
                             self.performSegue(withIdentifier: "loginOK", sender: nil)
                         }
             }
@@ -64,17 +67,17 @@ class LoginViewController: UIViewController {
     func requestGuest()
     {
         if Connectivity.isConnectedToInternet() {
-            request("http://192.168.6.162/api/public/index.php/api/guest",
+            request(Constants.url+"guest",
                     method: .post,
                     encoding: URLEncoding.httpBody).responseJSON { (replyQuestGLL) in
                         print(replyQuestGLL.response?.statusCode ?? 0)
     //                    print(replyQuestGL.result.value!)
                         
-                        var ResponseGLL = replyQuestGLL.result.value as! [String:Any]
+                        var jsonResponse = replyQuestGLL.result.value as! [String:Any]
                         
                         if((replyQuestGLL.response?.statusCode) != 200)
                         {
-                            let alert = UIAlertController(title: "\(ResponseGLL["message"] ?? "default") ", message:
+                            let alert = UIAlertController(title: "\(jsonResponse["message"] ?? "default") ", message:
                                 "Try it again", preferredStyle: .alert)
                             
                             alert.addAction(UIAlertAction(title: "ok", style:
@@ -83,9 +86,9 @@ class LoginViewController: UIViewController {
                         }
                         if replyQuestGLL.result.isSuccess
                         {
-                            print(replyQuestGLL.result.value!)
-                            saveInDefaults(value: ResponseGLL["token"] as! String, key: "token")
-                            print(loadFromDefaults(key: "token"))
+                            UserDefaults.standard.set(jsonResponse["token"]!, forKey: "token")
+                            UserDefaults.standard.set(jsonResponse["role_id"]!, forKey: "role_id")
+
                             self.performSegue(withIdentifier: "loginOK", sender: nil)
                         }
             }

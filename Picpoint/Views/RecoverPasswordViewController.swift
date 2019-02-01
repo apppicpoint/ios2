@@ -6,7 +6,7 @@ class RecoverPasswordViewController: UIViewController {
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var recoverPasswordBtn: UIButton!
     override func viewDidLoad() {super.viewDidLoad()}
-//Botón recuperar contraseña
+    //Botón recuperar contraseña
     @IBAction func actionRecoverPassword(_ sender: Any) {
         emailValidation()
         requestRegister()

@@ -29,16 +29,16 @@ class RegisterViewController: UIViewController {
     func requestGuestLogin()
     {
         if Connectivity.isConnectedToInternet() {
-            request("http://192.168.6.162/api/public/index.php/api/guest",
+            request(Constants.url+"guest",
                 method: .post,
                 encoding: URLEncoding.httpBody).responseJSON { (replyQuestGL) in
                     print(replyQuestGL.response?.statusCode ?? 0)
                     
-                    var ResponseGL = replyQuestGL.result.value as! [String:Any]
+                    var jsonResponse = replyQuestGL.result.value as! [String:Any]
 
                     if((replyQuestGL.response?.statusCode) != 200)
                     {
-                        let alert = UIAlertController(title: "\(ResponseGL["message"] ?? "default") ", message:
+                        let alert = UIAlertController(title: "\(jsonResponse["message"] ?? "default") ", message:
                             "Try it again", preferredStyle: .alert)
                         
                         alert.addAction(UIAlertAction(title: "ok", style:
@@ -48,8 +48,9 @@ class RegisterViewController: UIViewController {
                     if replyQuestGL.result.isSuccess
                     {
                         print(replyQuestGL.result.value!)
-                        saveInDefaults(value: ResponseGL["token"] as! String, key: "token")
-                        print(loadFromDefaults(key: "token"))
+                        UserDefaults.standard.set(jsonResponse["token"]!, forKey: "token")
+                        UserDefaults.standard.set(jsonResponse["role_id"]!, forKey: "role_id")
+                        print(UserDefaults.standard.string(forKey: "token")!)
                         self.performSegue(withIdentifier: "registerOK", sender: nil)
                     }
             }
@@ -66,27 +67,28 @@ class RegisterViewController: UIViewController {
     {
         if Connectivity.isConnectedToInternet() {
             print("ONLINE")
-            request("http://192.168.6.162/api/public/index.php/api/register",
+            request(Constants.url+"register",
                     method: .post,
                     parameters: ["name":nameField.text!, "email":emailField.text!, "password":passwordField.text! , "nickName":nickNameField.text!],
                     encoding: URLEncoding.httpBody).responseJSON { (replyQuestR) in
                         print(replyQuestR.response?.statusCode ?? 0)
                         
-                        var ResponseR = replyQuestR.result.value as! [String:Any]
+                        var jsonResponse = replyQuestR.result.value as! [String:Any]
                         
                         if (replyQuestR.error != nil){
-                            print("zozo")
                         }
                         if replyQuestR.response?.statusCode == 200
                         {
-                            saveInDefaults(value: ResponseR["token"] as! String, key: "token")
-                            print(loadFromDefaults(key: "token"))
+                            UserDefaults.standard.set(jsonResponse["token"]!, forKey: "token")
+                            UserDefaults.standard.set(jsonResponse["user_id"]!, forKey: "user_id")
+                            UserDefaults.standard.set(jsonResponse["role_id"]!, forKey: "role_id")
+
                             self.performSegue(withIdentifier: "registerOK", sender: nil)
                         }
                         
                         if((replyQuestR.response?.statusCode) != 200)
                         {
-                            let alert = UIAlertController(title: "\(ResponseR["message"] ?? "An error ocurred") ", message:
+                            let alert = UIAlertController(title: "\(jsonResponse["message"] ?? "An error ocurred") ", message:
                                 "Try it again", preferredStyle: .alert)
                             
                             alert.addAction(UIAlertAction(title: "ok", style:

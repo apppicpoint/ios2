@@ -10,13 +10,6 @@ import Foundation
 
 class  Validator {
     
-    func emptyString(string: String)
-    {
-        if string.isEmpty
-        {
-            true
-        }
-    }
     
     // Tiene ue tener texto antes de la @, una @, texto despues, y un . con algo. Osea un email válido.
     func isValidEmailAddress(string: String) -> Bool {
