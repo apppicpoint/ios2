@@ -4,7 +4,7 @@ import SystemConfiguration
 import Foundation
 
 class RegisterViewController: UIViewController {
-
+    
     @IBOutlet weak var nameField: UITextField!
     @IBOutlet weak var nickNameField: UITextField!
     @IBOutlet weak var emailField: UITextField!
@@ -30,35 +30,39 @@ class RegisterViewController: UIViewController {
     {
         if Connectivity.isConnectedToInternet() {
             request(Constants.url+"guest",
-                method: .post,
-                encoding: URLEncoding.httpBody).responseJSON { (replyQuestGL) in
-                    print(replyQuestGL.response?.statusCode ?? 0)
-                    
-                    var jsonResponse = replyQuestGL.result.value as! [String:Any]
-
-                    if((replyQuestGL.response?.statusCode) != 200)
-                    {
-                        let alert = UIAlertController(title: "\(jsonResponse["message"] ?? "default") ", message:
-                            "Try it again", preferredStyle: .alert)
+                    method: .post,
+                    encoding: URLEncoding.httpBody).responseJSON { (replyQuestGL) in
+                        print(replyQuestGL.response?.statusCode ?? 0)
                         
-                        alert.addAction(UIAlertAction(title: "ok", style:
-                            .cancel, handler: { (accion) in}))
-                        self.present(alert, animated: true, completion: nil)
-                    }
-                    if replyQuestGL.result.isSuccess
-                    {
-                        print(replyQuestGL.result.value!)
-                        UserDefaults.standard.set(jsonResponse["token"]!, forKey: "token")
-                        UserDefaults.standard.set(jsonResponse["role_id"]!, forKey: "role_id")
-                        print(UserDefaults.standard.string(forKey: "token")!)
-                        self.performSegue(withIdentifier: "registerOK", sender: nil)
-                    }
+                        var jsonResponse = replyQuestGL.result.value as! [String:Any]
+                        
+                        if((replyQuestGL.response?.statusCode) != 200)
+                        {
+                            let alert = UIAlertController(title: "\(jsonResponse["message"] ?? "default") ", message:
+                                "Try it again", preferredStyle: .alert)
+                            
+                            alert.addAction(UIAlertAction(title: "ok", style:
+                                .cancel, handler: { (accion) in}))
+                            self.present(alert, animated: true, completion: nil)
+                        }
+                        if replyQuestGL.result.isSuccess
+                        {
+                            print(replyQuestGL.result.value!)
+                            UserDefaults.standard.set(jsonResponse["token"]!, forKey: "token")
+                            UserDefaults.standard.set(jsonResponse["role_id"]!, forKey: "role_id")
+                            print(UserDefaults.standard.string(forKey: "token")!)
+                            self.performSegue(withIdentifier: "registerOK", sender: nil)
+                        }
             }
         }else{
-            let alert = UIAlertController(title: "No connection", message:
-                "Try it again", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "ok", style: .cancel, handler: { (accion) in}))
-            present(alert, animated: true, completion: nil)
+            
+            print("Sin conexión")
+            let alert = UIAlertController(title: "Ups! Something was wrong.", message:
+                "Check your connection and try it later", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "ok", style:
+                .cancel, handler: { (accion) in}))
+            self.present(alert, animated: true, completion: nil)
+            
         }
     }
     
@@ -69,7 +73,7 @@ class RegisterViewController: UIViewController {
             print("ONLINE")
             request(Constants.url+"register",
                     method: .post,
-                    parameters: ["name":nameField.text!, "email":emailField.text!, "password":passwordField.text! , "nickName":nickNameField.text!],
+                    parameters: ["email":emailField.text!, "password":passwordField.text! , "nickName":nickNameField.text!],
                     encoding: URLEncoding.httpBody).responseJSON { (replyQuestR) in
                         print(replyQuestR.response?.statusCode ?? 0)
                         
@@ -82,7 +86,7 @@ class RegisterViewController: UIViewController {
                             UserDefaults.standard.set(jsonResponse["token"]!, forKey: "token")
                             UserDefaults.standard.set(jsonResponse["user_id"]!, forKey: "user_id")
                             UserDefaults.standard.set(jsonResponse["role_id"]!, forKey: "role_id")
-
+                            
                             self.performSegue(withIdentifier: "registerOK", sender: nil)
                         }
                         
@@ -104,8 +108,8 @@ class RegisterViewController: UIViewController {
         }
         
     }
-   
-   
+    
+    
     
     //Esta función se encarga de ocultar el teclado
     @IBAction func textExit(_ sender: UITextField) {

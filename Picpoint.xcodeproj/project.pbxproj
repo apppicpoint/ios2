@@ -9,7 +9,9 @@
 /* Begin PBXBuildFile section */
 		1744CC4C5382D7568141763C /* Pods_Picpoint.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E5DABCEB6E2279A2BA6280E /* Pods_Picpoint.framework */; };
 		634C1A3421FB42520015BD8E /* Montserrat in Resources */ = {isa = PBXBuildFile; fileRef = 634C1A3321FB42510015BD8E /* Montserrat */; };
-		6355EAC92204814B00B784EB /* MapTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6355EAC82204814B00B784EB /* MapTableViewCell.swift */; };
+		6355EAC92204814B00B784EB /* MapFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6355EAC82204814B00B784EB /* MapFeedViewController.swift */; };
+		6355EACB2204C9D600B784EB /* PinAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6355EACA2204C9D600B784EB /* PinAnnotation.swift */; };
+		6355EACD220AEA0600B784EB /* SpotsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6355EACC220AEA0500B784EB /* SpotsTableViewController.swift */; };
 		639EFB6A22004890005AC6A1 /* Validator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639EFB6922004890005AC6A1 /* Validator.swift */; };
 		639EFB732200CD38005AC6A1 /* CustomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639EFB722200CD38005AC6A1 /* CustomTabBar.swift */; };
 		639EFB752200CDA4005AC6A1 /* SpotsFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639EFB742200CDA4005AC6A1 /* SpotsFeedViewController.swift */; };
@@ -23,9 +25,8 @@
 		639EFB862201BC5C005AC6A1 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639EFB852201BC5C005AC6A1 /* MapViewController.swift */; };
 		639EFB882201BCE9005AC6A1 /* MapNewSpotViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639EFB872201BCE9005AC6A1 /* MapNewSpotViewController.swift */; };
 		639EFB8A220306FA005AC6A1 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639EFB89220306FA005AC6A1 /* Utils.swift */; };
-		639EFB8C2203099F005AC6A1 /* previewImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639EFB8B2203099F005AC6A1 /* previewImageViewController.swift */; };
+		639EFB8C2203099F005AC6A1 /* PreviewImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639EFB8B2203099F005AC6A1 /* PreviewImageViewController.swift */; };
 		639EFB8E22045ED4005AC6A1 /* Spot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639EFB8D22045ED4005AC6A1 /* Spot.swift */; };
-		639EFB902204607A005AC6A1 /* SpotsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639EFB8F2204607A005AC6A1 /* SpotsTableViewController.swift */; };
 		639EFB942204622A005AC6A1 /* SpotDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639EFB932204622A005AC6A1 /* SpotDetailViewController.swift */; };
 		639EFB9622046261005AC6A1 /* PublicationDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639EFB9522046261005AC6A1 /* PublicationDetailViewController.swift */; };
 		639EFB98220462A9005AC6A1 /* SpotTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639EFB97220462A9005AC6A1 /* SpotTableViewCell.swift */; };
@@ -44,7 +45,9 @@
 /* Begin PBXFileReference section */
 		2C7CBB10648258A8C8C8A197 /* Pods-Picpoint.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Picpoint.release.xcconfig"; path = "Pods/Target Support Files/Pods-Picpoint/Pods-Picpoint.release.xcconfig"; sourceTree = "<group>"; };
 		634C1A3321FB42510015BD8E /* Montserrat */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Montserrat; path = ../../../../Downloads/Montserrat; sourceTree = "<group>"; };
-		6355EAC82204814B00B784EB /* MapTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapTableViewCell.swift; sourceTree = "<group>"; };
+		6355EAC82204814B00B784EB /* MapFeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapFeedViewController.swift; sourceTree = "<group>"; };
+		6355EACA2204C9D600B784EB /* PinAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinAnnotation.swift; sourceTree = "<group>"; };
+		6355EACC220AEA0500B784EB /* SpotsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SpotsTableViewController.swift; path = ../../../../../../.Trash/SpotsTableViewController.swift; sourceTree = "<group>"; };
 		639EFB6922004890005AC6A1 /* Validator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validator.swift; sourceTree = "<group>"; };
 		639EFB722200CD38005AC6A1 /* CustomTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBar.swift; sourceTree = "<group>"; };
 		639EFB742200CDA4005AC6A1 /* SpotsFeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotsFeedViewController.swift; sourceTree = "<group>"; };
@@ -58,9 +61,8 @@
 		639EFB852201BC5C005AC6A1 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		639EFB872201BCE9005AC6A1 /* MapNewSpotViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapNewSpotViewController.swift; sourceTree = "<group>"; };
 		639EFB89220306FA005AC6A1 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
-		639EFB8B2203099F005AC6A1 /* previewImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = previewImageViewController.swift; sourceTree = "<group>"; };
+		639EFB8B2203099F005AC6A1 /* PreviewImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewImageViewController.swift; sourceTree = "<group>"; };
 		639EFB8D22045ED4005AC6A1 /* Spot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spot.swift; sourceTree = "<group>"; };
-		639EFB8F2204607A005AC6A1 /* SpotsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotsTableViewController.swift; sourceTree = "<group>"; };
 		639EFB932204622A005AC6A1 /* SpotDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotDetailViewController.swift; sourceTree = "<group>"; };
 		639EFB9522046261005AC6A1 /* PublicationDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicationDetailViewController.swift; sourceTree = "<group>"; };
 		639EFB97220462A9005AC6A1 /* SpotTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotTableViewCell.swift; sourceTree = "<group>"; };
@@ -120,9 +122,6 @@
 				D2C2EACB21EC86C600D547BD /* LoginViewController.swift */,
 				D2CFD83B21F5D3160024EF0D /* RecoverPasswordViewController.swift */,
 				639EFB762200CDC3005AC6A1 /* ProfileViewController.swift */,
-				639EFB832201BC4E005AC6A1 /* CameraViewController.swift */,
-				639EFB8B2203099F005AC6A1 /* previewImageViewController.swift */,
-				639EFB872201BCE9005AC6A1 /* MapNewSpotViewController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -138,6 +137,8 @@
 		639EFB802200D672005AC6A1 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				639EFB8B2203099F005AC6A1 /* PreviewImageViewController.swift */,
+				639EFB832201BC4E005AC6A1 /* CameraViewController.swift */,
 				639EFB7E2200CF96005AC6A1 /* SearchViewController.swift */,
 				639EFB812201A3D0005AC6A1 /* CustomAlertViewController.swift */,
 				639EFB722200CD38005AC6A1 /* CustomTabBar.swift */,
@@ -161,12 +162,14 @@
 		639EFB9222046172005AC6A1 /* Spots */ = {
 			isa = PBXGroup;
 			children = (
-				639EFB8F2204607A005AC6A1 /* SpotsTableViewController.swift */,
+				6355EACC220AEA0500B784EB /* SpotsTableViewController.swift */,
 				639EFB742200CDA4005AC6A1 /* SpotsFeedViewController.swift */,
-				6355EAC82204814B00B784EB /* MapTableViewCell.swift */,
+				6355EAC82204814B00B784EB /* MapFeedViewController.swift */,
+				639EFB872201BCE9005AC6A1 /* MapNewSpotViewController.swift */,
 				639EFB7C2200CE3A005AC6A1 /* NewSpotViewController.swift */,
 				639EFB932204622A005AC6A1 /* SpotDetailViewController.swift */,
 				639EFB97220462A9005AC6A1 /* SpotTableViewCell.swift */,
+				6355EACA2204C9D600B784EB /* PinAnnotation.swift */,
 			);
 			path = Spots;
 			sourceTree = "<group>";
@@ -338,6 +341,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				639EFB882201BCE9005AC6A1 /* MapNewSpotViewController.swift in Sources */,
+				6355EACD220AEA0600B784EB /* SpotsTableViewController.swift in Sources */,
 				639EFB6A22004890005AC6A1 /* Validator.swift in Sources */,
 				D2CFD83C21F5D3160024EF0D /* RecoverPasswordViewController.swift in Sources */,
 				639EFB98220462A9005AC6A1 /* SpotTableViewCell.swift in Sources */,
@@ -351,13 +355,13 @@
 				639EFB7F2200CF96005AC6A1 /* SearchViewController.swift in Sources */,
 				639EFB792200CDD9005AC6A1 /* PublicationsFeedViewController.swift in Sources */,
 				639EFB8A220306FA005AC6A1 /* Utils.swift in Sources */,
-				639EFB8C2203099F005AC6A1 /* previewImageViewController.swift in Sources */,
+				639EFB8C2203099F005AC6A1 /* PreviewImageViewController.swift in Sources */,
 				639EFB7B2200CDED005AC6A1 /* NewPublicationViewController.swift in Sources */,
 				639EFB9C22046300005AC6A1 /* PublicationTableViewController.swift in Sources */,
 				639EFB942204622A005AC6A1 /* SpotDetailViewController.swift in Sources */,
-				639EFB902204607A005AC6A1 /* SpotsTableViewController.swift in Sources */,
 				639EFB842201BC4E005AC6A1 /* CameraViewController.swift in Sources */,
-				6355EAC92204814B00B784EB /* MapTableViewCell.swift in Sources */,
+				6355EACB2204C9D600B784EB /* PinAnnotation.swift in Sources */,
+				6355EAC92204814B00B784EB /* MapFeedViewController.swift in Sources */,
 				639EFB9622046261005AC6A1 /* PublicationDetailViewController.swift in Sources */,
 				D2C2EAB421EC7D1500D547BD /* AppDelegate.swift in Sources */,
 				639EFB822201A3D0005AC6A1 /* CustomAlertViewController.swift in Sources */,
@@ -518,7 +522,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = Joaquin.Picpoint;
+				PRODUCT_BUNDLE_IDENTIFIER = Picpoint.Picpoint;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -538,7 +542,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = Joaquin.Picpoint;
+				PRODUCT_BUNDLE_IDENTIFIER = Picpoint.Picpoint;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";

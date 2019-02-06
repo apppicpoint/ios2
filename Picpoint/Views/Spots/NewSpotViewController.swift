@@ -9,6 +9,7 @@
 import UIKit
 import Alamofire
 import AlamofireImage
+
 class NewSpotViewController: UIViewController {
 
     var image: UIImage?
@@ -22,27 +23,25 @@ class NewSpotViewController: UIViewController {
     @IBOutlet weak var descriptionTextView: UITextView!
     
     let utils = Utils()
+
+    @IBOutlet weak var CancelBtn: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         imageView.image = image
-        city = "Madrid"
-        country = "España"
-        longitude = 23
-        latitude = 2
-        
-        
+        city = "undefined"
+        country = "undefined"
     }
+    
+    
     
     @IBAction func saveSpot(_ sender: UIBarButtonItem) {
         if  validateInputs() {
             storeLocation()
-            uploadPhotoRequest()
         }
     }
     
     func storeLocation() {
-        
         let parameters: Parameters = [
             "description":descriptionTextView.text!,
             "name":titleTextField.text ?? "",
@@ -67,6 +66,7 @@ class NewSpotViewController: UIViewController {
                 if(response.response?.statusCode == 200){
                     print("Spot subido")
                     print(jsonResponse["message"]!)
+                    self.uploadPhotoRequest()
                     return
                     
                 } else {
@@ -75,16 +75,19 @@ class NewSpotViewController: UIViewController {
                     self.present(alert, animated: true)
                     print("error")
                 }
-                
             case .failure(let error):
                 print("Sin conexión")
                 print(error)
+                let alert = UIAlertController(title: "Ups! Something was wrong.", message:
+                    "Check your connection and try it later", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "ok", style:
+                    .cancel, handler: { (accion) in}))
+                self.present(alert, animated: true, completion: nil)
             }
         }
     }
     
     func uploadPhotoRequest(){
-        
         let image = self.image
         let imgData = image!.jpegData(compressionQuality: 1)
         let url = Constants.url+"img"
@@ -105,17 +108,25 @@ class NewSpotViewController: UIViewController {
                     print(response.response!.statusCode)
                     if(response.response?.statusCode == 200){
                         print("Foto subida")
+                        
+                        self.performSegue(withIdentifier: "unwindToFeed", sender: nil)
                         return
                     }
                 }
             case .failure(let error):
                 print("Sin conexión")
                 print(error)
+                let alert = UIAlertController(title: "Ups! Something was wrong.", message:
+                    "Check your connection and try it later", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "ok", style:
+                    .cancel, handler: { (accion) in}))
+                self.present(alert, animated: true, completion: nil)
             }
         }
     }
     
 
+    // Valida los datos.
     func validateInputs() -> Bool
     {
         if ((titleTextField.text?.isEmpty)! || (descriptionTextView.text?.isEmpty)!)
@@ -155,5 +166,7 @@ class NewSpotViewController: UIViewController {
         return true
     }
     
-    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+    }
 }

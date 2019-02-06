@@ -6,6 +6,8 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
 
     var image: UIImage?
     var imageName: String?
+    var longitude: Double?
+    var latitude: Double?
     let utils = Utils()
     var imagePicker = UIImagePickerController() //Selector de imagenes para la galería
     /*
@@ -60,17 +62,17 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.destination is previewImageViewController {
-            
-            let destination = segue.destination as! previewImageViewController
+        if segue.destination is PreviewImageViewController {
+            let destination = segue.destination as! PreviewImageViewController
             destination.imageName = imageName
             destination.image = self.image!
+            destination.longitude = longitude
+            destination.latitude = latitude
         }
     }
     
     
-    @IBAction func backFromNewSpot(_ segue: UIStoryboardSegue) {
-        
+    @IBAction func backFromNewSpotToCamera(_ segue: UIStoryboardSegue) {        
         
     }
     

@@ -8,8 +8,10 @@
 
 import UIKit
 
-class previewImageViewController: UIViewController {
+class PreviewImageViewController: UIViewController {
 
+    var longitude: Double?
+    var latitude: Double?
     var image: UIImage?
     var imageName: String?
     @IBOutlet weak var imageView: UIImageView!
@@ -19,13 +21,21 @@ class previewImageViewController: UIViewController {
         imageView.image = image
     }
     
-    @IBAction func goBack(_ sender: UIButton) {
+    
+    @IBAction func cancelBtn(_ sender: UIButton) {
         self.dismiss(animated: true, completion: nil)
+
     }
     
-    @IBAction func goToNewSpot(_ sender: UIButton) {
+    @IBAction func acceptBtn(_ sender: UIBarButtonItem) {
         performSegue(withIdentifier: "newSpot", sender: sender)
+
     }
+    
+    
+    
+    
+   
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.destination is NewSpotViewController {
@@ -33,6 +43,8 @@ class previewImageViewController: UIViewController {
             let destination = segue.destination as! NewSpotViewController
             destination.imageName = imageName
             destination.image = self.image!
+            destination.longitude = longitude
+            destination.latitude = latitude
         }
     }
 
