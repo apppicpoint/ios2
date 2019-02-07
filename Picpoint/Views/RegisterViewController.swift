@@ -16,53 +16,81 @@ class RegisterViewController: UIViewController {
     
     
     @IBAction func register(_ sender: Any){
-        if validateInputs()
-        {
-            requestRegister()
-        }
-    }
-    //Botón de usuario sin registrarse
-    @IBAction func enterWithoutRegistration(_ sender: Any) {
-        requestGuestLogin()
-    }
-    //Peticion con la api para usuario sin registro
-    func requestGuestLogin()
-    {
-        if Connectivity.isConnectedToInternet() {
-            request(Constants.url+"guest",
-                    method: .post,
-                    encoding: URLEncoding.httpBody).responseJSON { (replyQuestGL) in
-                        print(replyQuestGL.response?.statusCode ?? 0)
-                        
-                        var jsonResponse = replyQuestGL.result.value as! [String:Any]
-                        
-                        if((replyQuestGL.response?.statusCode) != 200)
-                        {
-                            let alert = UIAlertController(title: "\(jsonResponse["message"] ?? "default") ", message:
-                                "Try it again", preferredStyle: .alert)
-                            
-                            alert.addAction(UIAlertAction(title: "ok", style:
-                                .cancel, handler: { (accion) in}))
-                            self.present(alert, animated: true, completion: nil)
-                        }
-                        if replyQuestGL.result.isSuccess
-                        {
-                            print(replyQuestGL.result.value!)
-                            UserDefaults.standard.set(jsonResponse["token"]!, forKey: "token")
-                            UserDefaults.standard.set(jsonResponse["role_id"]!, forKey: "role_id")
-                            print(UserDefaults.standard.string(forKey: "token")!)
-                            self.performSegue(withIdentifier: "registerOK", sender: nil)
-                        }
-            }
-        }else{
+        if !Connectivity.isLocationEnabled() {
             
-            print("Sin conexión")
-            let alert = UIAlertController(title: "Ups! Something was wrong.", message:
-                "Check your connection and try it later", preferredStyle: .alert)
+            let alert = UIAlertController(title: "Pls! Activate the GPS", message:
+                "Picpoint cannot work without it", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "ok", style:
                 .cancel, handler: { (accion) in}))
             self.present(alert, animated: true, completion: nil)
             
+        } else {
+            if validateInputs()
+            {
+                requestRegister()
+            }
+        }
+    }
+    //Botón de usuario sin registrarse
+    @IBAction func enterWithoutRegistration(_ sender: Any) {
+        if !Connectivity.isLocationEnabled() {
+            
+            let alert = UIAlertController(title: "Pls! Activate the GPS", message:
+                "Picpoint cannot work without it", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "ok", style:
+                .cancel, handler: { (accion) in}))
+            self.present(alert, animated: true, completion: nil)
+            
+        } else {requestGuest()}
+    }
+    //Peticion con la api para usuario sin registro
+    func requestGuest()
+    {
+        if Connectivity.isConnectedToInternet() {
+            request(Constants.url+"guest",
+                    method: .post,
+                    encoding: URLEncoding.httpBody).responseJSON { (replyQuestGLL) in
+                        switch replyQuestGLL.result {
+                        case .success:
+                            var jsonResponse = replyQuestGLL.result.value as! [String:Any]
+                            if((replyQuestGLL.response?.statusCode) != 200)
+                            {
+                                let alert = UIAlertController(title: "\(jsonResponse["message"] ?? "default") ", message:
+                                    "Try it again", preferredStyle: .alert)
+                                
+                                alert.addAction(UIAlertAction(title: "ok", style:
+                                    .cancel, handler: { (accion) in}))
+                                self.present(alert, animated: true, completion: nil)
+                            }
+                            else
+                            {
+                                var jsonResponse = replyQuestGLL.result.value as! [String:Any]
+                                UserDefaults.standard.set(jsonResponse["token"]!, forKey: "token")
+                                UserDefaults.standard.set(jsonResponse["role_id"]!, forKey: "role_id")
+                                self.performSegue(withIdentifier: "loginOK", sender: nil)
+                            }
+                        case .failure(let error):
+                            let alert = UIAlertController(title: "Ups! Something was wrong", message:
+                                "Pls, try it later", preferredStyle: .alert)
+                            alert.addAction(UIAlertAction(title: "Settings", style:
+                                .default, handler: { (accion) in
+                                    UIApplication.shared.open(URL.init(string: UIApplication.openSettingsURLString)!, options: [:], completionHandler: nil)
+                            }))
+                            alert.addAction(UIAlertAction(title: "ok :(", style:
+                                .cancel, handler: { (accion) in }))
+                            self.present(alert, animated: true, completion: nil)
+                        }
+            }
+        }else{
+            let alert = UIAlertController(title: "Pls! Activate the internet", message:
+                "Picpoint cannot work without it", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Settings", style:
+                .default, handler: { (accion) in
+                    UIApplication.shared.open(URL.init(string: UIApplication.openSettingsURLString)!, options: [:], completionHandler: nil)
+            }))
+            alert.addAction(UIAlertAction(title: "ok :(", style:
+                .cancel, handler: { (accion) in }))
+            self.present(alert, animated: true, completion: nil)
         }
     }
     
@@ -75,36 +103,47 @@ class RegisterViewController: UIViewController {
                     method: .post,
                     parameters: ["email":emailField.text!, "password":passwordField.text! , "nickName":nickNameField.text!],
                     encoding: URLEncoding.httpBody).responseJSON { (replyQuestR) in
-                        print(replyQuestR.response?.statusCode ?? 0)
-                        
-                        var jsonResponse = replyQuestR.result.value as! [String:Any]
-                        
-                        if (replyQuestR.error != nil){
-                        }
-                        if replyQuestR.response?.statusCode == 200
-                        {
-                            UserDefaults.standard.set(jsonResponse["token"]!, forKey: "token")
-                            UserDefaults.standard.set(jsonResponse["user_id"]!, forKey: "user_id")
-                            UserDefaults.standard.set(jsonResponse["role_id"]!, forKey: "role_id")
-                            
-                            self.performSegue(withIdentifier: "registerOK", sender: nil)
-                        }
-                        
-                        if((replyQuestR.response?.statusCode) != 200)
-                        {
-                            let alert = UIAlertController(title: "\(jsonResponse["message"] ?? "An error ocurred") ", message:
-                                "Try it again", preferredStyle: .alert)
-                            
-                            alert.addAction(UIAlertAction(title: "ok", style:
-                                .cancel, handler: { (accion) in}))
+                        switch replyQuestR.result {
+                        case .success:
+                            var jsonResponse = replyQuestR.result.value as! [String:Any]
+                            if((replyQuestR.response?.statusCode) != 200)
+                            {
+                                let alert = UIAlertController(title: "\(jsonResponse["message"] ?? "default") ", message:
+                                    "Try it again", preferredStyle: .alert)
+                                
+                                alert.addAction(UIAlertAction(title: "ok", style:
+                                    .cancel, handler: { (accion) in}))
+                                self.present(alert, animated: true, completion: nil)
+                            }
+                            else
+                            {
+                                var jsonResponse = replyQuestR.result.value as! [String:Any]
+                                UserDefaults.standard.set(jsonResponse["token"]!, forKey: "token")
+                                UserDefaults.standard.set(jsonResponse["role_id"]!, forKey: "role_id")
+                                self.performSegue(withIdentifier: "loginOK", sender: nil)
+                            }
+                        case .failure(let error):
+                            let alert = UIAlertController(title: "Ups! Something was wrong", message:
+                                "Pls, try it later", preferredStyle: .alert)
+                            alert.addAction(UIAlertAction(title: "Settings", style:
+                                .default, handler: { (accion) in
+                                    UIApplication.shared.open(URL.init(string: UIApplication.openSettingsURLString)!, options: [:], completionHandler: nil)
+                            }))
+                            alert.addAction(UIAlertAction(title: "ok :(", style:
+                                .cancel, handler: { (accion) in }))
                             self.present(alert, animated: true, completion: nil)
                         }
             }
         }else{
-            let alert = UIAlertController(title: "No connection", message:
-                "Try it again", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "ok", style: .cancel, handler: { (accion) in}))
-            present(alert, animated: true, completion: nil)
+            let alert = UIAlertController(title: "Pls! Activate the internet", message:
+                "Picpoint cannot work without it", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Settings", style:
+                .default, handler: { (accion) in
+                    UIApplication.shared.open(URL.init(string: UIApplication.openSettingsURLString)!, options: [:], completionHandler: nil)
+            }))
+            alert.addAction(UIAlertAction(title: "ok :(", style:
+                .cancel, handler: { (accion) in }))
+            self.present(alert, animated: true, completion: nil)
         }
         
     }

@@ -24,17 +24,20 @@ class MapNewSpotViewController: UIViewController, CLLocationManagerDelegate, MKM
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        currentLatitude = locationManager.location!.coordinate.latitude
-        currentLongitude = locationManager.location!.coordinate.longitude
-        centerMap()
-        setMapview()
-        // Prepara el mapa y el manager para poder manejarlos.
-        locationManager.delegate = self
-        locationManager.requestWhenInUseAuthorization()
-        locationManager.startUpdatingLocation()
-        map.delegate = self
-        // Do any additional setup after loading the view.
-        getSpots()
+        if Connectivity.isLocationEnabled() && Connectivity.isConnectedToInternet(){
+            currentLatitude = locationManager.location!.coordinate.latitude
+            currentLongitude = locationManager.location!.coordinate.longitude
+            centerMap()
+            setMapview()
+            // Prepara el mapa y el manager para poder manejarlos.
+            locationManager.delegate = self
+            locationManager.requestWhenInUseAuthorization()
+            locationManager.startUpdatingLocation()
+            map.delegate = self
+            // Do any additional setup after loading the view.
+            getSpots()
+        }
+        
         
         
 
@@ -201,12 +204,14 @@ class MapNewSpotViewController: UIViewController, CLLocationManagerDelegate, MKM
                 }
                 
             case .failure(let error):
-                print("Sin conexión")
-                print(error)
-                let alert = UIAlertController(title: "Ups! Something was wrong.", message:
-                    "Check your connection and try it later", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "ok", style:
-                    .cancel, handler: { (accion) in}))
+                let alert = UIAlertController(title: "Ups! Something was wrong", message:
+                    "Pls, try it later", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Settings", style:
+                    .default, handler: { (accion) in
+                        UIApplication.shared.open(URL.init(string: UIApplication.openSettingsURLString)!, options: [:], completionHandler: nil)
+                }))
+                alert.addAction(UIAlertAction(title: "ok :(", style:
+                    .cancel, handler: { (accion) in }))
                 self.present(alert, animated: true, completion: nil)
             }
         }

@@ -26,39 +26,34 @@ class SpotsFeedViewController: UIViewController,  UITableViewDelegate, UITableVi
         //Configura los delegados del controlador de ubicaciones
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
-        print("comprobado")
         locationManager.startUpdatingLocation()
-
-        if Connectivity.isLocationEnabled() {
+        
+        //Configura los delegados de la tabla
+        spotsTableView.delegate = self
+        spotsTableView.dataSource = self
+        //spotsTableView.scroll(to: .top, animated: true) // Se actualiza la tabla al hacer scroll hacia arriba
+        
+        // Comprobacines de conectividad y ubicación
+        if Connectivity.isLocationEnabled() && Connectivity.isConnectedToInternet(){
             //Obtiene las coordenadas actuales del usuario.
             currentLatitude = locationManager.location!.coordinate.latitude
             currentLongitude = locationManager.location!.coordinate.longitude
             
-            //Pasa las coordenadas al mapa
-            map.currentLatitude = currentLatitude
-            map.currentLongitude = currentLongitude
+           
             
             //Obtiene la lista de spots
             getSpots()
             
             //Centra el mapa
             map.centerMap()
-        } else {
-            let alert = UIAlertController(title: "Pls! Activate the GPS", message:
-                "Picpoint cannot work without it", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "ok", style:
-                .cancel, handler: { (accion) in}))
-            self.present(alert, animated: true, completion: nil)
         }
         
-        //Configura los delegados de la tabla
-        spotsTableView.delegate = self
-        spotsTableView.dataSource = self
-        
-        
-        spotsTableView.scroll(to: .top, animated: true) // Se actualiza la tabla al hacer scroll hacia arriba
-        
     }
+    
+    @IBAction func centerMapBtn(_ sender: UIButton) {
+        map.centerMap()
+    }
+    
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         manager.startUpdatingLocation() // Determina la ubicación actual del usuario
@@ -80,7 +75,11 @@ class SpotsFeedViewController: UIViewController,  UITableViewDelegate, UITableVi
         cell = tableView.dequeueReusableCell(withIdentifier: "spotCell", for: indexPath) as! SpotTableViewCell
         cell.titleTextField.text = spots[indexPath.row].name
         cell.distanceTextField.text = String(spots[indexPath.row].distance!) + " km from you"
-        cell.imageView?.image = spots[indexPath.row].image
+        cell.spotImage?.layer.masksToBounds = true
+        cell.spotImage?.contentMode = .scaleAspectFill
+        cell.spotImage?.image = spots[indexPath.row].image
+        
+        print(cell.imageView?.clipsToBounds)
         
         return cell
     }

@@ -9,7 +9,7 @@ import UIKit
 import Foundation
 
 struct Constants {
-    // static let url = "http://192.168.6.162/api/public/index.php/api/"
+    //static let url = "http://192.168.6.162/api/public/index.php/api/"
     static let url = "http://localhost:8888/api/public/index.php/api/"
     
 }
@@ -59,10 +59,10 @@ extension UITableView {
     }
 }
 
-extension UITextField {
+
+extension UITextField {   
     
-    open override func awakeFromNib() {
-        super.awakeFromNib()
+    func whiteDesign() {
         self.textColor = .white
         let border = CALayer()
         let width = CGFloat(1.0)
@@ -72,23 +72,45 @@ extension UITextField {
         border.borderWidth = width
         self.layer.addSublayer(border)
         self.layer.masksToBounds = true
-        self.font = UIFont.init(name: "Montserrat-Medium.ttf", size: 14)
     }
-    
+    func greyDesign() {
+        self.textColor = .darkGray
+        let border = CALayer()
+        let width = CGFloat(1.0)
+        border.borderColor = UIColor.darkGray.cgColor
+        border.frame = CGRect(x: 0, y: self.frame.size.height - width, width: self.frame.size.width*2, height: self.frame.size.height)
+        
+        border.borderWidth = width
+        self.layer.addSublayer(border)
+        self.layer.masksToBounds = true
+    }
     
 }
 
-extension UILabel {
+extension UITextView {
+    
     open override func awakeFromNib() {
         super.awakeFromNib()
         
-        self.font = UIFont.init(name: "Montserrat-Medium.ttf", size: 14)
+        self.layer.borderColor = UIColor.darkGray.cgColor
+        self.layer.borderWidth = 1.0
+        self.layer.cornerRadius = 5.0
+        // self.font = UIFont.init(name: "Montserrat-Medium", size: 14)
+    }
+    
+}
+
+/*
+extension UILabel {
+    open override func awakeFromNib() {
+        super.awakeFromNib()
+  
+        self.font = UIFont(name: "Montserrat", size: 12)
         print("cambiandoTexto")
-        if UIFont.init(name: "Montserrat-Medium.ttf", size: 14) != nil {
+        if UIFont(name: "Montserrat", size: 14) != nil {
             print("hay tipo")
         } else{
             print("no hay tipo")
-            
         }
     }
 }
@@ -96,14 +118,13 @@ extension UILabel {
 extension UIButton {
     open override func awakeFromNib() {
         super.awakeFromNib()
-        self.titleLabel?.font = UIFont.init(name: "Montserrat-Light", size: 14)
+        self.titleLabel?.font = UIFont(name: "Montserrat-Light.ttf", size: 14)
         print("cambiandoTexto")
-        if UIFont.init(name:"", size: 14) != nil {
+        if UIFont(name:"Montserrat-Light.ttf", size: 14) != nil {
             print("hay tipo")
         } else{
             print("no hay tipo")
-            
         }
     }
 }
-
+*/

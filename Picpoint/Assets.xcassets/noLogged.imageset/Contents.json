@@ -2,11 +2,11 @@
   "images" : [
     {
       "idiom" : "universal",
+      "filename" : "noLogged.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "camara shooter@2x.png",
       "scale" : "2x"
     },
     {

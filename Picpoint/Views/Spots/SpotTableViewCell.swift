@@ -19,6 +19,9 @@ class SpotTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        spotImage.layer.masksToBounds = true
+        spotImage.clipsToBounds = true
+        //spotImage.contentMode = .scaleAspectFill
         // Initialization code
     }
 

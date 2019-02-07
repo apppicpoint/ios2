@@ -19,7 +19,23 @@ class CustomTabBarController:  UITabBarController, UITabBarControllerDelegate {
     override func viewDidLoad(){
         super.viewDidLoad()
         self.delegate = self
-
+        if !Connectivity.isLocationEnabled() {
+            let alert = UIAlertController(title: "Pls! Activate the GPS", message:
+                "Picpoint cannot work without it", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "ok", style:
+                .cancel, handler: { (accion) in}))
+            self.present(alert, animated: true, completion: nil)
+            
+        } else if !Connectivity.isLocationEnabled() {
+            let alert = UIAlertController(title: "Pls! Activate the internet", message:
+                "Picpoint cannot work without it", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "ok", style:
+                .cancel, handler: { (accion) in
+                    UIApplication.shared.open(URL.init(string: UIApplication.openSettingsURLString)!, options: [:], completionHandler: nil)
+                    
+            }))
+            self.present(alert, animated: true, completion: nil)
+        }       
         
         //Se hace referencia a todas las vistas del tabbar.
         spotsFeedViewController = storyboard?.instantiateViewController(withIdentifier: "spotsFeed") as?SpotsFeedViewController
@@ -53,16 +69,29 @@ class CustomTabBarController:  UITabBarController, UITabBarControllerDelegate {
     }
     
     
-    
+    // Personaliza los botones del tabbar que no llevan a pantallas directamente, si no que hacen cosas.
     func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
         if viewController.isKind(of: CustomAlertViewController.self) {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let myAlert = storyboard.instantiateViewController(withIdentifier: "customAlert")
+            let alertId = UserDefaults.standard.integer(forKey: "role_id") == 4 ? "noLogged" : "customAlert"
+            
+            let myAlert = storyboard.instantiateViewController(withIdentifier: alertId)
             myAlert.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
             myAlert.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
             self.present(myAlert, animated: true, completion: nil)            
             return false
-        } 
+            
+        } else if viewController.isKind(of: ProfileViewController.self) && UserDefaults.standard.integer(forKey: "role_id") == 4{
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let myAlert = storyboard.instantiateViewController(withIdentifier: "noLogged")
+            myAlert.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+            myAlert.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
+            self.present(myAlert, animated: true, completion: nil)
+            return false
+            
+        }
+        
+        
         return true
     }
     

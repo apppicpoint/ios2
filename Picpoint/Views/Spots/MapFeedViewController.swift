@@ -31,7 +31,7 @@ class MapFeedViewController:MKMapView , CLLocationManagerDelegate, MKMapViewDele
     
     // Centra el mapa
     func centerMap(){
-        let coordinates = CLLocationCoordinate2D.init(latitude: currentLatitude!, longitude: currentLongitude!)
+        let coordinates = CLLocationCoordinate2D.init(latitude: locationManager.location!.coordinate.latitude, longitude: locationManager.location!.coordinate.longitude)
         let span = MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)
         let region = MKCoordinateRegion(center: coordinates, span: span)
         self.setRegion(region, animated: true)

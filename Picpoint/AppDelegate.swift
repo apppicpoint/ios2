@@ -11,7 +11,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     self.window = UIWindow(frame: UIScreen.main.bounds)
     
     let storyboard = UIStoryboard(name: "Main", bundle: nil)
-    let view = UserDefaults.standard.string(forKey: "token") != nil ? "app" : "login"
+    let view = UserDefaults.standard.string(forKey: "token") != nil ? "app" : "singIn"
     let initialViewController = storyboard.instantiateViewController(withIdentifier: view)
     
     self.window?.rootViewController = initialViewController

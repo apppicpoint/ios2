@@ -9,8 +9,9 @@
 import UIKit
 import Alamofire
 import AlamofireImage
+import MapKit
 
-class NewSpotViewController: UIViewController {
+class NewSpotViewController: UIViewController, MKMapViewDelegate {
 
     var image: UIImage?
     var imageName: String?
@@ -22,6 +23,9 @@ class NewSpotViewController: UIViewController {
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var descriptionTextView: UITextView!
     
+    @IBOutlet weak var map: MKMapView!
+    
+    @IBOutlet weak var tagsTextField: UITextField!
     let utils = Utils()
 
     @IBOutlet weak var CancelBtn: UIBarButtonItem!
@@ -31,12 +35,19 @@ class NewSpotViewController: UIViewController {
         imageView.image = image
         city = "undefined"
         country = "undefined"
+        
+        map.delegate = self
+        centerMap()
+        
+        tagsTextField.greyDesign()
+        titleTextField.greyDesign()
+        
     }
     
     
     
     @IBAction func saveSpot(_ sender: UIBarButtonItem) {
-        if  validateInputs() {
+        if  validateInputs() && Connectivity.isLocationEnabled() && Connectivity.isConnectedToInternet(){
             storeLocation()
         }
     }
@@ -76,12 +87,14 @@ class NewSpotViewController: UIViewController {
                     print("error")
                 }
             case .failure(let error):
-                print("Sin conexión")
-                print(error)
-                let alert = UIAlertController(title: "Ups! Something was wrong.", message:
-                    "Check your connection and try it later", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "ok", style:
-                    .cancel, handler: { (accion) in}))
+                let alert = UIAlertController(title: "Ups! Something was wrong", message:
+                    "Pls, try it later", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Settings", style:
+                    .default, handler: { (accion) in
+                        UIApplication.shared.open(URL.init(string: UIApplication.openSettingsURLString)!, options: [:], completionHandler: nil)
+                }))
+                alert.addAction(UIAlertAction(title: "ok :(", style:
+                    .cancel, handler: { (accion) in }))
                 self.present(alert, animated: true, completion: nil)
             }
         }
@@ -114,12 +127,14 @@ class NewSpotViewController: UIViewController {
                     }
                 }
             case .failure(let error):
-                print("Sin conexión")
-                print(error)
-                let alert = UIAlertController(title: "Ups! Something was wrong.", message:
-                    "Check your connection and try it later", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "ok", style:
-                    .cancel, handler: { (accion) in}))
+                let alert = UIAlertController(title: "Ups! Something was wrong", message:
+                    "Pls, try it later", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Settings", style:
+                    .default, handler: { (accion) in
+                        UIApplication.shared.open(URL.init(string: UIApplication.openSettingsURLString)!, options: [:], completionHandler: nil)
+                }))
+                alert.addAction(UIAlertAction(title: "ok :(", style:
+                    .cancel, handler: { (accion) in }))
                 self.present(alert, animated: true, completion: nil)
             }
         }
@@ -148,7 +163,7 @@ class NewSpotViewController: UIViewController {
         }
         if descriptionTextView.text!.count < 10 || descriptionTextView.text!.count > 300 {
             let alert = UIAlertController(title: "Invalid inputs", message:
-                "Title size must be between 10 and 300 characters", preferredStyle: .alert)
+                "Descriptions must content between 10 and 300 characters", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "ok", style:
                 .cancel, handler: { (accion) in}))
             present(alert, animated: true, completion: nil)
@@ -166,7 +181,31 @@ class NewSpotViewController: UIViewController {
         return true
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    func centerMap(){
+       let coordinates = CLLocationCoordinate2D.init(latitude: self.latitude!, longitude: self.longitude!)// Establece las coordenadas del pin.
+        let mark = PinAnnotation(pinTitle: titleTextField.text!, pinSubTitle: "", location: coordinates, id:0)           // Crea el marcador
+        map.addAnnotation(mark)
         
+        
+        let span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
+        let region = MKCoordinateRegion(center: coordinates, span: span)
+        map.setRegion(region, animated: true)
     }
+    
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        if annotation is MKUserLocation {
+            return nil
+        }
+        let annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: "customannotaion") //Crea una vista personalizada del pin.
+        
+        annotationView.isEnabled = true // Activa el marcador.
+        annotationView.canShowCallout = true // Establece si puede mostrar informacion extra en la burbuja
+        annotationView.image = UIImage(named: "pin_full") // Establece la imagen del pin.
+        annotationView.centerOffset = CGPoint(x:0, y:(annotationView.image!.size.height / -2));
+        print("centra")
+        
+        
+        return annotationView
+    }
+    
 }
