@@ -197,7 +197,7 @@
                         <outlet property="nickNameField" destination="duf-dW-IC1" id="Lb2-AI-UNi"/>
                         <outlet property="passwordField" destination="Yf4-Er-IlJ" id="nAP-8n-B0b"/>
                         <outlet property="registerBtn" destination="g7b-xF-Dpt" id="aOY-K0-ptF"/>
-                        <segue destination="TVd-Fc-7sI" kind="show" identifier="registerOK" id="fOT-Tv-ZUK"/>
+                        <segue destination="TVd-Fc-7sI" kind="show" identifier="loginOK" id="fOT-Tv-ZUK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -468,8 +468,13 @@
                                 <rect key="frame" x="0.0" y="394" width="320" height="174"/>
                             </mapView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dlo-4F-sMO">
-                                <rect key="frame" x="137" y="503" width="46" height="30"/>
-                                <state key="normal" title="Create"/>
+                                <rect key="frame" x="76" y="475" width="168" height="58"/>
+                                <state key="normal" title="Create" backgroundImage="button">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="createBtn:" destination="DfM-3h-kP7" eventType="touchUpInside" id="Uj9-5l-x6H"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -496,7 +501,7 @@
                                 <segue destination="TdK-KP-Msn" kind="unwind" unwindAction="backFromNewSpotToCamera:" id="BFy-Nh-itt"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Save" id="HJS-zu-5py">
+                        <barButtonItem key="rightBarButtonItem" id="HJS-zu-5py">
                             <connections>
                                 <action selector="saveSpot:" destination="DfM-3h-kP7" id="xei-1W-fPo"/>
                             </connections>
@@ -579,7 +584,7 @@
                                 <action selector="close:" destination="T0F-7n-y2V" id="BMf-rE-FKj"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="&gt;" id="AMQ-IU-HGC">
+                        <barButtonItem key="rightBarButtonItem" title="Next &gt;" id="AMQ-IU-HGC">
                             <connections>
                                 <action selector="goToCamera:" destination="T0F-7n-y2V" id="rle-qL-I0L"/>
                             </connections>
@@ -1075,7 +1080,7 @@
                                     <color key="titleColor" white="0.0" alpha="0.58706121575342463" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <action selector="actionRecoverPassword:" destination="VQb-Q7-HFT" eventType="touchUpInside" id="cNf-qU-qHT"/>
+                                    <action selector="recoverBtn:" destination="VQb-Q7-HFT" eventType="touchUpInside" id="D4X-Ta-Dy6"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UgT-yN-ZLR">
@@ -1131,7 +1136,6 @@
                     <connections>
                         <outlet property="emailField" destination="7cM-Ph-aJm" id="Ew1-XU-vxV"/>
                         <outlet property="emailFieldRP" destination="7cM-Ph-aJm" id="8ls-Tq-yDB"/>
-                        <outlet property="recoverPasswordBtn" destination="Pdb-Db-dZy" id="682-Mt-n8d"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VjL-ky-5Ud" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1241,6 +1245,7 @@
         <image name="add_active" width="72" height="72"/>
         <image name="add_inactive" width="70" height="70"/>
         <image name="background" width="375.33334350585938" height="667.33331298828125"/>
+        <image name="button" width="168" height="58"/>
         <image name="buttonEmpty" width="504" height="172"/>
         <image name="camara_shooter" width="38.5" height="38.5"/>
         <image name="center_map" width="49" height="49"/>
@@ -1258,8 +1263,8 @@
         <image name="search_inactive" width="69" height="66"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="f1Y-vh-H2y"/>
-        <segue reference="3jF-nS-383"/>
+        <segue reference="fOT-Tv-ZUK"/>
+        <segue reference="LHQ-Wi-Wg0"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.36907798051834106" green="7.8340315667446703e-05" blue="0.5730704665184021" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>

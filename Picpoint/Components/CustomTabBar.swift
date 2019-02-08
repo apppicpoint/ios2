@@ -81,7 +81,7 @@ class CustomTabBarController:  UITabBarController, UITabBarControllerDelegate {
             self.present(myAlert, animated: true, completion: nil)            
             return false
             
-        } else if viewController.isKind(of: ProfileViewController.self) && UserDefaults.standard.integer(forKey: "role_id") == 4{
+        } else if (viewController.isKind(of: ProfileViewController.self) || viewController.isKind(of: PublicationsFeedViewController.self)) && UserDefaults.standard.integer(forKey: "role_id") == 4{
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let myAlert = storyboard.instantiateViewController(withIdentifier: "noLogged")
             myAlert.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext

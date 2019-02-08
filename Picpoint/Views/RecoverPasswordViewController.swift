@@ -4,17 +4,28 @@ class RecoverPasswordViewController: UIViewController {
     
     @IBOutlet weak var emailFieldRP: UITextField!
     @IBOutlet weak var emailField: UITextField!
-    @IBOutlet weak var recoverPasswordBtn: UIButton!
-    override func viewDidLoad() {super.viewDidLoad()}
-    //Botón recuperar contraseña
-    @IBAction func actionRecoverPassword(_ sender: Any) {
+    override func viewDidLoad() {super.viewDidLoad()
+        emailFieldRP.whiteDesign()
+        emailField.whiteDesign()
+
+        self.hideKeyboardWhenTappedAround()
+
+    }
+    
+    @IBAction func recoverBtn(_ sender: UIButton) {
         emailValidation()
         requestRegister()
+    }
+    
+    //Botón recuperar contraseña
+    @IBAction func actionRecoverPassword(_ sender: Any) {
+        
     }
     //Petición con la api de recuperación de contraseña
     func requestRegister()
     {
         if Connectivity.isConnectedToInternet() {
+            print("entra recovery")
             request(Constants.url+"forgotPass",
                     method: .post,
                     parameters: ["email":emailFieldRP.text!],
@@ -31,6 +42,17 @@ class RecoverPasswordViewController: UIViewController {
                                 alert.addAction(UIAlertAction(title: "ok", style:
                                     .cancel, handler: { (accion) in}))
                                 self.present(alert, animated: true, completion: nil)
+                            } else {
+                                let alert = UIAlertController(title: "An email has been sent", message:
+                                    "Check your inbox", preferredStyle: .alert)
+                                
+                                alert.addAction(UIAlertAction(title: "ok", style:
+                                    .cancel, handler: { (accion) in
+                                        self.dismiss(animated: true, completion: nil)
+                                }))
+                                self.present(alert, animated: true, completion: nil)
+                                
+                                
                             }
                         case .failure(let error):
                             let alert = UIAlertController(title: "Ups! Something was wrong", message:

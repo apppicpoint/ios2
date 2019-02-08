@@ -16,7 +16,7 @@ class ProfileViewController: UIViewController {
         
         //Declará el viewController al que se quiere acceder y abre sin necesidad de segue.
         //Es la mejor opción, ya que con segue se arrastraría el navigationController y el tabBarController.
-        let newViewController = storyBoard.instantiateViewController(withIdentifier: "sinIn") as! LoginViewController
+        let newViewController = storyBoard.instantiateViewController(withIdentifier: "singIn") as! LoginViewController
         self.present(newViewController, animated: true, completion: nil)
     }
     

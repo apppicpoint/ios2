@@ -12,7 +12,15 @@ class RegisterViewController: UIViewController {
     @IBOutlet weak var confirmPasswordField: UITextField!
     @IBOutlet weak var registerBtn: UIButton!
     let validator = Validator()
-    override func viewDidLoad() {super.viewDidLoad()}
+    override func viewDidLoad() {super.viewDidLoad()
+        emailField.whiteDesign()
+        passwordField.whiteDesign()
+        confirmPasswordField.whiteDesign()
+        nickNameField.whiteDesign()
+
+        self.hideKeyboardWhenTappedAround()
+
+    }
     
     
     @IBAction func register(_ sender: Any){
@@ -120,6 +128,7 @@ class RegisterViewController: UIViewController {
                                 var jsonResponse = replyQuestR.result.value as! [String:Any]
                                 UserDefaults.standard.set(jsonResponse["token"]!, forKey: "token")
                                 UserDefaults.standard.set(jsonResponse["role_id"]!, forKey: "role_id")
+                                UserDefaults.standard.set(jsonResponse["user_id"]!, forKey: "user_id")
                                 self.performSegue(withIdentifier: "loginOK", sender: nil)
                             }
                         case .failure(let error):

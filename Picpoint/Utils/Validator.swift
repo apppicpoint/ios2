@@ -36,7 +36,7 @@ class  Validator {
     // Nombre entre 3 y 16 caracteres. Solo caracteres alfanumericos.
         func isValidNickName(string: String) -> Bool {
             var returnValue = true
-            let regularExpresion = "^[a-z0-9_-]{3,16}$"
+            let regularExpresion = "^[a-z0-9A-Z_-]{3,16}$"
             
             do {
                 let regex = try NSRegularExpression(pattern: regularExpresion)

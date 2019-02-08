@@ -11,7 +11,7 @@ import Alamofire
 import AlamofireImage
 import MapKit
 
-class NewSpotViewController: UIViewController, MKMapViewDelegate {
+class NewSpotViewController: UIViewController, MKMapViewDelegate, UITextFieldDelegate {
 
     var image: UIImage?
     var imageName: String?
@@ -30,12 +30,17 @@ class NewSpotViewController: UIViewController, MKMapViewDelegate {
 
     @IBOutlet weak var CancelBtn: UIBarButtonItem!
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         imageView.image = image
         city = "undefined"
         country = "undefined"
-        
+        self.titleTextField.delegate = self
+
+
+        self.hideKeyboardWhenTappedAround()
+
         map.delegate = self
         centerMap()
         
@@ -192,6 +197,11 @@ class NewSpotViewController: UIViewController, MKMapViewDelegate {
         map.setRegion(region, animated: true)
     }
     
+    @IBAction func createBtn(_ sender: UIButton) {
+        if  validateInputs() && Connectivity.isLocationEnabled() && Connectivity.isConnectedToInternet(){
+            storeLocation()
+        }
+    }
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         if annotation is MKUserLocation {
             return nil
@@ -208,4 +218,8 @@ class NewSpotViewController: UIViewController, MKMapViewDelegate {
         return annotationView
     }
     
+    //Esta función se encarga de ocultar el teclado
+    @IBAction func textExit(_ sender: UITextField) {
+        sender.resignFirstResponder()
+    }
 }

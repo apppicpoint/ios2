@@ -9,8 +9,8 @@ import UIKit
 import Foundation
 
 struct Constants {
-    //static let url = "http://192.168.6.162/api/public/index.php/api/"
-    static let url = "http://localhost:8888/api/public/index.php/api/"
+    static let url = "http://192.168.6.162/api/public/index.php/api/"
+    //static let url = "http://localhost:8888/api/public/index.php/api/"
     
 }
 
@@ -60,8 +60,11 @@ extension UITableView {
 }
 
 
-extension UITextField {   
-    
+extension UITextField {
+    open override func awakeFromNib() {
+        self.resignFirstResponder()
+
+    }
     func whiteDesign() {
         self.textColor = .white
         let border = CALayer()
@@ -86,12 +89,23 @@ extension UITextField {
     }
     
 }
-
+extension UIViewController {
+    func hideKeyboardWhenTappedAround() {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
+    
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
+    }
+}
 extension UITextView {
     
     open override func awakeFromNib() {
         super.awakeFromNib()
-        
+        self.resignFirstResponder()
+
         self.layer.borderColor = UIColor.darkGray.cgColor
         self.layer.borderWidth = 1.0
         self.layer.cornerRadius = 5.0

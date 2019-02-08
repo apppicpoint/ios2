@@ -125,6 +125,7 @@ class SpotsFeedViewController: UIViewController,  UITableViewDelegate, UITableVi
                                         distance: Float(round(10*distance)/10))
                         self.spots.append(spot) //Por cada objeto en el json se añade un spot al array.
                         self.getSpotImage(imageName: dataItem["image"] as! String, spot: spot)
+                        
                     }
                     self.map.spots = self.spots // Le pasa los spots.
                     self.map.updateMap() //Actualiza los spots en el mapa                    

@@ -45,6 +45,7 @@ class MapFeedViewController:MKMapView , CLLocationManagerDelegate, MKMapViewDele
             let coordinates = CLLocationCoordinate2DMake(spot.latitude!, spot.longitude!) // Establece las coordenadas del pin.
             let mark = PinAnnotation(pinTitle: spot.name, pinSubTitle: spot.desc, location: coordinates, id:index)           // Crea el marcador
             self.addAnnotation(mark) // Añade el pin al mapa.
+            
         }
         
     }
@@ -63,7 +64,7 @@ class MapFeedViewController:MKMapView , CLLocationManagerDelegate, MKMapViewDele
         
 
         //Crea un botón derecho en la burbuja personalizado.
-        let calloutRightImage = UIImage(named: "point_active")
+        let calloutRightImage = UIImage(named: "pin_full")
         let calloutRightButton = UIButton(type: .custom)
         calloutRightButton.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
         calloutRightButton.setImage(calloutRightImage, for: .normal)

@@ -18,4 +18,5 @@ class PinAnnotation : NSObject, MKAnnotation {
         self.coordinate = location
         self.id = id
     }
+    
 }

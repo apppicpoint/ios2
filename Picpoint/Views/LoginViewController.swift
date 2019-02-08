@@ -13,6 +13,9 @@ class LoginViewController: UIViewController {
         locationManager.requestWhenInUseAuthorization()
         emailFieldL.whiteDesign()
         passwordFieldL.whiteDesign()
+        
+        self.hideKeyboardWhenTappedAround()
+
     }
     
     //Botón de login
