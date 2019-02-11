@@ -14,7 +14,7 @@ import MapKit
 class SpotsFeedViewController: UIViewController,  UITableViewDelegate, UITableViewDataSource, CLLocationManagerDelegate {
     @IBOutlet weak var map: MapFeedViewController!
     
-    @IBOutlet weak var spotsTableView: SpotsTableView!
+    @IBOutlet weak var spotsTableView: SpotsTableViewController!
     var spots = [Spot]()
     var currentLongitude: Double?
     var currentLatitude: Double?

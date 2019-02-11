@@ -11,7 +11,7 @@
 		634C1A3421FB42520015BD8E /* Montserrat in Resources */ = {isa = PBXBuildFile; fileRef = 634C1A3321FB42510015BD8E /* Montserrat */; };
 		6355EAC92204814B00B784EB /* MapFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6355EAC82204814B00B784EB /* MapFeedViewController.swift */; };
 		6355EACB2204C9D600B784EB /* PinAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6355EACA2204C9D600B784EB /* PinAnnotation.swift */; };
-		6355EACD220AEA0600B784EB /* SpotsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6355EACC220AEA0500B784EB /* SpotsTableViewController.swift */; };
+		63888445221175680067D2BB /* SpotsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63888444221175680067D2BB /* SpotsTableViewController.swift */; };
 		639EFB6A22004890005AC6A1 /* Validator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639EFB6922004890005AC6A1 /* Validator.swift */; };
 		639EFB732200CD38005AC6A1 /* CustomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639EFB722200CD38005AC6A1 /* CustomTabBar.swift */; };
 		639EFB752200CDA4005AC6A1 /* SpotsFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639EFB742200CDA4005AC6A1 /* SpotsFeedViewController.swift */; };
@@ -48,7 +48,7 @@
 		634C1A3321FB42510015BD8E /* Montserrat */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Montserrat; path = ../../../../Downloads/Montserrat; sourceTree = "<group>"; };
 		6355EAC82204814B00B784EB /* MapFeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapFeedViewController.swift; sourceTree = "<group>"; };
 		6355EACA2204C9D600B784EB /* PinAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinAnnotation.swift; sourceTree = "<group>"; };
-		6355EACC220AEA0500B784EB /* SpotsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SpotsTableViewController.swift; path = ../../../../../../.Trash/SpotsTableViewController.swift; sourceTree = "<group>"; };
+		63888444221175680067D2BB /* SpotsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SpotsTableViewController.swift; path = /Users/david/Proyectos/iOS/picpoint_ios/Picpoint/Views/Spots/SpotsTableViewController.swift; sourceTree = "<absolute>"; };
 		639EFB6922004890005AC6A1 /* Validator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validator.swift; sourceTree = "<group>"; };
 		639EFB722200CD38005AC6A1 /* CustomTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBar.swift; sourceTree = "<group>"; };
 		639EFB742200CDA4005AC6A1 /* SpotsFeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotsFeedViewController.swift; sourceTree = "<group>"; };
@@ -165,7 +165,7 @@
 		639EFB9222046172005AC6A1 /* Spots */ = {
 			isa = PBXGroup;
 			children = (
-				6355EACC220AEA0500B784EB /* SpotsTableViewController.swift */,
+				63888444221175680067D2BB /* SpotsTableViewController.swift */,
 				639EFB742200CDA4005AC6A1 /* SpotsFeedViewController.swift */,
 				639EFB97220462A9005AC6A1 /* SpotTableViewCell.swift */,
 				6355EAC82204814B00B784EB /* MapFeedViewController.swift */,
@@ -345,7 +345,6 @@
 			files = (
 				63DD0A40220C4FA500276B1A /* NoLoggedViewController.swift in Sources */,
 				639EFB882201BCE9005AC6A1 /* MapNewSpotViewController.swift in Sources */,
-				6355EACD220AEA0600B784EB /* SpotsTableViewController.swift in Sources */,
 				639EFB6A22004890005AC6A1 /* Validator.swift in Sources */,
 				D2CFD83C21F5D3160024EF0D /* RecoverPasswordViewController.swift in Sources */,
 				639EFB98220462A9005AC6A1 /* SpotTableViewCell.swift in Sources */,
@@ -370,6 +369,7 @@
 				D2C2EAB421EC7D1500D547BD /* AppDelegate.swift in Sources */,
 				639EFB822201A3D0005AC6A1 /* CustomAlertViewController.swift in Sources */,
 				D2B2884721FA13A20060F8A2 /* Connectivity.swift in Sources */,
+				63888445221175680067D2BB /* SpotsTableViewController.swift in Sources */,
 				639EFB862201BC5C005AC6A1 /* MapViewController.swift in Sources */,
 				639EFB9A220462C6005AC6A1 /* PublicationTableViewCell.swift in Sources */,
 			);
