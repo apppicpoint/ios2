@@ -124,7 +124,7 @@ class LoginViewController: UIViewController {
                                 "Pls, try it later", preferredStyle: .alert)
                             alert.addAction(UIAlertAction(title: "Settings", style:
                                 .default, handler: { (accion) in
-                                    UIApplication.shared.open(URL.init(string: UIApplication.openSettingsURLString)!, options: [:], completionHandler: nil)
+                                    UIApplication.shared.open(URL.init(string: UIApplicationOpenSettingsURLString)!, options: [:], completionHandler: nil)
                             }))
                             alert.addAction(UIAlertAction(title: "ok :(", style:
                                 .cancel, handler: { (accion) in }))
@@ -136,7 +136,7 @@ class LoginViewController: UIViewController {
                 "Picpoint cannot work without it", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Settings", style:
                 .default, handler: { (accion) in
-                    UIApplication.shared.open(URL.init(string: UIApplication.openSettingsURLString)!, options: [:], completionHandler: nil)
+                    UIApplication.shared.open(URL.init(string: UIApplicationOpenSettingsURLString  )!, options: [:], completionHandler: nil)
             }))
             alert.addAction(UIAlertAction(title: "ok :(", style:
                 .cancel, handler: { (accion) in }))

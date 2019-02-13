@@ -96,7 +96,7 @@ class NewSpotViewController: UIViewController, MKMapViewDelegate, UITextFieldDel
                     "Pls, try it later", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "Settings", style:
                     .default, handler: { (accion) in
-                        UIApplication.shared.open(URL.init(string: UIApplication.openSettingsURLString)!, options: [:], completionHandler: nil)
+                        UIApplication.shared.open(URL.init(string: UIApplicationOpenSettingsURLString)!, options: [:], completionHandler: nil)
                 }))
                 alert.addAction(UIAlertAction(title: "ok :(", style:
                     .cancel, handler: { (accion) in }))
@@ -107,7 +107,7 @@ class NewSpotViewController: UIViewController, MKMapViewDelegate, UITextFieldDel
     
     func uploadPhotoRequest(){
         let image = self.image
-        let imgData = image!.jpegData(compressionQuality: 1)
+        let imgData = UIImageJPEGRepresentation(image!, 1)
         let url = Constants.url+"img"
         print(url)
         let headers: HTTPHeaders = [
@@ -136,7 +136,7 @@ class NewSpotViewController: UIViewController, MKMapViewDelegate, UITextFieldDel
                     "Pls, try it later", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "Settings", style:
                     .default, handler: { (accion) in
-                        UIApplication.shared.open(URL.init(string: UIApplication.openSettingsURLString)!, options: [:], completionHandler: nil)
+                        UIApplication.shared.open(URL.init(string: UIApplicationOpenSettingsURLString)!, options: [:], completionHandler: nil)
                 }))
                 alert.addAction(UIAlertAction(title: "ok :(", style:
                     .cancel, handler: { (accion) in }))

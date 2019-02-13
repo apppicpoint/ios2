@@ -144,7 +144,7 @@ class MapNewSpotViewController: UIViewController, CLLocationManagerDelegate, MKM
     
     // Configuración de la pulsación larga.
     @objc func handleLongPress(gestureReconizer: UILongPressGestureRecognizer) {
-        if gestureReconizer.state != UIGestureRecognizer.State.ended {
+        if gestureReconizer.state != UIGestureRecognizerState.ended {
             //Solo permite una anotación de nuevo spot a la vez
             for annotation in map.annotations {
                 if annotation.title == "new" {
@@ -208,7 +208,7 @@ class MapNewSpotViewController: UIViewController, CLLocationManagerDelegate, MKM
                     "Pls, try it later", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "Settings", style:
                     .default, handler: { (accion) in
-                        UIApplication.shared.open(URL.init(string: UIApplication.openSettingsURLString)!, options: [:], completionHandler: nil)
+                        UIApplication.shared.open(URL.init(string: UIApplicationOpenSettingsURLString)!, options: [:], completionHandler: nil)
                 }))
                 alert.addAction(UIAlertAction(title: "ok :(", style:
                     .cancel, handler: { (accion) in }))

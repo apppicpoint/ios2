@@ -2,9 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:/Users/david/Proyectos/iOS/picpoint_ios/Picpoint/Views/Spots/SpotsTableViewController.swift">
-   </FileRef>
-   <FileRef
       location = "group:Picpoint.xcodeproj">
    </FileRef>
    <FileRef

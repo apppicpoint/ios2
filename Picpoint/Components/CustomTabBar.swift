@@ -31,7 +31,7 @@ class CustomTabBarController:  UITabBarController, UITabBarControllerDelegate {
                 "Picpoint cannot work without it", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "ok", style:
                 .cancel, handler: { (accion) in
-                    UIApplication.shared.open(URL.init(string: UIApplication.openSettingsURLString)!, options: [:], completionHandler: nil)
+                    UIApplication.shared.open(URL.init(string: UIApplicationOpenSettingsURLString)!, options: [:], completionHandler: nil)
                     
             }))
             self.present(alert, animated: true, completion: nil)

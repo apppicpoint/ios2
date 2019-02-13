@@ -1,12 +1,12 @@
 import UIKit
 
 @UIApplicationMain
- class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
 //Esta función se encarga de mantener la sesión iniciada
-   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
     
     self.window = UIWindow(frame: UIScreen.main.bounds)
     
