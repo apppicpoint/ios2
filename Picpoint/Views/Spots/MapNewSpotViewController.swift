@@ -234,7 +234,7 @@ class MapNewSpotViewController: UIViewController, CLLocationManagerDelegate, MKM
             case .success:
                 let jsonResponse = response.result.value as! [String:Any]
                 if(response.response?.statusCode == 200){
-                    self.spotNear = jsonResponse["spot"] as! Bool
+                    self.spotNear = jsonResponse["spot"] as? Bool
                     print(self.spotNear!)
                     
                 } else {

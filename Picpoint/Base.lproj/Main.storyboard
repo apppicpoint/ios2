@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -141,7 +142,7 @@
                                 <rect key="frame" x="28" y="133" width="264" height="71"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kM1-bO-Yu2">
-                                <rect key="frame" x="125" y="498" width="70" height="31"/>
+                                <rect key="frame" x="125" y="499" width="70" height="30"/>
                                 <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="15"/>
                                 <state key="normal" title="Sign in">
                                     <color key="titleColor" red="0.80784313725490198" green="0.80784313725490198" blue="0.80784313725490198" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -151,7 +152,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g7b-xF-Dpt">
-                                <rect key="frame" x="96" y="441.5" width="128" height="56.5"/>
+                                <rect key="frame" x="96" y="442.5" width="128" height="56.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="g7b-xF-Dpt" secondAttribute="height" multiplier="127:56" id="lVa-Tu-Ccf"/>
                                 </constraints>
@@ -450,7 +451,7 @@
                                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                 </collectionViewFlowLayout>
                                                 <cells>
-                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" insetsLayoutMarginsFromSafeArea="NO" id="iew-2S-TcS">
+                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="iew-2S-TcS">
                                                         <rect key="frame" x="0.0" y="6" width="50" height="50"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
@@ -549,7 +550,7 @@
                                 <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                             </mapView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Aaw-dQ-OLQ">
-                                <rect key="frame" x="251" y="140" width="49" height="49"/>
+                                <rect key="frame" x="276" y="140" width="24" height="24"/>
                                 <state key="normal" image="center_map"/>
                                 <connections>
                                     <action selector="centerMapBtn:" destination="T0F-7n-y2V" eventType="touchUpInside" id="Bkg-XI-OaY"/>
@@ -716,7 +717,7 @@
                                 </constraints>
                             </mapView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lcV-1A-SQG">
-                                <rect key="frame" x="251" y="96" width="49" height="49"/>
+                                <rect key="frame" x="276" y="96" width="24" height="24"/>
                                 <state key="normal" image="center_map"/>
                                 <connections>
                                     <action selector="centerMapBtn:" destination="BIn-5q-fBR" eventType="touchUpInside" id="Rto-7K-khs"/>
@@ -923,7 +924,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jc0-aT-1sn">
-                                <rect key="frame" x="90" y="362" width="140" height="28"/>
+                                <rect key="frame" x="90" y="363" width="140" height="28"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="28" id="I7W-ny-mb0"/>
                                 </constraints>
@@ -995,7 +996,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G20-Oh-fke">
-                                <rect key="frame" x="99" y="404" width="122" height="55"/>
+                                <rect key="frame" x="99" y="405" width="122" height="55"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="G20-Oh-fke" secondAttribute="height" multiplier="122:55" id="NnM-Eu-wyB"/>
                                 </constraints>
@@ -1009,7 +1010,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QdC-97-3fr">
-                                <rect key="frame" x="131" y="467" width="58" height="31"/>
+                                <rect key="frame" x="134" y="468" width="52" height="30"/>
                                 <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="15"/>
                                 <state key="normal" title="Sign up">
                                     <color key="titleColor" red="0.80784313730000001" green="0.80784313730000001" blue="0.80784313730000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1169,7 +1170,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="dld-36-fSb">
-                                        <rect key="frame" x="54.5" y="220" width="141" height="30"/>
+                                        <rect key="frame" x="54" y="220" width="142" height="30"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Ho-dq-o8E">
                                                 <rect key="frame" x="0.0" y="0.0" width="47" height="30"/>
@@ -1179,7 +1180,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YTi-4S-bMO">
-                                                <rect key="frame" x="87" y="0.0" width="54" height="30"/>
+                                                <rect key="frame" x="87" y="0.0" width="55" height="30"/>
                                                 <state key="normal" title="Sing Up"/>
                                                 <connections>
                                                     <action selector="singUp:" destination="Glx-K1-l7l" eventType="touchUpInside" id="Zt0-Pa-iNC"/>
@@ -1242,25 +1243,25 @@
         <image name="Logo picpoint " width="264" height="71"/>
         <image name="Pic bubble" width="127" height="127"/>
         <image name="Point bubble" width="127" height="134"/>
-        <image name="add_active" width="72" height="72"/>
-        <image name="add_inactive" width="70" height="70"/>
-        <image name="background" width="375.33334350585938" height="667.33331298828125"/>
+        <image name="add_active" width="36" height="36"/>
+        <image name="add_inactive" width="35" height="35"/>
+        <image name="background" width="375" height="667"/>
         <image name="button" width="168" height="58"/>
         <image name="buttonEmpty" width="504" height="172"/>
-        <image name="camara_shooter" width="38.5" height="38.5"/>
-        <image name="center_map" width="49" height="49"/>
-        <image name="feed_active" width="70" height="54"/>
-        <image name="feed_inactive" width="70" height="54"/>
+        <image name="camara_shooter" width="38" height="38"/>
+        <image name="center_map" width="24" height="24"/>
+        <image name="feed_active" width="35" height="27"/>
+        <image name="feed_inactive" width="35" height="27"/>
         <image name="flash_off" width="32" height="52"/>
         <image name="gallery" width="60" height="43"/>
         <image name="no-image" width="592" height="444"/>
         <image name="noLogged" width="283" height="351"/>
-        <image name="points_active" width="47" height="72"/>
-        <image name="points_inactive" width="45" height="69"/>
-        <image name="profile_active" width="70" height="70"/>
-        <image name="profile_inactive" width="70" height="70"/>
-        <image name="search_active" width="71" height="68"/>
-        <image name="search_inactive" width="69" height="66"/>
+        <image name="points_active" width="23" height="36"/>
+        <image name="points_inactive" width="22" height="34"/>
+        <image name="profile_active" width="35" height="35"/>
+        <image name="profile_inactive" width="35" height="35"/>
+        <image name="search_active" width="35" height="34"/>
+        <image name="search_inactive" width="34" height="33"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="fOT-Tv-ZUK"/>
