@@ -49,14 +49,6 @@ class NewSpotViewController: UIViewController, MKMapViewDelegate, UITextFieldDel
         
     }
     
-    
-    
-    @IBAction func saveSpot(_ sender: UIBarButtonItem) {
-        if  validateInputs() && Connectivity.isLocationEnabled() && Connectivity.isConnectedToInternet(){
-            storeLocation()
-        }
-    }
-    
     func storeLocation() {
         let parameters: Parameters = [
             "description":descriptionTextView.text!,
@@ -82,7 +74,7 @@ class NewSpotViewController: UIViewController, MKMapViewDelegate, UITextFieldDel
                 if(response.response?.statusCode == 200){
                     print("Spot subido")
                     print(jsonResponse["message"]!)
-                    self.uploadPhotoRequest()
+                    self.performSegue(withIdentifier: "unwindToFeed", sender: nil)
                     return
                     
                 } else {
@@ -118,18 +110,26 @@ class NewSpotViewController: UIViewController, MKMapViewDelegate, UITextFieldDel
         Alamofire.upload(multipartFormData: { (multipartFormData) in
             
             multipartFormData.append(imgData!, withName: "img", fileName: self.imageName!+".png", mimeType: "image/png")
+            
             print(self.imageName!+".png")
         }, usingThreshold: UInt64.init(), to: url, method: .post, headers: headers) { (result) in
             switch result{
             case .success(let upload, _, _):
                 upload.responseJSON { response in
+
+                    
                     print(response.response!.statusCode)
+                    print(response.error!)
+                    print(response.response!)
+                    print(response.data!)
+                    print(response.debugDescription)
+                    
                     if(response.response?.statusCode == 200){
                         print("Foto subida")
-                        
-                        self.performSegue(withIdentifier: "unwindToFeed", sender: nil)
+                        self.storeLocation()
                         return
                     }
+                    
                 }
             case .failure(let error):
                 let alert = UIAlertController(title: "Ups! Something was wrong", message:
@@ -199,7 +199,7 @@ class NewSpotViewController: UIViewController, MKMapViewDelegate, UITextFieldDel
     
     @IBAction func createBtn(_ sender: UIButton) {
         if  validateInputs() && Connectivity.isLocationEnabled() && Connectivity.isConnectedToInternet(){
-            storeLocation()
+            self.uploadPhotoRequest()
         }
     }
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {

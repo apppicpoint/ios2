@@ -27,11 +27,11 @@
 		639EFB8E22045ED4005AC6A1 /* Spot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639EFB8D22045ED4005AC6A1 /* Spot.swift */; };
 		639EFB942204622A005AC6A1 /* SpotDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639EFB932204622A005AC6A1 /* SpotDetailViewController.swift */; };
 		639EFB9622046261005AC6A1 /* PublicationDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639EFB9522046261005AC6A1 /* PublicationDetailViewController.swift */; };
-		639EFB98220462A9005AC6A1 /* SpotTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639EFB97220462A9005AC6A1 /* SpotTableViewCell.swift */; };
+		639EFB98220462A9005AC6A1 /* SpotCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639EFB97220462A9005AC6A1 /* SpotCollectionViewCell.swift */; };
 		639EFB9A220462C6005AC6A1 /* PublicationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639EFB99220462C6005AC6A1 /* PublicationTableViewCell.swift */; };
 		639EFB9C22046300005AC6A1 /* PublicationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639EFB9B22046300005AC6A1 /* PublicationTableViewController.swift */; };
 		63DD0A40220C4FA500276B1A /* NoLoggedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DD0A3F220C4FA500276B1A /* NoLoggedViewController.swift */; };
-		7F27ACD02214101F00146B57 /* SpotsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F27ACCF2214101F00146B57 /* SpotsTableViewController.swift */; };
+		7F27ACD02214101F00146B57 /* SpotsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F27ACCF2214101F00146B57 /* SpotsCollectionViewController.swift */; };
 		D2B2884721FA13A20060F8A2 /* Connectivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B2884621FA13A20060F8A2 /* Connectivity.swift */; };
 		D2C2EAB421EC7D1500D547BD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C2EAB321EC7D1500D547BD /* AppDelegate.swift */; };
 		D2C2EAB921EC7D1500D547BD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D2C2EAB721EC7D1500D547BD /* Main.storyboard */; };
@@ -63,12 +63,12 @@
 		639EFB8D22045ED4005AC6A1 /* Spot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spot.swift; sourceTree = "<group>"; };
 		639EFB932204622A005AC6A1 /* SpotDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotDetailViewController.swift; sourceTree = "<group>"; };
 		639EFB9522046261005AC6A1 /* PublicationDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicationDetailViewController.swift; sourceTree = "<group>"; };
-		639EFB97220462A9005AC6A1 /* SpotTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotTableViewCell.swift; sourceTree = "<group>"; };
+		639EFB97220462A9005AC6A1 /* SpotCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotCollectionViewCell.swift; sourceTree = "<group>"; };
 		639EFB99220462C6005AC6A1 /* PublicationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicationTableViewCell.swift; sourceTree = "<group>"; };
 		639EFB9B22046300005AC6A1 /* PublicationTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicationTableViewController.swift; sourceTree = "<group>"; };
 		63DD0A3F220C4FA500276B1A /* NoLoggedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoLoggedViewController.swift; sourceTree = "<group>"; };
 		7E5DABCEB6E2279A2BA6280E /* Pods_Picpoint.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Picpoint.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		7F27ACCF2214101F00146B57 /* SpotsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotsTableViewController.swift; sourceTree = "<group>"; };
+		7F27ACCF2214101F00146B57 /* SpotsCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotsCollectionViewController.swift; sourceTree = "<group>"; };
 		C05BA933E4DAAB37B56E6706 /* Pods-Picpoint.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Picpoint.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Picpoint/Pods-Picpoint.debug.xcconfig"; sourceTree = "<group>"; };
 		D2B2884621FA13A20060F8A2 /* Connectivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Connectivity.swift; sourceTree = "<group>"; };
 		D2C2EAB021EC7D1500D547BD /* Picpoint.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Picpoint.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -164,13 +164,13 @@
 			isa = PBXGroup;
 			children = (
 				639EFB742200CDA4005AC6A1 /* SpotsFeedViewController.swift */,
-				639EFB97220462A9005AC6A1 /* SpotTableViewCell.swift */,
+				639EFB97220462A9005AC6A1 /* SpotCollectionViewCell.swift */,
 				6355EAC82204814B00B784EB /* MapFeedViewController.swift */,
 				639EFB872201BCE9005AC6A1 /* MapNewSpotViewController.swift */,
 				639EFB7C2200CE3A005AC6A1 /* NewSpotViewController.swift */,
 				639EFB932204622A005AC6A1 /* SpotDetailViewController.swift */,
 				6355EACA2204C9D600B784EB /* PinAnnotation.swift */,
-				7F27ACCF2214101F00146B57 /* SpotsTableViewController.swift */,
+				7F27ACCF2214101F00146B57 /* SpotsCollectionViewController.swift */,
 			);
 			path = Spots;
 			sourceTree = "<group>";
@@ -335,7 +335,7 @@
 				639EFB882201BCE9005AC6A1 /* MapNewSpotViewController.swift in Sources */,
 				639EFB6A22004890005AC6A1 /* Validator.swift in Sources */,
 				D2CFD83C21F5D3160024EF0D /* RecoverPasswordViewController.swift in Sources */,
-				639EFB98220462A9005AC6A1 /* SpotTableViewCell.swift in Sources */,
+				639EFB98220462A9005AC6A1 /* SpotCollectionViewCell.swift in Sources */,
 				639EFB772200CDC3005AC6A1 /* ProfileViewController.swift in Sources */,
 				D2C2EAC621EC82B200D547BD /* RegisterViewController.swift in Sources */,
 				D2C2EACC21EC86C600D547BD /* LoginViewController.swift in Sources */,
@@ -357,7 +357,7 @@
 				D2C2EAB421EC7D1500D547BD /* AppDelegate.swift in Sources */,
 				639EFB822201A3D0005AC6A1 /* CustomAlertViewController.swift in Sources */,
 				D2B2884721FA13A20060F8A2 /* Connectivity.swift in Sources */,
-				7F27ACD02214101F00146B57 /* SpotsTableViewController.swift in Sources */,
+				7F27ACD02214101F00146B57 /* SpotsCollectionViewController.swift in Sources */,
 				639EFB862201BC5C005AC6A1 /* MapViewController.swift in Sources */,
 				639EFB9A220462C6005AC6A1 /* PublicationTableViewCell.swift in Sources */,
 			);

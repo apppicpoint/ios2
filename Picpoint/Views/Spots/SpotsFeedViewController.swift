@@ -11,10 +11,11 @@ import AlamofireImage
 import Alamofire
 import MapKit
 
-class SpotsFeedViewController: UIViewController,  UITableViewDelegate, UITableViewDataSource, CLLocationManagerDelegate {
+class SpotsFeedViewController: UIViewController,  UICollectionViewDelegate, UICollectionViewDataSource, CLLocationManagerDelegate {
+    
     @IBOutlet weak var map: MapFeedViewController!
     
-    @IBOutlet weak var spotsTableView: SpotsTableViewController!
+    @IBOutlet weak var spotsCollecionView: SpotsCollectionViewController!
     var spots = [Spot]()
     var currentLongitude: Double?
     var currentLatitude: Double?
@@ -29,8 +30,8 @@ class SpotsFeedViewController: UIViewController,  UITableViewDelegate, UITableVi
         locationManager.startUpdatingLocation()
         
         //Configura los delegados de la tabla
-        spotsTableView.delegate = self
-        spotsTableView.dataSource = self
+        spotsCollecionView.delegate = self
+        spotsCollecionView.dataSource = self
         //spotsTableView.scroll(to: .top, animated: true) // Se actualiza la tabla al hacer scroll hacia arriba
         
         // Comprobacines de conectividad y ubicación
@@ -60,16 +61,36 @@ class SpotsFeedViewController: UIViewController,  UITableViewDelegate, UITableVi
     }
     
     
-    func numberOfSections(in tableView: UITableView) -> Int {
+    /*func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return (spots.count)
+    }*/
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        print(spots.count)
+        return (spots.count)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell{
+        var cell = SpotCollectionViewCell()
+        
+        cell = collectionView.dequeueReusableCell(withReuseIdentifier: "spotCell", for: indexPath) as! SpotCollectionViewCell
+        cell.titleTextField.text = spots[indexPath.row].name
+        cell.distanceTextField.text = String(spots[indexPath.row].distance!) + " km from you"
+        cell.spotImage?.layer.masksToBounds = true
+        cell.spotImage?.contentMode = .scaleAspectFill
+        cell.spotImage?.image = spots[indexPath.row].image
+        
+        print("creando celdas")
+        
+        return cell
     }
     
     // Rellena cada una de las celdas con su información correspondiente.
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    /*func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var cell = SpotTableViewCell()
         
         cell = tableView.dequeueReusableCell(withIdentifier: "spotCell", for: indexPath) as! SpotTableViewCell
@@ -82,14 +103,14 @@ class SpotsFeedViewController: UIViewController,  UITableViewDelegate, UITableVi
         print(cell.imageView?.clipsToBounds)
         
         return cell
-    }
+    }*/
     
     // Establece la altura de las columnas de la tabla
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
+    /*func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
     {
         
         return 85 // Tamaño de la celda de spots
-    }
+    }*/
     
     
     
@@ -127,12 +148,14 @@ class SpotsFeedViewController: UIViewController,  UITableViewDelegate, UITableVi
                         self.getSpotImage(imageName: dataItem["image"] as! String, spot: spot)
                         
                     }
+                    
                     self.map.spots = self.spots // Le pasa los spots.
-                    self.map.updateMap() //Actualiza los spots en el mapa                    
+                    self.map.updateMap() //Actualiza los spots en el mapa
+                    self.spotsCollecionView.reloadData()
                 }
             //Si falla la conexión se muestra un alert.
             case .failure(let error):
-                print("Sin conexión")
+                print("Sin conexión en get spot")
                 print(error)
                 let alert = UIAlertController(title: "Ups! Something was wrong.", message:
                     "Check your connection and try it later", preferredStyle: .alert)
@@ -150,9 +173,9 @@ class SpotsFeedViewController: UIViewController,  UITableViewDelegate, UITableVi
             case .success:
                 let data = response.result.value
                 spot.image = data
-                self.spotsTableView.reloadData()
+                self.spotsCollecionView.reloadData()
             case .failure(let error):
-                print("Sin conexión")
+                print("Sin conexión en get spot image")
                 print(error)
                 let alert = UIAlertController(title: "Ups! Something was wrong.", message:
                     "Check your connection and try it later", preferredStyle: .alert)
@@ -168,7 +191,7 @@ class SpotsFeedViewController: UIViewController,  UITableViewDelegate, UITableVi
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.destination is SpotDetailViewController {            
             let destination = segue.destination as! SpotDetailViewController
-            let cell = sender as! SpotTableViewCell
+            let cell = sender as! SpotCollectionViewCell
             print(cell.id!)
             destination.spot = spots[cell.id!]
         }

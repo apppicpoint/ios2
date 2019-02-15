@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SpotsTableViewController: UITableView {
+class SpotsCollectionViewController: UICollectionView {
 
     /*
     // Only override draw() if you perform custom drawing.
