@@ -32,6 +32,8 @@ class SpotsFeedViewController: UIViewController,  UICollectionViewDelegate, UICo
         //Configura los delegados de la tabla
         spotsCollecionView.delegate = self
         spotsCollecionView.dataSource = self
+        
+        map.tintColor = UIColor.init(red: 15, green: 188, blue: 249, alpha: 1)
 
 
         //spotsTableView.scroll(to: .top, animated: true) // Se actualiza la tabla al hacer scroll hacia arriba
@@ -53,8 +55,9 @@ class SpotsFeedViewController: UIViewController,  UICollectionViewDelegate, UICo
     
     override func viewWillAppear(_ animated: Bool) {
         self.spotsCollecionView.reloadData()
-        
     }
+    
+    
     
     @IBAction func centerMapBtn(_ sender: UIButton) {
         map.centerMap()
@@ -91,7 +94,6 @@ class SpotsFeedViewController: UIViewController,  UICollectionViewDelegate, UICo
     
     func scrollViewDidScroll(_ scrollView: UIScrollView)
     {
-        
         let visibleRect = CGRect(origin: spotsCollecionView.contentOffset, size: spotsCollecionView.bounds.size)
         let visiblePoint = CGPoint(x: visibleRect.midX, y: visibleRect.midY)
         let indexPath = spotsCollecionView.indexPathForItem(at: visiblePoint)
@@ -99,7 +101,7 @@ class SpotsFeedViewController: UIViewController,  UICollectionViewDelegate, UICo
         if(indexPath != nil)
         {
             let cell = spotsCollecionView.cellForItem(at: indexPath!) as! SpotCollectionViewCell
-                        
+            
             //print("************************* id loclizaciones")
             //print("*************************" , cell.id!)
             
@@ -120,39 +122,31 @@ class SpotsFeedViewController: UIViewController,  UICollectionViewDelegate, UICo
                 {
                     //print(cell.id! , "celda", pinSelected.id! , "pin" , "true")
                     //print("-------------------------------------------")
-                    
-                    let pinView = map.view(for: pin)
-                    pinView?.canShowCallout = true
-                    
-                    // Cambiar imagen de tamaño
-                    let pinImage = UIImage(named: "pin_full")
-                    let size = CGSize(width: 40, height: 65) //proporcion 0.625
-                    UIGraphicsBeginImageContext(size)
-                    pinImage!.draw(in: CGRect(x: 0, y: 0, width: size.width, height: size.height))
-                    let resizedImage = UIGraphicsGetImageFromCurrentImageContext()
-                    
-                    pinView?.image = resizedImage
-                    pinView?.centerOffset = CGPoint(x:0, y:((pinView?.image!.size.height)! / -2));
+                    resizePinImage(pin: pin, width: 40, height: 65)
                 }else
                 {
                     //print(cell.id! , "celda", pinSelected.id! , "pin" , "false")
                     //print("-------------------------------------------")
-                    
-                    let pinView = map.view(for: pin)
-                    pinView?.canShowCallout = true
-                    
-                    // Cambiar imagen de tamaño
-                    let pinImage = UIImage(named: "pin_full")
-                    let size = CGSize(width: 30, height: 48) //proporcion 0.625
-                    UIGraphicsBeginImageContext(size)
-                    pinImage!.draw(in: CGRect(x: 0, y: 0, width: size.width, height: size.height))
-                    let resizedImage = UIGraphicsGetImageFromCurrentImageContext()
-                    
-                    pinView?.image = resizedImage
-                    pinView?.centerOffset = CGPoint(x:0, y:((pinView?.image!.size.height)! / -2));
+                    resizePinImage(pin: pin, width: 25, height: 38)
                 }
             }
         }
+    }
+    
+    func resizePinImage(pin:MKAnnotation,width:Int,height:Int){
+        
+        let pinView = map.view(for: pin)
+        pinView?.canShowCallout = true
+        
+        // Cambiar imagen de tamaño
+        let pinImage = UIImage(named: "pin_full")
+        let size = CGSize(width: width, height: height) //proporcion 0.625
+        UIGraphicsBeginImageContext(size)
+        pinImage!.draw(in: CGRect(x: 0, y: 0, width: size.width, height: size.height))
+        let resizedImage = UIGraphicsGetImageFromCurrentImageContext()
+        
+        pinView?.image = resizedImage
+        pinView?.centerOffset = CGPoint(x:0, y:((pinView?.image!.size.height)! / -2));
     }
     
     func getSpots() {

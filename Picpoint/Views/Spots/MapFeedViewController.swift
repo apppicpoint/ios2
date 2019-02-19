@@ -45,7 +45,6 @@ class MapFeedViewController:MKMapView , CLLocationManagerDelegate, MKMapViewDele
             let coordinates = CLLocationCoordinate2DMake(spot.latitude!, spot.longitude!) // Establece las coordenadas del pin.
             let mark = PinAnnotation(pinTitle: spot.name, pinSubTitle: spot.desc, location: coordinates, id:spot.id!)           // Crea el marcador
             self.addAnnotation(mark) // Añade el pin al mapa.
-            
         }
     }
     
@@ -85,6 +84,41 @@ class MapFeedViewController:MKMapView , CLLocationManagerDelegate, MKMapViewDele
         print("pulsado")
 
     }
+    
+    func mapViewDidFinishLoadingMap(_ mapView: MKMapView) {
+        
+        let id = self.spots[0].id
+        
+        for pin in mapView.annotations
+        {
+            if (pin is MKUserLocation)
+            {
+                continue
+            }
+            let pinSelected = pin as! PinAnnotation
+            
+            if(id! == pinSelected.id!){
+                resizePinImage(pin: pin, width: 40, height: 65,map: mapView)
+            }
+        }
+    }
+    
+    func resizePinImage(pin:MKAnnotation,width:Int,height:Int,map:MKMapView){
+        
+        let pinView = map.view(for: pin)
+        pinView?.canShowCallout = true
+        
+        // Cambiar imagen de tamaño
+        let pinImage = UIImage(named: "pin_full")
+        let size = CGSize(width: width, height: height) //proporcion 0.625
+        UIGraphicsBeginImageContext(size)
+        pinImage!.draw(in: CGRect(x: 0, y: 0, width: size.width, height: size.height))
+        let resizedImage = UIGraphicsGetImageFromCurrentImageContext()
+        
+        pinView?.image = resizedImage
+        pinView?.centerOffset = CGPoint(x:0, y:((pinView?.image!.size.height)! / -2));
+    }
+    
     
     func configureDetailView(annotationView: MKAnnotationView) {
         let width = 60

@@ -32,6 +32,7 @@
 		639EFB9C22046300005AC6A1 /* PublicationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639EFB9B22046300005AC6A1 /* PublicationTableViewController.swift */; };
 		63DD0A40220C4FA500276B1A /* NoLoggedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DD0A3F220C4FA500276B1A /* NoLoggedViewController.swift */; };
 		7F27ACD02214101F00146B57 /* SpotsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F27ACCF2214101F00146B57 /* SpotsCollectionViewController.swift */; };
+		7FE602B1221C33960032A2D1 /* TagsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FE602B0221C33960032A2D1 /* TagsViewController.swift */; };
 		D2B2884721FA13A20060F8A2 /* Connectivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B2884621FA13A20060F8A2 /* Connectivity.swift */; };
 		D2C2EAB421EC7D1500D547BD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C2EAB321EC7D1500D547BD /* AppDelegate.swift */; };
 		D2C2EAB921EC7D1500D547BD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D2C2EAB721EC7D1500D547BD /* Main.storyboard */; };
@@ -69,6 +70,7 @@
 		63DD0A3F220C4FA500276B1A /* NoLoggedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoLoggedViewController.swift; sourceTree = "<group>"; };
 		7E5DABCEB6E2279A2BA6280E /* Pods_Picpoint.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Picpoint.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F27ACCF2214101F00146B57 /* SpotsCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotsCollectionViewController.swift; sourceTree = "<group>"; };
+		7FE602B0221C33960032A2D1 /* TagsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagsViewController.swift; sourceTree = "<group>"; };
 		C05BA933E4DAAB37B56E6706 /* Pods-Picpoint.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Picpoint.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Picpoint/Pods-Picpoint.debug.xcconfig"; sourceTree = "<group>"; };
 		D2B2884621FA13A20060F8A2 /* Connectivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Connectivity.swift; sourceTree = "<group>"; };
 		D2C2EAB021EC7D1500D547BD /* Picpoint.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Picpoint.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -116,6 +118,7 @@
 		639EFB6C220048A8005AC6A1 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				7FE602AF221C33690032A2D1 /* Tags */,
 				639EFB9222046172005AC6A1 /* Spots */,
 				639EFB9122046164005AC6A1 /* Publications */,
 				D2C2EAC521EC82B200D547BD /* RegisterViewController.swift */,
@@ -173,6 +176,14 @@
 				7F27ACCF2214101F00146B57 /* SpotsCollectionViewController.swift */,
 			);
 			path = Spots;
+			sourceTree = "<group>";
+		};
+		7FE602AF221C33690032A2D1 /* Tags */ = {
+			isa = PBXGroup;
+			children = (
+				7FE602B0221C33960032A2D1 /* TagsViewController.swift */,
+			);
+			name = Tags;
 			sourceTree = "<group>";
 		};
 		C56A70AE010E6CD43AD7729B /* Frameworks */ = {
@@ -348,6 +359,7 @@
 				639EFB8A220306FA005AC6A1 /* Utils.swift in Sources */,
 				639EFB8C2203099F005AC6A1 /* PreviewImageViewController.swift in Sources */,
 				639EFB7B2200CDED005AC6A1 /* NewPublicationViewController.swift in Sources */,
+				7FE602B1221C33960032A2D1 /* TagsViewController.swift in Sources */,
 				639EFB9C22046300005AC6A1 /* PublicationTableViewController.swift in Sources */,
 				639EFB942204622A005AC6A1 /* SpotDetailViewController.swift in Sources */,
 				639EFB842201BC4E005AC6A1 /* CameraViewController.swift in Sources */,
