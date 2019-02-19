@@ -11,7 +11,7 @@ import AlamofireImage
 import Alamofire
 import MapKit
 
-class SpotsFeedViewController: UIViewController,  UICollectionViewDelegate, UICollectionViewDataSource, CLLocationManagerDelegate {
+class SpotsFeedViewController: UIViewController,  UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, CLLocationManagerDelegate {
     
     @IBOutlet weak var map: MapFeedViewController!
     
@@ -32,6 +32,8 @@ class SpotsFeedViewController: UIViewController,  UICollectionViewDelegate, UICo
         //Configura los delegados de la tabla
         spotsCollecionView.delegate = self
         spotsCollecionView.dataSource = self
+
+
         //spotsTableView.scroll(to: .top, animated: true) // Se actualiza la tabla al hacer scroll hacia arriba
         
         // Comprobacines de conectividad y ubicación
@@ -39,8 +41,6 @@ class SpotsFeedViewController: UIViewController,  UICollectionViewDelegate, UICo
             //Obtiene las coordenadas actuales del usuario.
             currentLatitude = locationManager.location!.coordinate.latitude
             currentLongitude = locationManager.location!.coordinate.longitude
-            
-           
             
             //Obtiene la lista de spots
             getSpots()
@@ -51,68 +51,109 @@ class SpotsFeedViewController: UIViewController,  UICollectionViewDelegate, UICo
         
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        self.spotsCollecionView.reloadData()
+        
+    }
+    
     @IBAction func centerMapBtn(_ sender: UIButton) {
         map.centerMap()
     }
-    
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         manager.startUpdatingLocation() // Determina la ubicación actual del usuario
     }
     
-    
-    /*func numberOfSections(in tableView: UITableView) -> Int {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return (spots.count)
-    }*/
-    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        print(spots.count)
         return (spots.count)
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell{
-        var cell = SpotCollectionViewCell()
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
+        var cell = SpotCollectionViewCell()
         cell = collectionView.dequeueReusableCell(withReuseIdentifier: "spotCell", for: indexPath) as! SpotCollectionViewCell
+        cell.id = spots[indexPath.row].id
         cell.titleTextField.text = spots[indexPath.row].name
-        cell.distanceTextField.text = String(spots[indexPath.row].distance!) + " km from you"
+        cell.distanceTextField.text = String(spots[indexPath.row].distance!) + "km from you"
         cell.spotImage?.layer.masksToBounds = true
         cell.spotImage?.contentMode = .scaleAspectFill
         cell.spotImage?.image = spots[indexPath.row].image
-        
-        print("creando celdas")
-        
         return cell
     }
     
-    // Rellena cada una de las celdas con su información correspondiente.
-    /*func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var cell = SpotTableViewCell()
-        
-        cell = tableView.dequeueReusableCell(withIdentifier: "spotCell", for: indexPath) as! SpotTableViewCell
-        cell.titleTextField.text = spots[indexPath.row].name
-        cell.distanceTextField.text = String(spots[indexPath.row].distance!) + " km from you"
-        cell.spotImage?.layer.masksToBounds = true
-        cell.spotImage?.contentMode = .scaleAspectFill
-        cell.spotImage?.image = spots[indexPath.row].image
-        
-        print(cell.imageView?.clipsToBounds)
-        
-        return cell
-    }*/
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: 280, height: 75)
+    }
     
-    // Establece la altura de las columnas de la tabla
-    /*func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
+    func scrollViewDidScroll(_ scrollView: UIScrollView)
     {
         
-        return 85 // Tamaño de la celda de spots
-    }*/
-    
-    
+        let visibleRect = CGRect(origin: spotsCollecionView.contentOffset, size: spotsCollecionView.bounds.size)
+        let visiblePoint = CGPoint(x: visibleRect.midX, y: visibleRect.midY)
+        let indexPath = spotsCollecionView.indexPathForItem(at: visiblePoint)
+        
+        if(indexPath != nil)
+        {
+            let cell = spotsCollecionView.cellForItem(at: indexPath!) as! SpotCollectionViewCell
+                        
+            //print("************************* id loclizaciones")
+            //print("*************************" , cell.id!)
+            
+            for pin in map.annotations
+            {
+                //print("bucle")
+                
+                if (pin is MKUserLocation)
+                {
+                    //print("MKUserLocation")
+                    //print("-------------------------------------------")
+                    continue
+                }
+                
+                let pinSelected = pin as! PinAnnotation
+                
+                if(cell.id! == pinSelected.id!)
+                {
+                    //print(cell.id! , "celda", pinSelected.id! , "pin" , "true")
+                    //print("-------------------------------------------")
+                    
+                    let pinView = map.view(for: pin)
+                    pinView?.canShowCallout = true
+                    
+                    // Cambiar imagen de tamaño
+                    let pinImage = UIImage(named: "pin_full")
+                    let size = CGSize(width: 40, height: 65) //proporcion 0.625
+                    UIGraphicsBeginImageContext(size)
+                    pinImage!.draw(in: CGRect(x: 0, y: 0, width: size.width, height: size.height))
+                    let resizedImage = UIGraphicsGetImageFromCurrentImageContext()
+                    
+                    pinView?.image = resizedImage
+                    pinView?.centerOffset = CGPoint(x:0, y:((pinView?.image!.size.height)! / -2));
+                }else
+                {
+                    //print(cell.id! , "celda", pinSelected.id! , "pin" , "false")
+                    //print("-------------------------------------------")
+                    
+                    let pinView = map.view(for: pin)
+                    pinView?.canShowCallout = true
+                    
+                    // Cambiar imagen de tamaño
+                    let pinImage = UIImage(named: "pin_full")
+                    let size = CGSize(width: 30, height: 48) //proporcion 0.625
+                    UIGraphicsBeginImageContext(size)
+                    pinImage!.draw(in: CGRect(x: 0, y: 0, width: size.width, height: size.height))
+                    let resizedImage = UIGraphicsGetImageFromCurrentImageContext()
+                    
+                    pinView?.image = resizedImage
+                    pinView?.centerOffset = CGPoint(x:0, y:((pinView?.image!.size.height)! / -2));
+                }
+            }
+        }
+    }
     
     func getSpots() {
         print("obteniendo spots")
@@ -203,3 +244,35 @@ class SpotsFeedViewController: UIViewController,  UICollectionViewDelegate, UICo
         getSpots()
     }
 }
+
+
+// Rellena cada una de las celdas con su información correspondiente.
+/*func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+ var cell = SpotTableViewCell()
+ 
+ cell = tableView.dequeueReusableCell(withIdentifier: "spotCell", for: indexPath) as! SpotTableViewCell
+ cell.titleTextField.text = spots[indexPath.row].name
+ cell.distanceTextField.text = String(spots[indexPath.row].distance!) + " km from you"
+ cell.spotImage?.layer.masksToBounds = true
+ cell.spotImage?.contentMode = .scaleAspectFill
+ cell.spotImage?.image = spots[indexPath.row].image
+ 
+ print(cell.imageView?.clipsToBounds)
+ 
+ return cell
+ }*/
+
+// Establece la altura de las columnas de la tabla
+/*func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
+ {
+ 
+ return 85 // Tamaño de la celda de spots
+ }*/
+
+/*func numberOfSections(in tableView: UITableView) -> Int {
+ return 1
+ }
+ 
+ func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+ return (spots.count)
+ }*/

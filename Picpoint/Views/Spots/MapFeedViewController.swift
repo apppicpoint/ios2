@@ -41,28 +41,32 @@ class MapFeedViewController:MKMapView , CLLocationManagerDelegate, MKMapViewDele
     func updateMap() {
         print("Actualizando mapa")
         self.removeAnnotations(self.annotations) //Borra todas las anotaciones existentes para que no se repitan.
-        for (index, spot) in spots.enumerated() {
+        for spot in spots {
             let coordinates = CLLocationCoordinate2DMake(spot.latitude!, spot.longitude!) // Establece las coordenadas del pin.
-            let mark = PinAnnotation(pinTitle: spot.name, pinSubTitle: spot.desc, location: coordinates, id:index)           // Crea el marcador
+            let mark = PinAnnotation(pinTitle: spot.name, pinSubTitle: spot.desc, location: coordinates, id:spot.id!)           // Crea el marcador
             self.addAnnotation(mark) // Añade el pin al mapa.
             
         }
-        
     }
     
     //Modifica el comportamiento de los pines
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        
+        print("Creacion de pines")
+        
         if annotation is MKUserLocation {
             return nil
         }
-        let annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: "customannotaion") //Crea una vista personalizada del pin.
+        
+        let annotation = annotation as! PinAnnotation
+        
+        let annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: String(annotation.id!)) //Crea una vista personalizada del pin.
         
         annotationView.isEnabled = true // Activa el marcador.
         annotationView.canShowCallout = true // Establece si puede mostrar informacion extra en la burbuja
         annotationView.image = UIImage(named: "pin_full") // Establece la imagen del pin.
         annotationView.centerOffset = CGPoint(x:0, y:(annotationView.image!.size.height / -2));
         
-
         //Crea un botón derecho en la burbuja personalizado.
         let calloutRightImage = UIImage(named: "pin_full")
         let calloutRightButton = UIButton(type: .custom)

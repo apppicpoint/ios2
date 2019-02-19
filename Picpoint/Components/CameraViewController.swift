@@ -50,9 +50,9 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
     func imagePickerController(_ picker: UIImagePickerController,
                                        didFinishPickingMediaWithInfo info: [String : Any]) {
         picker.dismiss(animated: true, completion: nil)
-         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
+        
+        if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
             self.image = image // Coloca la imagen en el imageView
-            let URIphoto = utils.randomString(length: 15) // Le da un nombre aleatorio
             imageName = UserDefaults.standard.string(forKey: "user_id")! + utils.randomString(length: 15)
         }
         //dismiss(animated: true, completion: nil) // Cierra la vista
@@ -63,6 +63,10 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.destination is PreviewImageViewController {
             let destination = segue.destination as! PreviewImageViewController
+            
+            print(imageName , "en prepare clase CameraViewController")
+            print(image , "en prepare clase CameraViewController")
+            
             destination.imageName = imageName
             destination.image = self.image!
             destination.longitude = longitude

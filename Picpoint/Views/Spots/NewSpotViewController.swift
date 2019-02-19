@@ -116,13 +116,6 @@ class NewSpotViewController: UIViewController, MKMapViewDelegate, UITextFieldDel
             switch result{
             case .success(let upload, _, _):
                 upload.responseJSON { response in
-
-                    
-                    print(response.response!.statusCode)
-                    print(response.error!)
-                    print(response.response!)
-                    print(response.data!)
-                    print(response.debugDescription)
                     
                     if(response.response?.statusCode == 200){
                         print("Foto subida")
