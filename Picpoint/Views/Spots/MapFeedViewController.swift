@@ -87,18 +87,21 @@ class MapFeedViewController:MKMapView , CLLocationManagerDelegate, MKMapViewDele
     
     func mapViewDidFinishLoadingMap(_ mapView: MKMapView) {
         
-        let id = self.spots[0].id
-        
-        for pin in mapView.annotations
-        {
-            if (pin is MKUserLocation)
-            {
-                continue
-            }
-            let pinSelected = pin as! PinAnnotation
+        if(self.spots.count > 0) {
             
-            if(id! == pinSelected.id!){
-                resizePinImage(pin: pin, width: 40, height: 65,map: mapView)
+            let id = self.spots[0].id
+            
+            for pin in mapView.annotations
+            {
+                if (pin is MKUserLocation)
+                {
+                    continue
+                }
+                let pinSelected = pin as! PinAnnotation
+                
+                if(id! == pinSelected.id!){
+                    resizePinImage(pin: pin, width: 40, height: 65,map: mapView)
+                }
             }
         }
     }

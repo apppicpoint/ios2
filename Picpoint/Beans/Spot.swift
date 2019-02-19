@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+
 class Spot {
     var id: Int?
     var name:String?
