@@ -30,7 +30,7 @@ class NewSpotViewController: UIViewController, MKMapViewDelegate, UITextFieldDel
 
     @IBAction func tagsBtn(_ sender: UIButton) {
         
-        let storyboard = UIStoryboard(name: "tagPopUp", bundle: nil)
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let myAlert = storyboard.instantiateViewController(withIdentifier: "tagPopUp")
         myAlert.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
         myAlert.modalTransitionStyle = UIModalTransitionStyle.crossDissolve

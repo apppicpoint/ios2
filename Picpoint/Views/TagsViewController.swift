@@ -12,17 +12,54 @@ import Alamofire
 
 class TagsViewController: UIViewController , UICollectionViewDelegate , UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
-    var tags:[Tag]?
+    var tags:[Tag] = [Tag]()
+    
+    
+    @IBOutlet weak var tagsCollectionView: UICollectionView!
+    
+    override func viewDidLoad() {
+        
+        tagsCollectionView.delegate = self
+        tagsCollectionView.dataSource = self
+        
+        let flowLayout = tagsCollectionView.collectionViewLayout as? UICollectionViewFlowLayout
+        
+        flowLayout?.scrollDirection = .vertical
+        flowLayout?.minimumLineSpacing = 0
+        flowLayout?.minimumInteritemSpacing = 0
+        flowLayout?.sectionInset = UIEdgeInsetsMake(5, 5, 5, 5)
+        
+        getTags()
+        
+    }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 0
+        print(tags.count , "numero detags que hay")
+        return tags.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = TagsCollectionViewCell()
+        var cell = TagsCollectionViewCell()
+        cell = collectionView.dequeueReusableCell(withReuseIdentifier: "tagCell", for: indexPath) as! TagsCollectionViewCell
+        cell.tagBtn.setTitle(tags[indexPath.row].name, for: .normal)
         return cell
     }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        let totalwidth = collectionView.bounds.size.width;
+        let numberOfCellsPerRow = 3
+        let oddEven = indexPath.row / numberOfCellsPerRow % 2
+        let dimensions = CGFloat(Int(totalwidth) / numberOfCellsPerRow)
+        if (oddEven == 0) {
+            return CGSize(width: dimensions,height: dimensions)
+        } else {
+            return CGSize(width: dimensions,height: dimensions / 2)
+        }
+    }
+    
+    
     @IBAction func closeTagPopUp(_ sender: UIButton) {
          self.dismiss(animated: true, completion: nil)
     }
@@ -32,12 +69,10 @@ class TagsViewController: UIViewController , UICollectionViewDelegate , UICollec
         "Content-Type":"application/x-www-form-urlencoded",
         "Authorization":UserDefaults.standard.string(forKey: "token")!
     ]
-    let parameters: Parameters = [
-        "0":"0"
-    ]
+
     func getTags() {
         
-        Alamofire.request(url, method: .get,parameters: parameters, encoding: URLEncoding.httpBody, headers: _headers).responseJSON {
+        Alamofire.request(url, method: .get, encoding: URLEncoding.httpBody, headers: _headers).responseJSON {
             response in
             
             switch response.result {
@@ -46,14 +81,15 @@ class TagsViewController: UIViewController , UICollectionViewDelegate , UICollec
                     if(response.response?.statusCode == 200){
                         
                         self.tags = [Tag]()
-                        
+                        print("getTags 200")
                         let jsonResponse = response.result.value as! [String:Any]
                         let tags = jsonResponse["tags"] as! [[String: Any]]
                         
                         for tag in tags{
                         
-                            self.tags?.append(Tag(id: tag["id"] as! Int, name: tag["name"] as! String))
+                            self.tags.append(Tag(id: tag["id"] as! Int, name: tag["name"] as! String))
                         }
+                        self.tagsCollectionView.reloadData()
                     }
                     break
                         

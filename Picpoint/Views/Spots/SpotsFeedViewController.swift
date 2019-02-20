@@ -127,7 +127,7 @@ class SpotsFeedViewController: UIViewController,  UICollectionViewDelegate, UICo
                 {
                     //print(cell.id! , "celda", pinSelected.id! , "pin" , "false")
                     //print("-------------------------------------------")
-                    resizePinImage(pin: pin, width: 25, height: 38)
+                    resizePinImage(pin: pin, width: 10, height: 16)
                 }
             }
         }
