@@ -42,7 +42,7 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
         if UIImagePickerController.isSourceTypeAvailable(.savedPhotosAlbum){
             imagePicker.delegate = self //Selecciona la propia vista como delegado
             imagePicker.sourceType = .savedPhotosAlbum;
-            imagePicker.allowsEditing = true //Permite editar la foto
+            imagePicker.allowsEditing = false //Permite editar la foto
             self.present(imagePicker, animated: true, completion: nil)//Reserva la foto para usarla.
         }
     }

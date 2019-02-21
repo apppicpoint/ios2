@@ -10,10 +10,15 @@ import Foundation
 import UIKit
 import Alamofire
 
-class TagsViewController: UIViewController , UICollectionViewDelegate , UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+
+
+
+class TagsViewController: UIViewController , UICollectionViewDelegate , UICollectionViewDataSource, UICollectionViewDelegateFlowLayout  {
     
     var tags:[Tag] = [Tag]()
-    
+    var tagsSelected:[Tag] = [Tag]()
+    var new: NewSpotViewController!
+
     
     @IBOutlet weak var tagsCollectionView: UICollectionView!
     
@@ -25,12 +30,46 @@ class TagsViewController: UIViewController , UICollectionViewDelegate , UICollec
         let flowLayout = tagsCollectionView.collectionViewLayout as? UICollectionViewFlowLayout
         
         flowLayout?.scrollDirection = .vertical
-        flowLayout?.minimumLineSpacing = 0
-        flowLayout?.minimumInteritemSpacing = 0
-        flowLayout?.sectionInset = UIEdgeInsetsMake(5, 5, 5, 5)
+        flowLayout?.minimumLineSpacing = 3
+        flowLayout?.minimumInteritemSpacing = 3
+        //flowLayout?.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0)
         
         getTags()
         
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        tagsSelected = []
+    }
+
+    
+    @IBAction func tagsBtnAction(_ sender: UIButton) {
+        
+        NewSpotViewController.tagsId = []
+        
+        for i in 0..<tagsSelected.count {
+            
+            if(tagsSelected[i].id == sender.tag){
+                
+                tagsSelected.remove(at: i)
+                //print("tag eliminado")
+                return
+            }
+        }
+        
+        for tag in tags {
+            
+            if(tag.id == sender.tag){
+                tagsSelected.append(Tag(id: tag.id!, name: tag.name!))
+            }
+        }
+        
+        //print("tag añadido")
+        
+        //print("--------------------------")
+        for tags in tagsSelected {
+            print(tags)
+        }
+        //print("--------------------------")
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -43,26 +82,42 @@ class TagsViewController: UIViewController , UICollectionViewDelegate , UICollec
         var cell = TagsCollectionViewCell()
         cell = collectionView.dequeueReusableCell(withReuseIdentifier: "tagCell", for: indexPath) as! TagsCollectionViewCell
         cell.tagBtn.setTitle(tags[indexPath.row].name, for: .normal)
+        cell.tagBtn.tag = tags[indexPath.row].id!
+        
+        for tag in NewSpotViewController.tagsId{
+            
+            if(tag.id == tags[indexPath.row].id){
+                
+                tagsSelected.append(Tag(id: tags[indexPath.row].id!, name: tags[indexPath.row].name!))
+                cell.state = true
+                cell.backgroundColor = UIColor.magenta
+            }
+        }
+        
         return cell
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        let totalwidth = collectionView.bounds.size.width;
-        let numberOfCellsPerRow = 3
-        let oddEven = indexPath.row / numberOfCellsPerRow % 2
-        let dimensions = CGFloat(Int(totalwidth) / numberOfCellsPerRow)
-        if (oddEven == 0) {
-            return CGSize(width: dimensions,height: dimensions)
-        } else {
-            return CGSize(width: dimensions,height: dimensions / 2)
-        }
+        let letras = tags[indexPath.row].name?.count
+        
+        //print(tags[indexPath.row].name!)
+        //print(letras!)
+        //print("---------------------------------------")
+
+        let dimensions = CGFloat((8 * letras!) + 20)
+        return CGSize(width: dimensions,height: 40)
     }
     
     
     @IBAction func closeTagPopUp(_ sender: UIButton) {
-         self.dismiss(animated: true, completion: nil)
+        
+        NewSpotViewController.clase?.tagCollectionView.reloadData()
+        NewSpotViewController.tagsId.append(contentsOf: tagsSelected)
+        self.dismiss(animated: true, completion: nil)
     }
+    
+
     
     let url = Constants.url+"tag"
     let _headers : HTTPHeaders = [
@@ -93,9 +148,6 @@ class TagsViewController: UIViewController , UICollectionViewDelegate , UICollec
                     }
                     break
                         
-                        
-            
-                
                 //Si falla la conexión se muestra un alert.
                 case .failure(let error):
                     
@@ -111,5 +163,4 @@ class TagsViewController: UIViewController , UICollectionViewDelegate , UICollec
             }
         }
     }
- 
 }

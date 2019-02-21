@@ -11,4 +11,21 @@ import UIKit
 class TagsCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var tagBtn: UIButton!
+    
+    var state:Bool = false
+    
+    @IBAction func tagBtnAction(_ sender: UIButton) {
+        
+        if(state){
+            
+            state = false
+            sender.backgroundColor = UIColor.purple
+        }else{
+            state = true
+            sender.backgroundColor = UIColor.magenta
+            
+            
+        }
+    }
 }
+

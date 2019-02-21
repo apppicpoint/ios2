@@ -32,6 +32,7 @@
 		639EFB9C22046300005AC6A1 /* PublicationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639EFB9B22046300005AC6A1 /* PublicationTableViewController.swift */; };
 		63DD0A40220C4FA500276B1A /* NoLoggedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DD0A3F220C4FA500276B1A /* NoLoggedViewController.swift */; };
 		7F27ACD02214101F00146B57 /* SpotsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F27ACCF2214101F00146B57 /* SpotsCollectionViewController.swift */; };
+		7FD34B57221EF2DD00268775 /* SpotTagCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD34B56221EF2DD00268775 /* SpotTagCollectionViewCell.swift */; };
 		7FE602B1221C33960032A2D1 /* TagsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FE602B0221C33960032A2D1 /* TagsViewController.swift */; };
 		7FE602B3221C4E030032A2D1 /* TagsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FE602B2221C4E020032A2D1 /* TagsCollectionViewCell.swift */; };
 		7FE602B5221C56510032A2D1 /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FE602B4221C56510032A2D1 /* Tag.swift */; };
@@ -39,7 +40,6 @@
 		D2C2EAB421EC7D1500D547BD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C2EAB321EC7D1500D547BD /* AppDelegate.swift */; };
 		D2C2EAB921EC7D1500D547BD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D2C2EAB721EC7D1500D547BD /* Main.storyboard */; };
 		D2C2EABB21EC7D1600D547BD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D2C2EABA21EC7D1600D547BD /* Assets.xcassets */; };
-		D2C2EABE21EC7D1600D547BD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D2C2EABC21EC7D1600D547BD /* LaunchScreen.storyboard */; };
 		D2C2EAC621EC82B200D547BD /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C2EAC521EC82B200D547BD /* RegisterViewController.swift */; };
 		D2C2EACC21EC86C600D547BD /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C2EACB21EC86C600D547BD /* LoginViewController.swift */; };
 		D2CFD83C21F5D3160024EF0D /* RecoverPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2CFD83B21F5D3160024EF0D /* RecoverPasswordViewController.swift */; };
@@ -72,6 +72,7 @@
 		63DD0A3F220C4FA500276B1A /* NoLoggedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoLoggedViewController.swift; sourceTree = "<group>"; };
 		7E5DABCEB6E2279A2BA6280E /* Pods_Picpoint.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Picpoint.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F27ACCF2214101F00146B57 /* SpotsCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotsCollectionViewController.swift; sourceTree = "<group>"; };
+		7FD34B56221EF2DD00268775 /* SpotTagCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotTagCollectionViewCell.swift; sourceTree = "<group>"; };
 		7FE602B0221C33960032A2D1 /* TagsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagsViewController.swift; sourceTree = "<group>"; };
 		7FE602B2221C4E020032A2D1 /* TagsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagsCollectionViewCell.swift; sourceTree = "<group>"; };
 		7FE602B4221C56510032A2D1 /* Tag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
@@ -81,7 +82,6 @@
 		D2C2EAB321EC7D1500D547BD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D2C2EAB821EC7D1500D547BD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D2C2EABA21EC7D1600D547BD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		D2C2EABD21EC7D1600D547BD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D2C2EABF21EC7D1600D547BD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D2C2EAC521EC82B200D547BD /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		D2C2EACB21EC86C600D547BD /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -179,6 +179,7 @@
 				639EFB932204622A005AC6A1 /* SpotDetailViewController.swift */,
 				6355EACA2204C9D600B784EB /* PinAnnotation.swift */,
 				7F27ACCF2214101F00146B57 /* SpotsCollectionViewController.swift */,
+				7FD34B56221EF2DD00268775 /* SpotTagCollectionViewCell.swift */,
 			);
 			path = Spots;
 			sourceTree = "<group>";
@@ -228,7 +229,6 @@
 				639EFB6B220048A0005AC6A1 /* Utils */,
 				639EFB802200D672005AC6A1 /* Components */,
 				D2C2EABA21EC7D1600D547BD /* Assets.xcassets */,
-				D2C2EABC21EC7D1600D547BD /* LaunchScreen.storyboard */,
 				D2C2EABF21EC7D1600D547BD /* Info.plist */,
 			);
 			path = Picpoint;
@@ -294,7 +294,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D2C2EABE21EC7D1600D547BD /* LaunchScreen.storyboard in Resources */,
 				D2C2EABB21EC7D1600D547BD /* Assets.xcassets in Resources */,
 				D2C2EAB921EC7D1500D547BD /* Main.storyboard in Resources */,
 			);
@@ -369,6 +368,7 @@
 				639EFB7B2200CDED005AC6A1 /* NewPublicationViewController.swift in Sources */,
 				7FE602B1221C33960032A2D1 /* TagsViewController.swift in Sources */,
 				639EFB9C22046300005AC6A1 /* PublicationTableViewController.swift in Sources */,
+				7FD34B57221EF2DD00268775 /* SpotTagCollectionViewCell.swift in Sources */,
 				639EFB942204622A005AC6A1 /* SpotDetailViewController.swift in Sources */,
 				639EFB842201BC4E005AC6A1 /* CameraViewController.swift in Sources */,
 				6355EACB2204C9D600B784EB /* PinAnnotation.swift in Sources */,
@@ -392,14 +392,6 @@
 				D2C2EAB821EC7D1500D547BD /* Base */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		D2C2EABC21EC7D1600D547BD /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				D2C2EABD21EC7D1600D547BD /* Base */,
-			);
-			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
