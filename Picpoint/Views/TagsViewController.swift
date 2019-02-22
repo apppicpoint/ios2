@@ -10,9 +10,6 @@ import Foundation
 import UIKit
 import Alamofire
 
-
-
-
 class TagsViewController: UIViewController , UICollectionViewDelegate , UICollectionViewDataSource, UICollectionViewDelegateFlowLayout  {
     
     var tags:[Tag] = [Tag]()
@@ -32,23 +29,25 @@ class TagsViewController: UIViewController , UICollectionViewDelegate , UICollec
         flowLayout?.scrollDirection = .vertical
         flowLayout?.minimumLineSpacing = 3
         flowLayout?.minimumInteritemSpacing = 3
+        
+        //tagsCollectionView.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: 5, right: 0)
         //flowLayout?.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0)
         
         getTags()
         
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         tagsSelected = []
     }
 
-    
     @IBAction func tagsBtnAction(_ sender: UIButton) {
         
         NewSpotViewController.tagsId = []
         
         for i in 0..<tagsSelected.count {
             
-            if(tagsSelected[i].id == sender.tag){
+            if(tagsSelected[i].id == sender.tag) {
                 
                 tagsSelected.remove(at: i)
                 //print("tag eliminado")
@@ -66,11 +65,13 @@ class TagsViewController: UIViewController , UICollectionViewDelegate , UICollec
         //print("tag añadido")
         
         //print("--------------------------")
-        for tags in tagsSelected {
-            print(tags)
-        }
+        //for tags in tagsSelected {
+        //   print(tags)
+        //}
         //print("--------------------------")
     }
+    
+
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         print(tags.count , "numero detags que hay")
@@ -80,11 +81,12 @@ class TagsViewController: UIViewController , UICollectionViewDelegate , UICollec
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         var cell = TagsCollectionViewCell()
+
         cell = collectionView.dequeueReusableCell(withReuseIdentifier: "tagCell", for: indexPath) as! TagsCollectionViewCell
         cell.tagBtn.setTitle(tags[indexPath.row].name, for: .normal)
         cell.tagBtn.tag = tags[indexPath.row].id!
         
-        for tag in NewSpotViewController.tagsId{
+        for tag in NewSpotViewController.tagsId {
             
             if(tag.id == tags[indexPath.row].id){
                 
@@ -93,8 +95,21 @@ class TagsViewController: UIViewController , UICollectionViewDelegate , UICollec
                 cell.backgroundColor = UIColor.magenta
             }
         }
+        //tagsCollectionView.scrollToItem(at: indexPath, at: .centeredVertically, animated: true)
         
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        
+        let totalCellWidth = 80 * collectionView.numberOfItems(inSection: 0)
+        let totalSpacingWidth = 10 * (collectionView.numberOfItems(inSection: 0) - 1)
+        
+        let leftInset = (collectionView.layer.frame.size.width - CGFloat(totalCellWidth + totalSpacingWidth)) / 2
+        let rightInset = leftInset
+        
+        return UIEdgeInsetsMake(0, leftInset, 0, rightInset)
+        
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -112,6 +127,7 @@ class TagsViewController: UIViewController , UICollectionViewDelegate , UICollec
     
     @IBAction func closeTagPopUp(_ sender: UIButton) {
         
+        NewSpotViewController.tagsId = []
         NewSpotViewController.clase?.tagCollectionView.reloadData()
         NewSpotViewController.tagsId.append(contentsOf: tagsSelected)
         self.dismiss(animated: true, completion: nil)
