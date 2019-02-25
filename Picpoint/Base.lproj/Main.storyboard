@@ -767,7 +767,6 @@
                     <connections>
                         <outlet property="author" destination="3gj-GZ-tDM" id="jIj-80-usP"/>
                         <outlet property="createdBy" destination="mmZ-Aj-cRM" id="W5d-qa-RPt"/>
-                        <outlet property="cvTags" destination="ptQ-Op-XJT" id="bCg-pO-wkg"/>
                         <outlet property="image" destination="K0e-C3-bOD" id="RKP-3C-2Pc"/>
                         <outlet property="spotDescription" destination="gsp-fw-Mso" id="Wc6-4F-gmd"/>
                         <outlet property="spotName" destination="jpg-fz-Qvp" id="RsJ-kZ-CgO"/>
@@ -775,7 +774,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cA2-Ge-Xr8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-4320" y="4084.8591549295775"/>
+            <point key="canvasLocation" x="-4320" y="4331"/>
         </scene>
         <!--Tags View Controller-->
         <scene sceneID="Vg2-eQ-J4u">
@@ -1108,6 +1107,7 @@
                                             <outlet property="distanceTextField" destination="UqT-35-sOH" id="Xsa-J4-aPb"/>
                                             <outlet property="spotImage" destination="ra6-zO-MYF" id="qor-pA-9VY"/>
                                             <outlet property="titleTextField" destination="7Pd-1W-Ide" id="NZy-DT-Eib"/>
+                                            <segue destination="WWy-d6-uyH" kind="show" id="cq0-KM-srH"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -1135,7 +1135,6 @@
                         <outlet property="map" destination="zdz-LV-LeX" id="LaA-WH-fxD"/>
                         <outlet property="searchDisplayController" destination="cUG-XP-C3o" id="1Sp-oG-ehw"/>
                         <outlet property="spotsCollecionView" destination="RC7-jr-YoK" id="chg-cC-SzO"/>
-                        <segue destination="WWy-d6-uyH" kind="show" identifier="goToSpotDetail" id="ItQ-P3-gYF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fQa-4v-bTe" userLabel="First Responder" sceneMemberID="firstResponder"/>

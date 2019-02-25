@@ -80,6 +80,7 @@ class SpotsFeedViewController: UIViewController,  UICollectionViewDelegate, UICo
         var cell = SpotCollectionViewCell()
         cell = collectionView.dequeueReusableCell(withReuseIdentifier: "spotCell", for: indexPath) as! SpotCollectionViewCell
         cell.id = spots[indexPath.row].id
+        cell.index = indexPath.row
         cell.titleTextField.text = spots[indexPath.row].name
         cell.distanceTextField.text = String(spots[indexPath.row].distance!) + "km from you"
         cell.spotImage?.layer.masksToBounds = true
@@ -228,7 +229,9 @@ class SpotsFeedViewController: UIViewController,  UICollectionViewDelegate, UICo
             let destination = segue.destination as! SpotDetailViewController
             let cell = sender as! SpotCollectionViewCell
             print(cell.id!)
-            destination.spot = spots[cell.id!]
+            destination.spot = spots[cell.index!]
+            
+            
         }
     }
     

@@ -11,6 +11,7 @@ import UIKit
 class SpotCollectionViewCell: UICollectionViewCell {
 
     var id: Int?
+    var index: Int?
     
     @IBOutlet weak var titleTextField: UILabel!
     @IBOutlet weak var distanceTextField: UILabel!    
