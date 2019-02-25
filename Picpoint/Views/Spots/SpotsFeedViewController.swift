@@ -185,9 +185,11 @@ class SpotsFeedViewController: UIViewController,  UICollectionViewDelegate, UICo
                                         longitude: dataItem["longitude"] as! Double,
                                         latitude: dataItem["latitude"] as! Double,
                                         user_id: dataItem["user_id"] as! Int,
-                                        distance: Float(round(10*distance)/10))
+                                        distance: Float(round(10*distance)/10),
+                                        imageName: dataItem["image"] as! String
+                                        )
                         self.spots.append(spot) //Por cada objeto en el json se añade un spot al array.
-                        self.getSpotImage(imageName: dataItem["image"] as! String, spot: spot)
+                        self.getSpotImage(imageName: spot.imageName!, spot: spot)
                         
                     }
                     
@@ -214,7 +216,7 @@ class SpotsFeedViewController: UIViewController,  UICollectionViewDelegate, UICo
             switch response.result {
             case .success:
                 let data = response.result.value
-                spot.image = data
+                spot.image = data!
                 self.spotsCollecionView.reloadData()
             case .failure(let error):
                 print("Sin conexión en get spot image")
