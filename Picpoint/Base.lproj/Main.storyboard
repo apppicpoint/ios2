@@ -941,15 +941,22 @@
                                     <outlet property="delegate" destination="T0F-7n-y2V" id="BpA-Cx-3WE"/>
                                 </connections>
                             </searchBar>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U64-vD-JRi">
+                                <rect key="frame" x="50" y="518" width="220" height="30"/>
+                                <state key="normal" title="Select Current Location"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="6sp-Zb-OUg" firstAttribute="leading" secondItem="VLt-6g-Jb1" secondAttribute="leading" id="0OB-Ng-gme"/>
+                            <constraint firstItem="VLt-6g-Jb1" firstAttribute="bottom" secondItem="U64-vD-JRi" secondAttribute="bottom" constant="20" id="7re-Xg-aYQ"/>
                             <constraint firstItem="6sp-Zb-OUg" firstAttribute="bottom" secondItem="VLt-6g-Jb1" secondAttribute="bottom" id="8sg-BB-Rfa"/>
+                            <constraint firstItem="VLt-6g-Jb1" firstAttribute="trailing" secondItem="U64-vD-JRi" secondAttribute="trailing" constant="50" id="DVk-PS-xLQ"/>
                             <constraint firstItem="Fnu-Fa-f7Y" firstAttribute="leading" secondItem="VLt-6g-Jb1" secondAttribute="leading" id="LDe-cc-YeR"/>
                             <constraint firstItem="Fnu-Fa-f7Y" firstAttribute="top" secondItem="VLt-6g-Jb1" secondAttribute="top" id="Puj-uf-M9G"/>
                             <constraint firstItem="Aaw-dQ-OLQ" firstAttribute="top" secondItem="Fnu-Fa-f7Y" secondAttribute="bottom" constant="20" id="Tw2-97-Wd3"/>
                             <constraint firstItem="6sp-Zb-OUg" firstAttribute="trailing" secondItem="VLt-6g-Jb1" secondAttribute="trailing" id="cgs-x7-3y6"/>
+                            <constraint firstItem="U64-vD-JRi" firstAttribute="leading" secondItem="VLt-6g-Jb1" secondAttribute="leading" constant="50" id="hlf-3T-Qnr"/>
                             <constraint firstItem="6sp-Zb-OUg" firstAttribute="top" secondItem="VLt-6g-Jb1" secondAttribute="top" id="nNI-dd-rXE"/>
                             <constraint firstItem="VLt-6g-Jb1" firstAttribute="trailing" secondItem="Aaw-dQ-OLQ" secondAttribute="trailing" constant="20" id="nkV-BG-BaA"/>
                             <constraint firstItem="Fnu-Fa-f7Y" firstAttribute="trailing" secondItem="VLt-6g-Jb1" secondAttribute="trailing" id="zfz-MU-kUJ"/>
