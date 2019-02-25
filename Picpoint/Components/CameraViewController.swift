@@ -12,14 +12,7 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
     var new: String?
     let utils = Utils()
     var imagePicker = UIImagePickerController() //Selector de imagenes para la galería
-    /*
-    var captureSession = AVCaptureSession()
-    var backCamera: AVCaptureDevice?
-    var frontCamera: AVCaptureDevice?
-    var currentCamera: AVCaptureDevice?
-    var photoOutput: AVCapturePhotoOutput?
-    */
-    
+
     override func viewDidLoad() {
         
         if new == "spot"{
@@ -51,8 +44,11 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
     @IBAction func takePhotoButton(_ sender: UIButton) {
         performSegue(withIdentifier: "previewImage", sender: sender)
     }
-        // Do any additional setup after loading the view.
-    @IBAction func takePhotoFromGallery(_ sender: UIButton) {
+    
+    
+    
+    // Do any additional setup after loading the view.
+    @IBAction func takePhotoFromGalelery(_ sender: UIButton) {
         if UIImagePickerController.isSourceTypeAvailable(.savedPhotosAlbum){
             imagePicker.delegate = self //Selecciona la propia vista como delegado
             imagePicker.sourceType = .savedPhotosAlbum;
@@ -61,6 +57,7 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
         }
     }
     
+    //Coge la foto
     func imagePickerController(_ picker: UIImagePickerController,
                                        didFinishPickingMediaWithInfo info: [String : Any]) {
         picker.dismiss(animated: true, completion: nil)
@@ -98,54 +95,6 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
     @IBAction func backFromToCamera(_ segue: UIStoryboardSegue) {
         
     }
-    
-/*
-    func setupCaptureSession(){
-        captureSession.sessionPreset = AVCaptureSession.Preset.photo
-        
-    }
-    
-    func setupDevice(){
-        let deviceDiscoverySession = AVCaptureDevice.DiscoverySession(deviceTypes: [AVCaptureDevice.DeviceType.builtInWideAngleCamera], mediaType: AVMediaType.video, position: AVCaptureDevice.Position.unspecified)
-        let devices = deviceDiscoverySession.devices
-        
-        for device in devices {
-            if device.position == AVCaptureDevice.Position.back {
-                backCamera = device
-
-                print("back")
-
-                
-            } else if device.position == AVCaptureDevice.Position.front{
-                frontCamera = device
-                print("front")
-            }
-        }
-        
-        currentCamera = backCamera
-    }
-    
-    func setupInputOutput(){
-        do{
-            let captureDeviceInput = try AVCaptureDeviceInput(device: currentCamera!)
-            captureSession.addInput(captureDeviceInput)
-            photoOutput?.setPreparedPhotoSettingsArray([AVCapturePhotoSettings(format: [AVVideoCodecKey : AVVideoCodecType.jpeg])], completionHandler: nil)
-        } catch {
-            print(error)
-        }
-        
-    }
-    
-    func setupPreviewLayer(){
-        
-        
-    }
-    
-    func startRunningCaptureSession(){
-        
-        
-    }
- */
 }
 
     

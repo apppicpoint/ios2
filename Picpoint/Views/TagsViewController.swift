@@ -85,6 +85,7 @@ class TagsViewController: UIViewController , UICollectionViewDelegate , UICollec
         var cell = TagsCollectionViewCell()
 
         cell = collectionView.dequeueReusableCell(withReuseIdentifier: "tagCell", for: indexPath) as! TagsCollectionViewCell
+        cell.backgroundColor = UIColor.init(red: 0.741176470588235, green: 0.623529411764706, blue: 0.768627450980392, alpha: 1)
         cell.tagBtn.setTitle(tags[indexPath.row].name, for: .normal)
         cell.tagBtn.tag = tags[indexPath.row].id!
         
@@ -140,10 +141,9 @@ class TagsViewController: UIViewController , UICollectionViewDelegate , UICollec
         //print(letras!)
         //print("---------------------------------------")
 
-        let dimensions = CGFloat((8 * letras!) + 20)
+        let dimensions = CGFloat((6 * letras!) + 30)
         return CGSize(width: dimensions,height: 40)
     }
-    
     
     @IBAction func closeTagPopUp(_ sender: UIButton) {
         

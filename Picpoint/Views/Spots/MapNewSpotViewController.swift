@@ -21,6 +21,7 @@ class MapNewSpotViewController: UIViewController, CLLocationManagerDelegate, MKM
     var currentLatitude: Double?
     var spotNear: Bool?
     @IBOutlet weak var map: MKMapView!
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,10 +39,10 @@ class MapNewSpotViewController: UIViewController, CLLocationManagerDelegate, MKM
             getSpots()
             map.tintColor = UIColor.init(red: 15, green: 188, blue: 249, alpha: 1)
         }
-        
-        
-        
-
+    }
+    
+    @IBAction func CurrentLocation(_ sender: UIButton) {
+        pointInCurrentLocation()
     }
     
     @IBAction func backAct(_ sender: Any) {
@@ -52,12 +53,27 @@ class MapNewSpotViewController: UIViewController, CLLocationManagerDelegate, MKM
     @IBAction func centerMapBtn(_ sender: UIButton) {
         centerMap()
     }
-    
-    
+
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         manager.startUpdatingLocation() // Determina la ubicación actual del usuario
     }
     
+    func pointInCurrentLocation(){
+    
+        //Solo permite una anotación de nuevo spot a la vez
+        for annotation in map.annotations {
+            if annotation.title == "new" {
+            map.removeAnnotation(annotation)
+            }
+        }
+
+        //Guarda la longitud y latitud
+        longitude = currentLongitude!
+        latitude = currentLatitude!
+        
+        checkSpotNear(newSpotLongitude: longitude!, newSpotLatitude: latitude!, distance: 15)
+    }
+
     // Centra el mapa
     func centerMap(){
         let coordinates = CLLocationCoordinate2D.init(latitude: currentLatitude!, longitude: currentLongitude!)
@@ -66,9 +82,7 @@ class MapNewSpotViewController: UIViewController, CLLocationManagerDelegate, MKM
         map.setRegion(region, animated: true)
         
     }  
-    
-    
-    
+ 
     // Actualiza el mapa
     func updateMap() {
         map.removeAnnotations(map.annotations) //Borra todas las anotaciones existentes para que no se repitan.
@@ -163,15 +177,9 @@ class MapNewSpotViewController: UIViewController, CLLocationManagerDelegate, MKM
             //Guarda la longitud y latitud
             longitude = coordinate.longitude
             latitude = coordinate.latitude
-            // Add annotation:
-            let annotation = MKPointAnnotation()
-            annotation.coordinate = coordinate
-            annotation.title = "new"
-            map.addAnnotation(annotation)
+            
             checkSpotNear(newSpotLongitude: longitude!, newSpotLatitude: latitude!, distance: 15)
         }
-        
-        
     }
     
     func getSpots() {
@@ -200,8 +208,8 @@ class MapNewSpotViewController: UIViewController, CLLocationManagerDelegate, MKM
                                         longitude: dataItem["longitude"] as! Double,
                                         latitude: dataItem["latitude"] as! Double,
                                         user_id: dataItem["user_id"] as! Int,
-                                        //image: dataItem["image"] as? String,
-                            distance: dataItem["distance_user"] as? Float)
+                                        distance: dataItem["distance_user"] as? Float,
+                                        imageName: dataItem["image"] as? String)
                         self.spots.append(spot) //Por cada objeto en el json se añade una ubicación al array.
                         
                     }
@@ -223,7 +231,7 @@ class MapNewSpotViewController: UIViewController, CLLocationManagerDelegate, MKM
         }
     }
     
-    func checkSpotNear(newSpotLongitude: Double, newSpotLatitude: Double, distance: Double) -> Bool {
+    func checkSpotNear(newSpotLongitude: Double, newSpotLatitude: Double, distance: Double){
         let parameters: Parameters = [
             "distanceUser":0.0015,
             "longitude": longitude!,
@@ -240,8 +248,24 @@ class MapNewSpotViewController: UIViewController, CLLocationManagerDelegate, MKM
             case .success:
                 let jsonResponse = response.result.value as! [String:Any]
                 if(response.response?.statusCode == 200){
-                    self.spotNear = jsonResponse["spot"] as? Bool
-                    print(self.spotNear!)
+                    
+                    self.spotNear = (jsonResponse["spot"] as? Bool)!
+                    
+                    if(self.spotNear)!{
+                        
+                        // Add annotation:
+                        let annotation = MKPointAnnotation()
+                        annotation.coordinate = CLLocationCoordinate2DMake(newSpotLatitude, newSpotLongitude)
+                        annotation.title = "new"
+                        self.map.addAnnotation(annotation)
+                        
+                    } else {
+                        
+                        let alert = UIAlertController(title: "Point to nearby", message: ("There's a point nearby. You have to be 15 meters away."), preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
+                        self.present(alert, animated: true, completion: nil)
+                        
+                    }
                     
                 } else {
                     let alert = UIAlertController(title: "Error", message: (jsonResponse["message"]! as! String), preferredStyle: .alert)
@@ -259,7 +283,6 @@ class MapNewSpotViewController: UIViewController, CLLocationManagerDelegate, MKM
                 self.present(alert, animated: true, completion: nil)
             }
         }
-        return true
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -271,5 +294,4 @@ class MapNewSpotViewController: UIViewController, CLLocationManagerDelegate, MKM
             destination.new = "spot"
         }
     }
-    
 }

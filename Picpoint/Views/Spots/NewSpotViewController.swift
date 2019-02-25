@@ -42,10 +42,7 @@ class NewSpotViewController: UIViewController, MKMapViewDelegate, UITextFieldDel
         self.present(myAlert, animated: true, completion: nil)
     }
     
-
- 
     @IBOutlet weak var CancelBtn: UIBarButtonItem!
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -71,15 +68,14 @@ class NewSpotViewController: UIViewController, MKMapViewDelegate, UITextFieldDel
         flowLayout?.scrollDirection = .horizontal
         flowLayout?.minimumLineSpacing = 3
         flowLayout?.minimumInteritemSpacing = 3
-        //flowLayout?.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0)
         
-        
+        NewSpotViewController.tagsId = []
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return NewSpotViewController.tagsId.count
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         var cell = SpotTagCollectionViewCell()
@@ -103,10 +99,7 @@ class NewSpotViewController: UIViewController, MKMapViewDelegate, UITextFieldDel
     func storeLocation() {
         
         print(NewSpotViewController.tagsId.count)
-        print("te amo carlos")
-        print("holi")
-        
- 
+
         var sendid:[Int] = [Int]()
         
         for tag in NewSpotViewController.tagsId {
@@ -172,6 +165,8 @@ class NewSpotViewController: UIViewController, MKMapViewDelegate, UITextFieldDel
     func uploadPhotoRequest(){
         let image = self.image
         let imgData = UIImageJPEGRepresentation(image!, 1)
+        //let imgData: Data = UIImagePNGRepresentation(image!)!
+        //let imgData = #imageLiteral(resourceName: "Logo picpoint ")
         let url = Constants.url+"img"
         print(url)
         let headers: HTTPHeaders = [
@@ -181,13 +176,18 @@ class NewSpotViewController: UIViewController, MKMapViewDelegate, UITextFieldDel
         
         Alamofire.upload(multipartFormData: { (multipartFormData) in
             
-            multipartFormData.append(imgData!, withName: "img", fileName: self.imageName!+".png", mimeType: "image/png")
+            multipartFormData.append(imgData!, withName: "img", fileName: self.imageName!+".jpeg", mimeType: "image/jpeg")
             
             print(self.imageName!+".png")
         }, usingThreshold: UInt64.init(), to: url, method: .post, headers: headers) { (result) in
             switch result{
             case .success(let upload, _, _):
                 upload.responseJSON { response in
+
+                    print(upload.request?.httpBodyStream)
+                    print(response.response!.statusCode)
+                    print("data", response.data!.count)
+                    print(response.data![1])
                     
                     if(response.response?.statusCode == 200){
                         print("Foto subida")
