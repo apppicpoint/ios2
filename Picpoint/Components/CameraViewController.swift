@@ -11,12 +11,8 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
     let utils = Utils()
     var imagePicker = UIImagePickerController() //Selector de imagenes para la galería
 
-    
     override func viewDidLoad() {
-        
-
-
-        
+ 
     }
 
     @IBAction func goPreviewImage(_ sender: UIBarButtonItem) {

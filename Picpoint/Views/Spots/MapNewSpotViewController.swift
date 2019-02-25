@@ -61,16 +61,11 @@ class MapNewSpotViewController: UIViewController, CLLocationManagerDelegate, MKM
             map.removeAnnotation(annotation)
             }
         }
-        
+
         //Guarda la longitud y latitud
         longitude = currentLongitude!
         latitude = currentLatitude!
         
-        // Add annotation:
-        let annotation = MKPointAnnotation()
-        annotation.coordinate =  CLLocationCoordinate2DMake(latitude!, longitude!)
-        annotation.title = "new"
-        map.addAnnotation(annotation)
         checkSpotNear(newSpotLongitude: longitude!, newSpotLatitude: latitude!, distance: 15)
     }
 
@@ -177,11 +172,7 @@ class MapNewSpotViewController: UIViewController, CLLocationManagerDelegate, MKM
             //Guarda la longitud y latitud
             longitude = coordinate.longitude
             latitude = coordinate.latitude
-            // Add annotation:
-            let annotation = MKPointAnnotation()
-            annotation.coordinate = coordinate
-            annotation.title = "new"
-            map.addAnnotation(annotation)
+            
             checkSpotNear(newSpotLongitude: longitude!, newSpotLatitude: latitude!, distance: 15)
         }
     }
@@ -235,7 +226,7 @@ class MapNewSpotViewController: UIViewController, CLLocationManagerDelegate, MKM
         }
     }
     
-    func checkSpotNear(newSpotLongitude: Double, newSpotLatitude: Double, distance: Double) -> Bool {
+    func checkSpotNear(newSpotLongitude: Double, newSpotLatitude: Double, distance: Double){
         let parameters: Parameters = [
             "distanceUser":0.0015,
             "longitude": longitude!,
@@ -252,8 +243,24 @@ class MapNewSpotViewController: UIViewController, CLLocationManagerDelegate, MKM
             case .success:
                 let jsonResponse = response.result.value as! [String:Any]
                 if(response.response?.statusCode == 200){
-                    self.spotNear = jsonResponse["spot"] as? Bool
-                    print(self.spotNear!)
+                    
+                    self.spotNear = (jsonResponse["spot"] as? Bool)!
+                    
+                    if(self.spotNear)!{
+                        
+                        // Add annotation:
+                        let annotation = MKPointAnnotation()
+                        annotation.coordinate = CLLocationCoordinate2DMake(newSpotLatitude, newSpotLongitude)
+                        annotation.title = "new"
+                        self.map.addAnnotation(annotation)
+                        
+                    } else {
+                        
+                        let alert = UIAlertController(title: "Point to nearby", message: ("There's a point nearby. You have to be 15 meters away."), preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
+                        self.present(alert, animated: true, completion: nil)
+                        
+                    }
                     
                 } else {
                     let alert = UIAlertController(title: "Error", message: (jsonResponse["message"]! as! String), preferredStyle: .alert)
@@ -271,7 +278,6 @@ class MapNewSpotViewController: UIViewController, CLLocationManagerDelegate, MKM
                 self.present(alert, animated: true, completion: nil)
             }
         }
-        return true
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

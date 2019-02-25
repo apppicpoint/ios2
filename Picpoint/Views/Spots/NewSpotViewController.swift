@@ -41,10 +41,7 @@ class NewSpotViewController: UIViewController, MKMapViewDelegate, UITextFieldDel
         self.present(myAlert, animated: true, completion: nil)
     }
     
-
- 
     @IBOutlet weak var CancelBtn: UIBarButtonItem!
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -70,15 +67,14 @@ class NewSpotViewController: UIViewController, MKMapViewDelegate, UITextFieldDel
         flowLayout?.scrollDirection = .horizontal
         flowLayout?.minimumLineSpacing = 3
         flowLayout?.minimumInteritemSpacing = 3
-        //flowLayout?.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0)
         
-        
+        NewSpotViewController.tagsId = []
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return NewSpotViewController.tagsId.count
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         var cell = SpotTagCollectionViewCell()
