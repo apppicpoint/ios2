@@ -6,19 +6,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
 //Esta función se encarga de mantener la sesión iniciada
-   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool
+   {
+        self.window = UIWindow(frame: UIScreen.main.bounds)
     
-    self.window = UIWindow(frame: UIScreen.main.bounds)
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let view = UserDefaults.standard.string(forKey: "token") != nil ? "app" : "singIn"
+        let initialViewController = storyboard.instantiateViewController(withIdentifier: view)
     
-    let storyboard = UIStoryboard(name: "Main", bundle: nil)
-    let view = UserDefaults.standard.string(forKey: "token") != nil ? "app" : "singIn"
-    let initialViewController = storyboard.instantiateViewController(withIdentifier: view)
+        self.window?.rootViewController = initialViewController
+        self.window?.makeKeyAndVisible()
     
-    self.window?.rootViewController = initialViewController
-    self.window?.makeKeyAndVisible()
-    
-    
-    return true
+        return true
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
