@@ -1417,6 +1417,9 @@
                                     <constraint firstAttribute="height" constant="25" id="eJi-gf-Qc5"/>
                                 </constraints>
                                 <state key="normal" image="gallery"/>
+                                <connections>
+                                    <action selector="takePhotoFromGallery:" destination="550-TK-NIc" eventType="touchUpInside" id="MCJ-sN-Swh"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tgQ-lC-6Bm" userLabel="flash">
                                 <rect key="frame" x="263.5" y="498" width="21.5" height="35"/>
