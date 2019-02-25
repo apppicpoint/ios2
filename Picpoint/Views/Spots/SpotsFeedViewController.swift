@@ -203,7 +203,7 @@ class SpotsFeedViewController: UIViewController,  UICollectionViewDelegate, UICo
     }
     
     func getSpotImage(imageName: String, spot: Spot){
-        let url = Constants.url+"img/"+imageName //Se le pasa el nombre de la foto, el cual lo tiene el spot.
+        let url = Constants.url+"imgLow/"+imageName //Se le pasa el nombre de la foto, el cual lo tiene el spot.
         Alamofire.request(url, method: .get).responseImage { response in
             switch response.result {
             case .success:
