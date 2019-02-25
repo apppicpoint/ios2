@@ -30,15 +30,24 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
     }
 
     @IBAction func goPreviewImage(_ sender: UIBarButtonItem) {
+        do {
         performSegue(withIdentifier: "previewImage", sender: sender)
+        } catch {
+        performSegue(withIdentifier: "previewImage2", sender: sender)
+        }
     }
     
     
     @IBAction func takePhotoButton(_ sender: UIButton) {
         performSegue(withIdentifier: "previewImage", sender: sender)
+        do {
+        performSegue(withIdentifier: "previewImage", sender: self)
+        } catch {
+        performSegue(withIdentifier: "previewImage2", sender: self)
+        }
     }
         // Do any additional setup after loading the view.
-    @IBAction func takePhotoFromGalelery(_ sender: UIButton) {
+    @IBAction func takePhotoFromGallery(_ sender: UIButton) {
         if UIImagePickerController.isSourceTypeAvailable(.savedPhotosAlbum){
             imagePicker.delegate = self //Selecciona la propia vista como delegado
             imagePicker.sourceType = .savedPhotosAlbum;
@@ -56,7 +65,12 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
             imageName = UserDefaults.standard.string(forKey: "user_id")! + utils.randomString(length: 15)
         }
         //dismiss(animated: true, completion: nil) // Cierra la vista
-        performSegue(withIdentifier: "previewImage", sender: self)
+        do {
+            performSegue(withIdentifier: "previewImage", sender: self)
+        } catch {
+            performSegue(withIdentifier: "previewImage2", sender: self)
+        }
+        
     }
     
     
@@ -69,8 +83,13 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
             
             destination.imageName = imageName
             destination.image = self.image!
-            destination.longitude = longitude
-            destination.latitude = latitude
+            
+            if segue.identifier == "previewImage" {
+                destination.longitude = longitude
+                destination.latitude = latitude
+            }
+            
+            
         }
     }
     

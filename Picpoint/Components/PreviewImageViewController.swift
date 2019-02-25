@@ -28,7 +28,12 @@ class PreviewImageViewController: UIViewController {
     }
     
     @IBAction func acceptBtn(_ sender: UIBarButtonItem) {
-        performSegue(withIdentifier: "newSpot", sender: sender)
+        do {
+            performSegue(withIdentifier: "newSpot", sender: sender)
+        } catch {
+            performSegue(withIdentifier: "newPub", sender: sender)
+        }
+        
 
     }
     
@@ -45,6 +50,11 @@ class PreviewImageViewController: UIViewController {
             destination.image = self.image!
             destination.longitude = longitude
             destination.latitude = latitude
+        }
+        if segue.destination is NewPublicationViewController {
+            let destination = segue.destination as! NewSpotViewController
+            destination.imageName = imageName
+            destination.image = self.image!
         }
     }
 
