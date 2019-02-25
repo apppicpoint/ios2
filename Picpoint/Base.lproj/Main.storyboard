@@ -1233,7 +1233,7 @@
                                 </constraints>
                                 <state key="normal" image="gallery"/>
                                 <connections>
-                                    <action selector="takePhotoFromGalelery:" destination="DNp-1N-RFl" eventType="touchUpInside" id="0Vl-bE-H2a"/>
+                                    <action selector="takePhotoFromGallery:" destination="DNp-1N-RFl" eventType="touchUpInside" id="IU3-2G-5us"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uEG-AG-ef1" userLabel="flash">
@@ -1642,7 +1642,7 @@
                                 </constraints>
                                 <state key="normal" image="gallery"/>
                                 <connections>
-                                    <action selector="takePhotoFromGalelery:" destination="550-TK-NIc" eventType="touchUpInside" id="G68-Kr-iHV"/>
+                                    <action selector="takePhotoFromGallery:" destination="550-TK-NIc" eventType="touchUpInside" id="MCJ-sN-Swh"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tgQ-lC-6Bm" userLabel="flash">

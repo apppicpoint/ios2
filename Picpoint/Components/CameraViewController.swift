@@ -38,7 +38,7 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
         performSegue(withIdentifier: "previewImage", sender: sender)
     }
         // Do any additional setup after loading the view.
-    @IBAction func takePhotoFromGalelery(_ sender: UIButton) {
+    @IBAction func takePhotoFromGallery(_ sender: UIButton) {
         if UIImagePickerController.isSourceTypeAvailable(.savedPhotosAlbum){
             imagePicker.delegate = self //Selecciona la propia vista como delegado
             imagePicker.sourceType = .savedPhotosAlbum;
