@@ -27,6 +27,7 @@ class CustomAlertViewController: UIViewController {
     
     // Boton de nuevo spot
     @IBAction func newSpot(_ sender: UIButton) {
+        self.dismiss(animated: true, completion: nil)
         performSegue(withIdentifier: "mapNewSpot", sender: sender)
         
     }
