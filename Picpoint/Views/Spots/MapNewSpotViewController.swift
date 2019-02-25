@@ -36,6 +36,7 @@ class MapNewSpotViewController: UIViewController, CLLocationManagerDelegate, MKM
             map.delegate = self
             // Do any additional setup after loading the view.
             getSpots()
+            map.tintColor = UIColor.init(red: 15, green: 188, blue: 249, alpha: 1)
         }
         
         

@@ -11,23 +11,38 @@ import Alamofire
 import AlamofireImage
 import MapKit
 
-class NewSpotViewController: UIViewController, MKMapViewDelegate, UITextFieldDelegate {
-
+class NewSpotViewController: UIViewController, MKMapViewDelegate, UITextFieldDelegate , UICollectionViewDelegate , UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+ 
     var image: UIImage?
     var imageName: String?
     var longitude: Double?
     var latitude: Double?
     var city: String?
     var country: String?
+    public static var tagsId:[Tag] = [Tag]()
+    public static var clase: NewSpotViewController?
+
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var descriptionTextView: UITextView!
     
+    @IBOutlet weak var tagCollectionView: UICollectionView!
     @IBOutlet weak var map: MKMapView!
     
-    @IBOutlet weak var tagsTextField: UITextField!
+
     let utils = Utils()
 
+    @IBAction func tagsBtn(_ sender: UIButton) {
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let myAlert = storyboard.instantiateViewController(withIdentifier: "tagPopUp")
+        myAlert.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+        myAlert.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
+        self.present(myAlert, animated: true, completion: nil)
+    }
+    
+
+ 
     @IBOutlet weak var CancelBtn: UIBarButtonItem!
     
     
@@ -36,6 +51,7 @@ class NewSpotViewController: UIViewController, MKMapViewDelegate, UITextFieldDel
         imageView.image = image
         city = "undefined"
         country = "undefined"
+        NewSpotViewController.clase = self
         self.titleTextField.delegate = self
 
 
@@ -44,12 +60,60 @@ class NewSpotViewController: UIViewController, MKMapViewDelegate, UITextFieldDel
         map.delegate = self
         centerMap()
         
-        tagsTextField.greyDesign()
         titleTextField.greyDesign()
+        
+        self.tagCollectionView.delegate = self
+        self.tagCollectionView.dataSource = self
+        
+        let flowLayout = tagCollectionView.collectionViewLayout as? UICollectionViewFlowLayout
+        
+        flowLayout?.scrollDirection = .horizontal
+        flowLayout?.minimumLineSpacing = 3
+        flowLayout?.minimumInteritemSpacing = 3
+        //flowLayout?.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0)
+        
         
     }
     
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return NewSpotViewController.tagsId.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        var cell = SpotTagCollectionViewCell()
+        cell = collectionView.dequeueReusableCell(withReuseIdentifier: "tagCellDetaill", for: indexPath) as! SpotTagCollectionViewCell
+        cell.TagName.text = NewSpotViewController.tagsId[indexPath.row].name!
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        let letras = NewSpotViewController.tagsId[indexPath.row].name?.count
+        
+        //print(tags[indexPath.row].name!)
+        //print(letras!)
+        //print("---------------------------------------")
+        
+        let dimensions = CGFloat((8 * letras!) + 20)
+        return CGSize(width: dimensions,height: 40)
+    }
+    
     func storeLocation() {
+        
+        print(NewSpotViewController.tagsId.count)
+        print("te amo carlos")
+        print("holi")
+        
+ 
+        var sendid:[Int] = [Int]()
+        
+        for tag in NewSpotViewController.tagsId {
+            
+            sendid.append(tag.id!)
+        }
+        
+        
         let parameters: Parameters = [
             "description":descriptionTextView.text!,
             "name":titleTextField.text ?? "",
@@ -57,7 +121,8 @@ class NewSpotViewController: UIViewController, MKMapViewDelegate, UITextFieldDel
             "latitude": latitude!,
             "image":imageName!,
             "city": city!,
-            "country":country!
+            "country":country!,
+            "tag_id": sendid
         ]
         let url = Constants.url+"spots"
         let _headers : HTTPHeaders = [
@@ -74,7 +139,10 @@ class NewSpotViewController: UIViewController, MKMapViewDelegate, UITextFieldDel
                 if(response.response?.statusCode == 200){
                     print("Spot subido")
                     print(jsonResponse["message"]!)
-                    self.performSegue(withIdentifier: "unwindToFeed", sender: nil)
+                    
+                    let alert = UIAlertController(title: "Todo bien", message: "Point Creado", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: ":)", style: .cancel, handler: { (accion) in self.performSegue(withIdentifier: "unwindToFeed", sender: nil) }))
+                    self.present(alert, animated: true)
                     return
                     
                 } else {
@@ -84,6 +152,9 @@ class NewSpotViewController: UIViewController, MKMapViewDelegate, UITextFieldDel
                     print("error")
                 }
             case .failure(let error):
+                
+                print(error)
+                
                 let alert = UIAlertController(title: "Ups! Something was wrong", message:
                     "Pls, try it later", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "Settings", style:
@@ -129,7 +200,6 @@ class NewSpotViewController: UIViewController, MKMapViewDelegate, UITextFieldDel
                         self.storeLocation()
                         return
                     }
-                    
                 }
             case .failure(let error):
                 let alert = UIAlertController(title: "Ups! Something was wrong", message:

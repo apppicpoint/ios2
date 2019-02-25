@@ -41,28 +41,31 @@ class MapFeedViewController:MKMapView , CLLocationManagerDelegate, MKMapViewDele
     func updateMap() {
         print("Actualizando mapa")
         self.removeAnnotations(self.annotations) //Borra todas las anotaciones existentes para que no se repitan.
-        for (index, spot) in spots.enumerated() {
+        for spot in spots {
             let coordinates = CLLocationCoordinate2DMake(spot.latitude!, spot.longitude!) // Establece las coordenadas del pin.
-            let mark = PinAnnotation(pinTitle: spot.name, pinSubTitle: spot.desc, location: coordinates, id:index)           // Crea el marcador
+            let mark = PinAnnotation(pinTitle: spot.name, pinSubTitle: spot.desc, location: coordinates, id:spot.id!)           // Crea el marcador
             self.addAnnotation(mark) // Añade el pin al mapa.
-            
         }
-        
     }
     
     //Modifica el comportamiento de los pines
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        
+        print("Creacion de pines")
+        
         if annotation is MKUserLocation {
             return nil
         }
-        let annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: "customannotaion") //Crea una vista personalizada del pin.
+        
+        let annotation = annotation as! PinAnnotation
+        
+        let annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: String(annotation.id!)) //Crea una vista personalizada del pin.
         
         annotationView.isEnabled = true // Activa el marcador.
         annotationView.canShowCallout = true // Establece si puede mostrar informacion extra en la burbuja
         annotationView.image = UIImage(named: "pin_full") // Establece la imagen del pin.
         annotationView.centerOffset = CGPoint(x:0, y:(annotationView.image!.size.height / -2));
         
-
         //Crea un botón derecho en la burbuja personalizado.
         let calloutRightImage = UIImage(named: "pin_full")
         let calloutRightButton = UIButton(type: .custom)
@@ -81,6 +84,44 @@ class MapFeedViewController:MKMapView , CLLocationManagerDelegate, MKMapViewDele
         print("pulsado")
 
     }
+    
+    func mapViewDidFinishLoadingMap(_ mapView: MKMapView) {
+        
+        if(self.spots.count > 0) {
+            
+            let id = self.spots[0].id
+            
+            for pin in mapView.annotations
+            {
+                if (pin is MKUserLocation)
+                {
+                    continue
+                }
+                let pinSelected = pin as! PinAnnotation
+                
+                if(id! == pinSelected.id!){
+                    resizePinImage(pin: pin, width: 40, height: 65,map: mapView)
+                }
+            }
+        }
+    }
+    
+    func resizePinImage(pin:MKAnnotation,width:Int,height:Int,map:MKMapView){
+        
+        let pinView = map.view(for: pin)
+        pinView?.canShowCallout = true
+        
+        // Cambiar imagen de tamaño
+        let pinImage = UIImage(named: "pin_full")
+        let size = CGSize(width: width, height: height) //proporcion 0.625
+        UIGraphicsBeginImageContext(size)
+        pinImage!.draw(in: CGRect(x: 0, y: 0, width: size.width, height: size.height))
+        let resizedImage = UIGraphicsGetImageFromCurrentImageContext()
+        
+        pinView?.image = resizedImage
+        pinView?.centerOffset = CGPoint(x:0, y:((pinView?.image!.size.height)! / -2));
+    }
+    
     
     func configureDetailView(annotationView: MKAnnotationView) {
         let width = 60

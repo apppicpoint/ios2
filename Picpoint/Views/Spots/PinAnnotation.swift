@@ -10,6 +10,7 @@ class PinAnnotation : NSObject, MKAnnotation {
     var title: String?
     var subtitle: String?
     var id:Int?
+    var selected: Bool = false
     
     init(pinTitle:String?, pinSubTitle: String?, location:CLLocationCoordinate2D, id:Int)
     {
