@@ -36,6 +36,8 @@
 		7FE602B1221C33960032A2D1 /* TagsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FE602B0221C33960032A2D1 /* TagsViewController.swift */; };
 		7FE602B3221C4E030032A2D1 /* TagsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FE602B2221C4E020032A2D1 /* TagsCollectionViewCell.swift */; };
 		7FE602B5221C56510032A2D1 /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FE602B4221C56510032A2D1 /* Tag.swift */; };
+		7FE8E0242223E44000EFA7D2 /* PreviewImagePubViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FE8E0232223E44000EFA7D2 /* PreviewImagePubViewController.swift */; };
+		7FE8E0262223E45600EFA7D2 /* CameraPubViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FE8E0252223E45600EFA7D2 /* CameraPubViewController.swift */; };
 		D2B2884721FA13A20060F8A2 /* Connectivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B2884621FA13A20060F8A2 /* Connectivity.swift */; };
 		D2C2EAB421EC7D1500D547BD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C2EAB321EC7D1500D547BD /* AppDelegate.swift */; };
 		D2C2EAB921EC7D1500D547BD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D2C2EAB721EC7D1500D547BD /* Main.storyboard */; };
@@ -76,6 +78,8 @@
 		7FE602B0221C33960032A2D1 /* TagsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagsViewController.swift; sourceTree = "<group>"; };
 		7FE602B2221C4E020032A2D1 /* TagsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagsCollectionViewCell.swift; sourceTree = "<group>"; };
 		7FE602B4221C56510032A2D1 /* Tag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
+		7FE8E0232223E44000EFA7D2 /* PreviewImagePubViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewImagePubViewController.swift; sourceTree = "<group>"; };
+		7FE8E0252223E45600EFA7D2 /* CameraPubViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraPubViewController.swift; sourceTree = "<group>"; };
 		C05BA933E4DAAB37B56E6706 /* Pods-Picpoint.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Picpoint.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Picpoint/Pods-Picpoint.debug.xcconfig"; sourceTree = "<group>"; };
 		D2B2884621FA13A20060F8A2 /* Connectivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Connectivity.swift; sourceTree = "<group>"; };
 		D2C2EAB021EC7D1500D547BD /* Picpoint.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Picpoint.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -146,12 +150,14 @@
 			isa = PBXGroup;
 			children = (
 				639EFB8B2203099F005AC6A1 /* PreviewImageViewController.swift */,
+				7FE8E0232223E44000EFA7D2 /* PreviewImagePubViewController.swift */,
 				639EFB832201BC4E005AC6A1 /* CameraViewController.swift */,
 				639EFB7E2200CF96005AC6A1 /* SearchViewController.swift */,
 				63DD0A3F220C4FA500276B1A /* NoLoggedViewController.swift */,
 				639EFB812201A3D0005AC6A1 /* CustomAlertViewController.swift */,
 				639EFB722200CD38005AC6A1 /* CustomTabBar.swift */,
 				639EFB852201BC5C005AC6A1 /* MapViewController.swift */,
+				7FE8E0252223E45600EFA7D2 /* CameraPubViewController.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -360,6 +366,7 @@
 				639EFB8E22045ED4005AC6A1 /* Spot.swift in Sources */,
 				639EFB752200CDA4005AC6A1 /* SpotsFeedViewController.swift in Sources */,
 				639EFB7D2200CE3A005AC6A1 /* NewSpotViewController.swift in Sources */,
+				7FE8E0262223E45600EFA7D2 /* CameraPubViewController.swift in Sources */,
 				639EFB7F2200CF96005AC6A1 /* SearchViewController.swift in Sources */,
 				639EFB792200CDD9005AC6A1 /* PublicationsFeedViewController.swift in Sources */,
 				7FE602B3221C4E030032A2D1 /* TagsCollectionViewCell.swift in Sources */,
@@ -372,6 +379,7 @@
 				639EFB942204622A005AC6A1 /* SpotDetailViewController.swift in Sources */,
 				639EFB842201BC4E005AC6A1 /* CameraViewController.swift in Sources */,
 				6355EACB2204C9D600B784EB /* PinAnnotation.swift in Sources */,
+				7FE8E0242223E44000EFA7D2 /* PreviewImagePubViewController.swift in Sources */,
 				6355EAC92204814B00B784EB /* MapFeedViewController.swift in Sources */,
 				639EFB9622046261005AC6A1 /* PublicationDetailViewController.swift in Sources */,
 				D2C2EAB421EC7D1500D547BD /* AppDelegate.swift in Sources */,

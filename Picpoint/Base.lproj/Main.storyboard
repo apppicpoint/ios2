@@ -1394,7 +1394,7 @@
         <!--Camera-->
         <scene sceneID="x0d-i2-Qww">
             <objects>
-                <viewController id="550-TK-NIc" userLabel="Camera" customClass="CameraViewController" customModule="Picpoint" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="550-TK-NIc" userLabel="Camera" customClass="CameraPubViewController" customModule="Picpoint" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Uip-mD-4rn">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1407,7 +1407,7 @@
                                 </constraints>
                                 <state key="normal" backgroundImage="camara_shooter"/>
                                 <connections>
-                                    <action selector="takePhotoButton:" destination="550-TK-NIc" eventType="touchUpInside" id="VVu-sI-vcc"/>
+                                    <action selector="takePhotoButton:" destination="550-TK-NIc" eventType="touchUpInside" id="ncq-1k-nrS"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Nr-F6-TJ4">
@@ -1418,7 +1418,7 @@
                                 </constraints>
                                 <state key="normal" image="gallery"/>
                                 <connections>
-                                    <action selector="takePhotoFromGallery:" destination="550-TK-NIc" eventType="touchUpInside" id="MCJ-sN-Swh"/>
+                                    <action selector="takePhotoFromGallery:" destination="550-TK-NIc" eventType="touchUpInside" id="Gss-bE-2PO"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tgQ-lC-6Bm" userLabel="flash">
@@ -1455,7 +1455,7 @@
         <!--preview image-->
         <scene sceneID="h8S-ex-B7N">
             <objects>
-                <viewController storyboardIdentifier="previewImage2" id="rlA-8N-Y6E" userLabel="preview image" customClass="PreviewImageViewController" customModule="Picpoint" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="previewImage2" id="rlA-8N-Y6E" userLabel="preview image" customClass="PreviewImagePubViewController" customModule="Picpoint" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="iZV-hS-Vch">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1475,12 +1475,12 @@
                     </view>
                     <navigationItem key="navigationItem" id="RjU-PF-7lF">
                         <barButtonItem key="backBarButtonItem" title="Back" id="y4H-8l-lxE"/>
-                        <barButtonItem key="leftBarButtonItem" title="cancel" id="xVV-8Y-58a">
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="xVV-8Y-58a">
                             <connections>
                                 <action selector="cancelBtn:" destination="rlA-8N-Y6E" id="G9H-5j-dEY"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="accept" id="8dg-wI-rlD">
+                        <barButtonItem key="rightBarButtonItem" title="Accept" id="8dg-wI-rlD">
                             <connections>
                                 <action selector="acceptBtn:" destination="rlA-8N-Y6E" id="XwS-WJ-2Vi"/>
                             </connections>
@@ -1488,17 +1488,17 @@
                     </navigationItem>
                     <connections>
                         <outlet property="imageView" destination="Fl1-z6-uOM" id="ir5-hm-py1"/>
-                        <segue destination="54s-FN-6no" kind="show" identifier="newPublication" id="7m7-vQ-MTr"/>
+                        <segue destination="54s-FN-6no" kind="show" identifier="newPub" id="7m7-vQ-MTr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iuJ-SR-7MV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1757" y="2345"/>
         </scene>
-        <!--New Spot-->
+        <!--New Pub-->
         <scene sceneID="QnA-iY-rza">
             <objects>
-                <viewController storyboardIdentifier="newPub" hidesBottomBarWhenPushed="YES" id="54s-FN-6no" userLabel="New Spot" customClass="NewSpotViewController" customModule="Picpoint" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="newPub" hidesBottomBarWhenPushed="YES" id="54s-FN-6no" userLabel="New Pub" customClass="NewPublicationViewController" customModule="Picpoint" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="exC-64-mub">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1622,9 +1622,6 @@
                                     </stackView>
                                 </subviews>
                             </stackView>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="eaH-MW-gJq">
-                                <rect key="frame" x="0.0" y="364" width="320" height="204"/>
-                            </mapView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4NE-d8-FgL">
                                 <rect key="frame" x="76" y="475" width="168" height="58"/>
                                 <color key="tintColor" red="0.36862745099999999" green="0.0" blue="0.57254901960000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1639,25 +1636,21 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="tRJ-AC-NAA" firstAttribute="top" secondItem="tty-Fl-K0e" secondAttribute="bottom" constant="15" id="0nZ-0o-qQS"/>
-                            <constraint firstItem="8u9-33-hHh" firstAttribute="trailing" secondItem="eaH-MW-gJq" secondAttribute="trailing" id="ACy-Zh-6by"/>
                             <constraint firstItem="tty-Fl-K0e" firstAttribute="leading" secondItem="8u9-33-hHh" secondAttribute="leading" constant="20" id="CYB-j7-Wnl"/>
                             <constraint firstItem="8u9-33-hHh" firstAttribute="bottom" secondItem="4NE-d8-FgL" secondAttribute="bottom" constant="35" id="Lzm-Zv-juW"/>
                             <constraint firstItem="tRJ-AC-NAA" firstAttribute="leading" secondItem="8u9-33-hHh" secondAttribute="leading" constant="20" id="Mtd-ri-1Lb"/>
-                            <constraint firstItem="eaH-MW-gJq" firstAttribute="top" secondItem="tRJ-AC-NAA" secondAttribute="bottom" constant="15" id="Vts-Ye-Mr7"/>
                             <constraint firstItem="tRJ-AC-NAA" firstAttribute="centerX" secondItem="exC-64-mub" secondAttribute="centerX" id="Zyb-wg-BoI"/>
-                            <constraint firstItem="eaH-MW-gJq" firstAttribute="leading" secondItem="8u9-33-hHh" secondAttribute="leading" id="cdk-5c-FXN"/>
                             <constraint firstItem="4NE-d8-FgL" firstAttribute="centerX" secondItem="exC-64-mub" secondAttribute="centerX" id="daI-lp-DLp"/>
                             <constraint firstItem="8u9-33-hHh" firstAttribute="trailing" secondItem="tty-Fl-K0e" secondAttribute="trailing" constant="20" id="hjj-Wf-sGp"/>
                             <constraint firstItem="tty-Fl-K0e" firstAttribute="top" secondItem="8u9-33-hHh" secondAttribute="top" constant="10" id="rB1-8V-dzx"/>
-                            <constraint firstItem="8u9-33-hHh" firstAttribute="bottom" secondItem="eaH-MW-gJq" secondAttribute="bottom" id="rsC-xD-hFD"/>
                             <constraint firstItem="8u9-33-hHh" firstAttribute="trailing" secondItem="tRJ-AC-NAA" secondAttribute="trailing" constant="20" id="t60-VC-xSa"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="8u9-33-hHh"/>
                     </view>
-                    <navigationItem key="navigationItem" title="New Spot" id="prV-5b-VPD">
+                    <navigationItem key="navigationItem" title="Pic details" id="prV-5b-VPD">
                         <barButtonItem key="leftBarButtonItem" title="Back" id="Klo-ah-ydl">
                             <connections>
-                                <segue destination="IXj-BD-UPu" kind="unwind" unwindAction="backFromNewSpotToCamera:" id="xqw-DC-MGZ"/>
+                                <segue destination="IXj-BD-UPu" kind="unwind" unwindAction="backFromNewPubToCamera:" id="ivN-8b-uDD"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" id="MGT-B7-z0c">
@@ -1670,7 +1663,6 @@
                         <outlet property="CancelBtn" destination="Klo-ah-ydl" id="cc3-KE-VHS"/>
                         <outlet property="descriptionTextView" destination="36n-wu-GDs" id="v8U-Gz-SsX"/>
                         <outlet property="imageView" destination="5OA-kz-eQW" id="pBg-87-Pqz"/>
-                        <outlet property="map" destination="eaH-MW-gJq" id="Tzv-J1-X30"/>
                         <outlet property="tagCollectionView" destination="Gmp-yY-Lhd" id="8f7-Uh-hdo"/>
                         <outlet property="titleTextField" destination="Tzw-mp-DhK" id="PAw-g0-KUj"/>
                         <segue destination="IXj-BD-UPu" kind="unwind" identifier="unwindToFeed" unwindAction="backFromNewSpotToFeed:" id="349-zK-MzJ"/>
