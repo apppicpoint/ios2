@@ -132,16 +132,14 @@ class TagsViewController: UIViewController , UICollectionViewDelegate , UICollec
         NewSpotViewController.tagsId.append(contentsOf: tagsSelected)
         self.dismiss(animated: true, completion: nil)
     }
-    
-
-    
-    let url = Constants.url+"tag"
-    let _headers : HTTPHeaders = [
-        "Content-Type":"application/x-www-form-urlencoded",
-        "Authorization":UserDefaults.standard.string(forKey: "token")!
-    ]
 
     func getTags() {
+        
+        let url = Constants.url+"tag"
+        let _headers : HTTPHeaders = [
+            "Content-Type":"application/x-www-form-urlencoded",
+            "Authorization":UserDefaults.standard.string(forKey: "token")!
+        ]
         
         Alamofire.request(url, method: .get, encoding: URLEncoding.httpBody, headers: _headers).responseJSON {
             response in
