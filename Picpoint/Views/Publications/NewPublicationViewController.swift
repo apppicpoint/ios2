@@ -101,7 +101,7 @@ class NewPublicationViewController: UIViewController, UITextFieldDelegate , UICo
         let parameters: Parameters = [
             "description":descriptionTextView.text!,
 //            "name":titleTextField.text ?? "",
-            "image":imageName!,
+            "media":imageName!,
             "tag_id": sendid
         ]
         let url = Constants.url+"publications"
