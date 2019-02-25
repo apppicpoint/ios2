@@ -55,6 +55,12 @@ class SpotsFeedViewController: UIViewController,  UICollectionViewDelegate, UICo
     
     override func viewWillAppear(_ animated: Bool) {
         self.spotsCollecionView.reloadData()
+        navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: animated)
     }
     
     
@@ -222,6 +228,7 @@ class SpotsFeedViewController: UIViewController,  UICollectionViewDelegate, UICo
             
         }
     }
+
     
     //Prepara la clase de destino.
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

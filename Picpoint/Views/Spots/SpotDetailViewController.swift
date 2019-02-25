@@ -19,7 +19,6 @@ class SpotDetailViewController: UIViewController {
         spotDescription.text = spot.desc
         getUserName()
         
-     
     }
     
     @IBAction func showInMapButton(_ sender: Any) {
@@ -33,7 +32,7 @@ class SpotDetailViewController: UIViewController {
     }
     
     func getUserName(){
-        let url = Constants.url+"user/"+"spot.user_id"
+        let url = Constants.url+"users/"+String(spot.user_id!)
         let _headers : HTTPHeaders = [
             "Content-Type":"application/x-www-form-urlencoded",
             "Authorization":UserDefaults.standard.string(forKey: "token")!
@@ -41,10 +40,10 @@ class SpotDetailViewController: UIViewController {
         
         Alamofire.request(url, method: .get, headers: _headers).responseJSON {
             response in
-            let data = response.result.value
-            self.author.text = data as? String
-            print("author: ", self.author.text)
-            print("data :",data)
+            let jsonResponse = response.result.value as! [String:Any]
+            let data = jsonResponse["user"] as! [String: Any]
+            self.author.text = data["name"] as! String
+           
         }
     }
     
