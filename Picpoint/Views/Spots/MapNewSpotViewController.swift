@@ -44,6 +44,11 @@ class MapNewSpotViewController: UIViewController, CLLocationManagerDelegate, MKM
 
     }
     
+    @IBAction func backAct(_ sender: Any) {
+        
+        dismiss(animated: true, completion: nil)
+    }
+    
     @IBAction func centerMapBtn(_ sender: UIButton) {
         centerMap()
     }
@@ -263,6 +268,7 @@ class MapNewSpotViewController: UIViewController, CLLocationManagerDelegate, MKM
             let destination = segue.destination as! CameraViewController
             destination.longitude = longitude
             destination.latitude = latitude
+            destination.new = "spot"
         }
     }
     

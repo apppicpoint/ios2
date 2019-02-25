@@ -14,6 +14,8 @@ class PreviewImageViewController: UIViewController {
     var latitude: Double?
     var image: UIImage?
     var imageName: String?
+    var new: String?
+    
     @IBOutlet weak var imageView: UIImageView!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,14 +30,18 @@ class PreviewImageViewController: UIViewController {
     }
     
     @IBAction func acceptBtn(_ sender: UIBarButtonItem) {
-        performSegue(withIdentifier: "newSpot", sender: sender)
+        
+        print(self.new, new)
+        
+        if new == "spot"{
+            performSegue(withIdentifier: "newSpot", sender: sender)
+        }
+        else{
+            performSegue(withIdentifier: "newPub", sender: sender)
+        }
+        
 
     }
-    
-    
-    
-    
-   
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.destination is NewSpotViewController {
@@ -45,6 +51,14 @@ class PreviewImageViewController: UIViewController {
             destination.image = self.image!
             destination.longitude = longitude
             destination.latitude = latitude
+        }
+        
+        if segue.destination is NewPublicationViewController {
+            
+            let destination = segue.destination as! NewPublicationViewController
+            destination.imageName = imageName
+            destination.image = self.image!
+
         }
     }
 

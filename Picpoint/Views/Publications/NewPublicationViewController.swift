@@ -19,7 +19,6 @@ class NewPublicationViewController: UIViewController, UITextFieldDelegate , UICo
     
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var titleTextField: UITextField!
-    @IBOutlet weak var descriptionTextView: UITextView!
     
     @IBOutlet weak var tagCollectionView: UICollectionView!
     
@@ -29,9 +28,11 @@ class NewPublicationViewController: UIViewController, UITextFieldDelegate , UICo
     @IBAction func tagsBtn(_ sender: UIButton) {
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let myAlert = storyboard.instantiateViewController(withIdentifier: "tagPopUp")
+        let myAlert : TagsViewController = storyboard.instantiateViewController(withIdentifier: "tagPopUp") as! TagsViewController
+        myAlert.new = "pub"
         myAlert.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
         myAlert.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
+        
         self.present(myAlert, animated: true, completion: nil)
     }
     
@@ -65,20 +66,20 @@ class NewPublicationViewController: UIViewController, UITextFieldDelegate , UICo
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return NewSpotViewController.tagsId.count
+        return NewPublicationViewController.tagsId.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         var cell = SpotTagCollectionViewCell()
         cell = collectionView.dequeueReusableCell(withReuseIdentifier: "tagCellDetaill", for: indexPath) as! SpotTagCollectionViewCell
-        cell.TagName.text = NewSpotViewController.tagsId[indexPath.row].name!
+        cell.TagName.text = NewPublicationViewController.tagsId[indexPath.row].name!
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        let letras = NewSpotViewController.tagsId[indexPath.row].name?.count
+        let letras = NewPublicationViewController.tagsId[indexPath.row].name?.count
         
         //print(tags[indexPath.row].name!)
         //print(letras!)
@@ -99,8 +100,7 @@ class NewPublicationViewController: UIViewController, UITextFieldDelegate , UICo
         
         
         let parameters: Parameters = [
-            "description":descriptionTextView.text!,
-//            "name":titleTextField.text ?? "",
+            "name":titleTextField.text ?? "",
             "media":imageName!,
             "tag_id": sendid
         ]
@@ -192,7 +192,7 @@ class NewPublicationViewController: UIViewController, UITextFieldDelegate , UICo
     // Valida los datos.
     func validateInputs() -> Bool
     {
-        if ((titleTextField.text?.isEmpty)! || (descriptionTextView.text?.isEmpty)!)
+        if ((titleTextField.text?.isEmpty)!)
         {
             let alert = UIAlertController(title: "There cannot be empty fields", message:
                 "Try it again", preferredStyle: .alert)
@@ -204,14 +204,6 @@ class NewPublicationViewController: UIViewController, UITextFieldDelegate , UICo
         if titleTextField.text!.count < 4 || titleTextField.text!.count > 30 {
             let alert = UIAlertController(title: "Invalid inputs", message:
                 "Title size must be between 4 and 30 characters", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "ok", style:
-                .cancel, handler: { (accion) in}))
-            present(alert, animated: true, completion: nil)
-            return false
-        }
-        if descriptionTextView.text!.count < 10 || descriptionTextView.text!.count > 300 {
-            let alert = UIAlertController(title: "Invalid inputs", message:
-                "Descriptions must content between 10 and 300 characters", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "ok", style:
                 .cancel, handler: { (accion) in}))
             present(alert, animated: true, completion: nil)

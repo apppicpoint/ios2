@@ -30,17 +30,5 @@ class CustomAlertViewController: UIViewController {
         
     }
     
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.destination is MapNewSpotViewController {
-            let destination = segue.destination as! MapNewSpotViewController
-            
-        }
-        
-        if segue.destination is MapNewSpotViewController {
-            let destination = segue.destination as! MapNewSpotViewController
-            
-        }
-    }
 
 }

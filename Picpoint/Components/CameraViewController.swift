@@ -4,10 +4,12 @@ import AVFoundation
 
 class CameraViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
 
+    @IBOutlet weak var backBtn: UIBarButtonItem!
     var image: UIImage?
     var imageName: String?
     var longitude: Double?
     var latitude: Double?
+    var new: String?
     let utils = Utils()
     var imagePicker = UIImagePickerController() //Selector de imagenes para la galería
     /*
@@ -20,6 +22,13 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
     
     override func viewDidLoad() {
         
+        if new == "spot"{
+            self.navigationItem.leftBarButtonItem = nil
+        }
+        else {
+            self.navigationItem.leftBarButtonItem = backBtn
+        }
+        
         /*
         setupCaptureSession()
         setupDevice()
@@ -29,6 +38,11 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
         
     }
 
+    @IBAction func backAct(_ sender: Any) {
+        
+        dismiss(animated: true, completion: nil)
+    }
+    
     @IBAction func goPreviewImage(_ sender: UIBarButtonItem) {
         performSegue(withIdentifier: "previewImage", sender: sender)
     }
@@ -66,16 +80,22 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
             
             print(imageName , "en prepare clase CameraViewController")
             print(image , "en prepare clase CameraViewController")
+            print(new)
             
             destination.imageName = imageName
             destination.image = self.image!
-            destination.longitude = longitude
-            destination.latitude = latitude
+            destination.new = self.new
+            
+            if new == "spot"{
+                destination.longitude = longitude
+                destination.latitude = latitude
+            }
+
         }
     }
     
     
-    @IBAction func backFromNewSpotToCamera(_ segue: UIStoryboardSegue) {        
+    @IBAction func backFromToCamera(_ segue: UIStoryboardSegue) {
         
     }
     
