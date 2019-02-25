@@ -21,6 +21,7 @@ class MapNewSpotViewController: UIViewController, CLLocationManagerDelegate, MKM
     var currentLatitude: Double?
     var spotNear: Bool?
     @IBOutlet weak var map: MKMapView!
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,21 +39,41 @@ class MapNewSpotViewController: UIViewController, CLLocationManagerDelegate, MKM
             getSpots()
             map.tintColor = UIColor.init(red: 15, green: 188, blue: 249, alpha: 1)
         }
-        
-        
-        
-
+    }
+    
+    @IBAction func CurrentLocation(_ sender: UIButton) {
+        pointInCurrentLocation()
     }
     
     @IBAction func centerMapBtn(_ sender: UIButton) {
         centerMap()
     }
-    
-    
+
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         manager.startUpdatingLocation() // Determina la ubicación actual del usuario
     }
     
+    func pointInCurrentLocation(){
+    
+        //Solo permite una anotación de nuevo spot a la vez
+        for annotation in map.annotations {
+            if annotation.title == "new" {
+            map.removeAnnotation(annotation)
+            }
+        }
+        
+        //Guarda la longitud y latitud
+        longitude = currentLongitude!
+        latitude = currentLatitude!
+        
+        // Add annotation:
+        let annotation = MKPointAnnotation()
+        annotation.coordinate =  CLLocationCoordinate2DMake(latitude!, longitude!)
+        annotation.title = "new"
+        map.addAnnotation(annotation)
+        checkSpotNear(newSpotLongitude: longitude!, newSpotLatitude: latitude!, distance: 15)
+    }
+
     // Centra el mapa
     func centerMap(){
         let coordinates = CLLocationCoordinate2D.init(latitude: currentLatitude!, longitude: currentLongitude!)
@@ -61,9 +82,7 @@ class MapNewSpotViewController: UIViewController, CLLocationManagerDelegate, MKM
         map.setRegion(region, animated: true)
         
     }  
-    
-    
-    
+ 
     // Actualiza el mapa
     func updateMap() {
         map.removeAnnotations(map.annotations) //Borra todas las anotaciones existentes para que no se repitan.
@@ -165,8 +184,6 @@ class MapNewSpotViewController: UIViewController, CLLocationManagerDelegate, MKM
             map.addAnnotation(annotation)
             checkSpotNear(newSpotLongitude: longitude!, newSpotLatitude: latitude!, distance: 15)
         }
-        
-        
     }
     
     func getSpots() {
@@ -265,5 +282,4 @@ class MapNewSpotViewController: UIViewController, CLLocationManagerDelegate, MKM
             destination.latitude = latitude
         }
     }
-    
 }

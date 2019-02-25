@@ -15,6 +15,7 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
     override func viewDidLoad() {
         
 
+
         
     }
 

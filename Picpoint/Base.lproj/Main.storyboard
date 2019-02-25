@@ -944,6 +944,9 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U64-vD-JRi">
                                 <rect key="frame" x="50" y="518" width="220" height="30"/>
                                 <state key="normal" title="Select Current Location"/>
+                                <connections>
+                                    <action selector="CurrentLocation:" destination="T0F-7n-y2V" eventType="touchUpInside" id="1nq-G6-5Wy"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
