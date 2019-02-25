@@ -10,22 +10,11 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
     var latitude: Double?
     let utils = Utils()
     var imagePicker = UIImagePickerController() //Selector de imagenes para la galería
-    /*
-    var captureSession = AVCaptureSession()
-    var backCamera: AVCaptureDevice?
-    var frontCamera: AVCaptureDevice?
-    var currentCamera: AVCaptureDevice?
-    var photoOutput: AVCapturePhotoOutput?
-    */
+
     
     override func viewDidLoad() {
         
-        /*
-        setupCaptureSession()
-        setupDevice()
-        setupInputOutput()
-        setupPreviewLayer()
-        startRunningCaptureSession() */
+
         
     }
 
@@ -37,7 +26,10 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
     @IBAction func takePhotoButton(_ sender: UIButton) {
         performSegue(withIdentifier: "previewImage", sender: sender)
     }
-        // Do any additional setup after loading the view.
+    
+    
+    
+    // Do any additional setup after loading the view.
     @IBAction func takePhotoFromGalelery(_ sender: UIButton) {
         if UIImagePickerController.isSourceTypeAvailable(.savedPhotosAlbum){
             imagePicker.delegate = self //Selecciona la propia vista como delegado
@@ -47,6 +39,7 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
         }
     }
     
+    //Coge la foto
     func imagePickerController(_ picker: UIImagePickerController,
                                        didFinishPickingMediaWithInfo info: [String : Any]) {
         picker.dismiss(animated: true, completion: nil)
@@ -64,8 +57,8 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
         if segue.destination is PreviewImageViewController {
             let destination = segue.destination as! PreviewImageViewController
             
-            print(imageName , "en prepare clase CameraViewController")
-            print(image , "en prepare clase CameraViewController")
+            print(imageName! , "en prepare clase CameraViewController")
+            print(image! , "en prepare clase CameraViewController")
             
             destination.imageName = imageName
             destination.image = self.image!
@@ -78,54 +71,6 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
     @IBAction func backFromNewSpotToCamera(_ segue: UIStoryboardSegue) {        
         
     }
-    
-/*
-    func setupCaptureSession(){
-        captureSession.sessionPreset = AVCaptureSession.Preset.photo
-        
-    }
-    
-    func setupDevice(){
-        let deviceDiscoverySession = AVCaptureDevice.DiscoverySession(deviceTypes: [AVCaptureDevice.DeviceType.builtInWideAngleCamera], mediaType: AVMediaType.video, position: AVCaptureDevice.Position.unspecified)
-        let devices = deviceDiscoverySession.devices
-        
-        for device in devices {
-            if device.position == AVCaptureDevice.Position.back {
-                backCamera = device
-
-                print("back")
-
-                
-            } else if device.position == AVCaptureDevice.Position.front{
-                frontCamera = device
-                print("front")
-            }
-        }
-        
-        currentCamera = backCamera
-    }
-    
-    func setupInputOutput(){
-        do{
-            let captureDeviceInput = try AVCaptureDeviceInput(device: currentCamera!)
-            captureSession.addInput(captureDeviceInput)
-            photoOutput?.setPreparedPhotoSettingsArray([AVCapturePhotoSettings(format: [AVVideoCodecKey : AVVideoCodecType.jpeg])], completionHandler: nil)
-        } catch {
-            print(error)
-        }
-        
-    }
-    
-    func setupPreviewLayer(){
-        
-        
-    }
-    
-    func startRunningCaptureSession(){
-        
-        
-    }
- */
 }
 
     

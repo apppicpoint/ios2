@@ -19,11 +19,12 @@ class TagsCollectionViewCell: UICollectionViewCell {
         if(state){
             
             state = false
-            sender.backgroundColor = UIColor.purple
+            //morado claro
+            sender.backgroundColor = UIColor.init(red: 0.741176470588235, green: 0.623529411764706, blue: 0.768627450980392, alpha: 1)
         }else{
             state = true
-            sender.backgroundColor = UIColor.magenta
-            
+            //morado oscuro
+            sender.backgroundColor = UIColor.init(red: 0.505882352941176, green: 0, blue: 0.564705882352941, alpha: 1)
             
         }
     }

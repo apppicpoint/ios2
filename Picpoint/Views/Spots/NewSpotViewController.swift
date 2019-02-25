@@ -102,10 +102,7 @@ class NewSpotViewController: UIViewController, MKMapViewDelegate, UITextFieldDel
     func storeLocation() {
         
         print(NewSpotViewController.tagsId.count)
-        print("te amo carlos")
-        print("holi")
-        
- 
+
         var sendid:[Int] = [Int]()
         
         for tag in NewSpotViewController.tagsId {
