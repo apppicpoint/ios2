@@ -1445,7 +1445,7 @@
                         <barButtonItem key="backBarButtonItem" title=" Back" id="j5s-cv-3gW"/>
                     </navigationItem>
                     <connections>
-                        <segue destination="rlA-8N-Y6E" kind="show" identifier="previewImage" id="AfP-xq-5VX"/>
+                        <segue destination="rlA-8N-Y6E" kind="show" identifier="previewImage2" id="AfP-xq-5VX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YqU-OT-yKR" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1455,7 +1455,7 @@
         <!--preview image-->
         <scene sceneID="h8S-ex-B7N">
             <objects>
-                <viewController storyboardIdentifier="previewImage" id="rlA-8N-Y6E" userLabel="preview image" customClass="PreviewImageViewController" customModule="Picpoint" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="previewImage2" id="rlA-8N-Y6E" userLabel="preview image" customClass="PreviewImageViewController" customModule="Picpoint" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="iZV-hS-Vch">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1488,7 +1488,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="imageView" destination="Fl1-z6-uOM" id="ir5-hm-py1"/>
-                        <segue destination="54s-FN-6no" kind="show" id="7m7-vQ-MTr"/>
+                        <segue destination="54s-FN-6no" kind="show" identifier="newPublication" id="7m7-vQ-MTr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iuJ-SR-7MV" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1498,7 +1498,7 @@
         <!--New Spot-->
         <scene sceneID="QnA-iY-rza">
             <objects>
-                <viewController storyboardIdentifier="newSpot" hidesBottomBarWhenPushed="YES" id="54s-FN-6no" userLabel="New Spot" customClass="NewSpotViewController" customModule="Picpoint" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="newPub" hidesBottomBarWhenPushed="YES" id="54s-FN-6no" userLabel="New Spot" customClass="NewSpotViewController" customModule="Picpoint" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="exC-64-mub">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
