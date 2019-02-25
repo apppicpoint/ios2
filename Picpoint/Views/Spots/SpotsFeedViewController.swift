@@ -55,6 +55,12 @@ class SpotsFeedViewController: UIViewController,  UICollectionViewDelegate, UICo
     
     override func viewWillAppear(_ animated: Bool) {
         self.spotsCollecionView.reloadData()
+        navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: animated)
     }
     
     
@@ -80,6 +86,7 @@ class SpotsFeedViewController: UIViewController,  UICollectionViewDelegate, UICo
         var cell = SpotCollectionViewCell()
         cell = collectionView.dequeueReusableCell(withReuseIdentifier: "spotCell", for: indexPath) as! SpotCollectionViewCell
         cell.id = spots[indexPath.row].id
+        cell.index = indexPath.row
         cell.titleTextField.text = spots[indexPath.row].name
         cell.distanceTextField.text = String(spots[indexPath.row].distance!) + "km from you"
         cell.spotImage?.layer.masksToBounds = true
@@ -178,9 +185,11 @@ class SpotsFeedViewController: UIViewController,  UICollectionViewDelegate, UICo
                                         longitude: dataItem["longitude"] as! Double,
                                         latitude: dataItem["latitude"] as! Double,
                                         user_id: dataItem["user_id"] as! Int,
-                                        distance: Float(round(10*distance)/10))
+                                        distance: Float(round(10*distance)/10),
+                                        imageName: dataItem["image"] as! String
+                                        )
                         self.spots.append(spot) //Por cada objeto en el json se añade un spot al array.
-                        self.getSpotImage(imageName: dataItem["image"] as! String, spot: spot)
+                        self.getSpotImage(imageName: spot.imageName!, spot: spot)
                         
                     }
                     
@@ -202,12 +211,12 @@ class SpotsFeedViewController: UIViewController,  UICollectionViewDelegate, UICo
     }
     
     func getSpotImage(imageName: String, spot: Spot){
-        let url = Constants.url+"img/"+imageName //Se le pasa el nombre de la foto, el cual lo tiene el spot.
+        let url = Constants.url+"imgLow/"+imageName //Se le pasa el nombre de la foto, el cual lo tiene el spot.
         Alamofire.request(url, method: .get).responseImage { response in
             switch response.result {
             case .success:
                 let data = response.result.value
-                spot.image = data
+                spot.image = data!
                 self.spotsCollecionView.reloadData()
             case .failure(let error):
                 print("Sin conexión en get spot image")
@@ -221,6 +230,7 @@ class SpotsFeedViewController: UIViewController,  UICollectionViewDelegate, UICo
             
         }
     }
+
     
     //Prepara la clase de destino.
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -228,7 +238,9 @@ class SpotsFeedViewController: UIViewController,  UICollectionViewDelegate, UICo
             let destination = segue.destination as! SpotDetailViewController
             let cell = sender as! SpotCollectionViewCell
             print(cell.id!)
-            destination.spot = spots[cell.id!]
+            destination.spot = spots[cell.index!]
+            
+            
         }
     }
     
