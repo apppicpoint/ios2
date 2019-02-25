@@ -1,31 +1,30 @@
-//
-//  SpotDetailViewController.swift
-//  Picpoint
-//
-//  Created by David on 01/02/2019.
-//  Copyright © 2019 Joaquín Collazo Ruiz. All rights reserved.
-//
 
+import Alamofire
 import UIKit
 
 class SpotDetailViewController: UIViewController {
 
+    @IBOutlet weak var image: UIImageView!
+    @IBOutlet weak var spotName: UILabel!
+    @IBOutlet weak var author: UILabel!
+    @IBOutlet weak var spotDescription: UILabel!
+    @IBOutlet weak var createdBy: UILabel!
+   
+    
     var spot = Spot()
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        image.image = spot.image
+        spotName.text = spot.name
+        spotDescription.text = spot.desc
+        
+     
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    @IBAction func showInMapButton(_ sender: Any) {
+        
     }
-    */
+    
 
 }

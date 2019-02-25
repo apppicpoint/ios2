@@ -20,7 +20,6 @@ class CustomAlertViewController: UIViewController {
     
     //Boton de nueva publicación
     @IBAction func newPublication(_ sender: UIButton) {
-        self.dismiss(animated: true, completion: nil)
         performSegue(withIdentifier: "newPublication", sender: sender)
 
     }
@@ -34,6 +33,11 @@ class CustomAlertViewController: UIViewController {
     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.destination is MapNewSpotViewController {
+            let destination = segue.destination as! MapNewSpotViewController
+            
+        }
+        
         if segue.destination is MapNewSpotViewController {
             let destination = segue.destination as! MapNewSpotViewController
             
