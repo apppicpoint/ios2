@@ -23,6 +23,7 @@ class AddSpotNewPublicationViewController: UIViewController, CLLocationManagerDe
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        viewSelected.isHidden = true
         map.delegate = self
     }
     
@@ -107,7 +108,7 @@ class AddSpotNewPublicationViewController: UIViewController, CLLocationManagerDe
         map.removeAnnotations(map.annotations) //Borra todas las anotaciones existentes para que no se repitan.
         for spot in spots {
             let coordinates = CLLocationCoordinate2DMake(spot.latitude!, spot.longitude!) // Establece las coordenadas del pin.
-            let mark = PinAnnotation(pinTitle: spot.name, pinSubTitle: spot.desc, location: coordinates, id:spot.id!)           // Crea el marcador
+            let mark = PinAnnotation(pinTitle: spot.name, pinSubTitle: spot.desc, location: coordinates, id:spot.id!)// Crea el marcador
             map.addAnnotation(mark) // Añade el pin al mapa.
         }
     }
@@ -143,15 +144,47 @@ class AddSpotNewPublicationViewController: UIViewController, CLLocationManagerDe
     
     //Se llama al pulsar cada Pin
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-        // VACIO
         
-        var selectedAnnotations = map.selectedAnnotations
-        for annotation in selectedAnnotations {
-            map.deselectAnnotation(annotation, animated: true)
-        }
+        viewSelected.isHidden = false
+        let annotation = view.annotation as! PinAnnotation
+        changeStateAnn()
+        let spotSelected = searchSpot(id: annotation.id!)
+        
+        let span = MKCoordinateSpan(latitudeDelta: 1, longitudeDelta: 1)
+        let region = MKCoordinateRegion(center: annotation.coordinate, span: span)
+        map.setRegion(region, animated: true)
+        
         view.image = UIImage(named: "pin_full")
-        
+        viewSelected.isHidden = false
+        imgSelected.image = spotSelected.image
+        nameSelected.text = annotation.title
+    
+    }
+    
+    @IBAction func mapTap(_ sender: Any) {
+        changeStateAnn()
+        viewSelected.isHidden = true
     }
     
     
+    func searchSpot(id: Int) -> Spot{
+        
+        for spot in spots {
+            if spot.id == id{
+                return spot
+            }
+        }
+        
+        return spots[0]
+    }
+    
+    func changeStateAnn(){
+        
+        for annotation in map.annotations{
+            
+            var annotationV = self.map.view(for: annotation)
+            
+            annotationV?.image = UIImage(named: "circle_point")
+        }
+    }
 }
