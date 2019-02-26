@@ -36,6 +36,19 @@ class SpotDetailViewController: UIViewController {
         
     }
     
+    /*func getTagsSpot(){
+        let url = Constants.url+"spotTag"+String(spot.id!)
+        let headers: HTTPHeaders = [
+            "Content-Type":"application/x-www-form-urlencoded",
+            "Authorization":UserDefaults.standard.string(forKey: "token")!
+        ]
+        
+        Alamofire.request(url, method: .get, headers: headers) {
+            response in
+            
+        }
+    }*/
+    
     func getSpotImage(imageName: String){
         let url = Constants.url+"imgFull/"+imageName //Se le pasa el nombre de la foto, el cual lo tiene el spot.
         Alamofire.request(url, method: .get).responseImage { response in
