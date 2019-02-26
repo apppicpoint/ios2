@@ -176,7 +176,7 @@ class NewSpotViewController: UIViewController, MKMapViewDelegate, UITextFieldDel
         
         Alamofire.upload(multipartFormData: { (multipartFormData) in
             
-            multipartFormData.append(imgData!, withName: "img", fileName: self.imageName!+".jpeg", mimeType: "image/jpeg")
+            multipartFormData.append(imgData!, withName: "img", fileName: self.imageName!+".png", mimeType: "image/png")
             
             print(self.imageName!+".png")
         }, usingThreshold: UInt64.init(), to: url, method: .post, headers: headers) { (result) in
