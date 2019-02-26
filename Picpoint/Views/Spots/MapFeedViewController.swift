@@ -63,7 +63,7 @@ class MapFeedViewController:MKMapView , CLLocationManagerDelegate, MKMapViewDele
         
         annotationView.isEnabled = true // Activa el marcador.
         annotationView.canShowCallout = true // Establece si puede mostrar informacion extra en la burbuja
-        annotationView.image = UIImage(named: "pin_full") // Establece la imagen del pin.
+        annotationView.image = UIImage(named: "circle_point") // Establece la imagen del pin.
         annotationView.centerOffset = CGPoint(x:0, y:(annotationView.image!.size.height / -2));
         
         //Crea un botón derecho en la burbuja personalizado.
@@ -129,9 +129,7 @@ class MapFeedViewController:MKMapView , CLLocationManagerDelegate, MKMapViewDele
         
         let view = UIView(frame: CGRect(x: 0, y: 0, width: width, height: height))
         view.tintColor = .red
-        
 
-        
         annotationView.detailCalloutAccessoryView = view
     }
     

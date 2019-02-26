@@ -921,7 +921,16 @@
                             </searchBar>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U64-vD-JRi">
                                 <rect key="frame" x="50" y="518" width="220" height="30"/>
-                                <state key="normal" title="Select Current Location"/>
+                                <color key="backgroundColor" red="0.36773407459259033" green="0.0" blue="0.57383722066879272" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="Select Current Location">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="CurrentLocation:" destination="T0F-7n-y2V" eventType="touchUpInside" id="1nq-G6-5Wy"/>
                                 </connections>
@@ -1889,7 +1898,7 @@
     <inferredMetricsTieBreakers>
         <segue reference="fOT-Tv-ZUK"/>
         <segue reference="Wpa-CT-FGJ"/>
-        <segue reference="3OC-wB-Wwj"/>
+        <segue reference="A6h-nQ-ZBq"/>
         <segue reference="LHQ-Wi-Wg0"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.36862745098039218" green="0.0" blue="0.5725490196078431" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
