@@ -129,24 +129,24 @@ class SpotsFeedViewController: UIViewController,  UICollectionViewDelegate, UICo
                 {
                     //print(cell.id! , "celda", pinSelected.id! , "pin" , "true")
                     //print("-------------------------------------------")
-                    resizePinImage(pin: pin, width: 40, height: 65)
+                    resizePinImage(pin: pin, width: 40, height: 65, nameImage: "pin_full")
                 }else
                 {
                     //print(cell.id! , "celda", pinSelected.id! , "pin" , "false")
                     //print("-------------------------------------------")
-                    resizePinImage(pin: pin, width: 10, height: 16)
+                    resizePinImage(pin: pin, width: 10, height: 10, nameImage: "circle_point")
                 }
             }
         }
     }
     
-    func resizePinImage(pin:MKAnnotation,width:Int,height:Int){
+    func resizePinImage(pin:MKAnnotation,width:Int,height:Int,nameImage:String){
         
         let pinView = map.view(for: pin)
         pinView?.canShowCallout = true
         
         // Cambiar imagen de tamaño
-        let pinImage = UIImage(named: "pin_full")
+        let pinImage = UIImage(named: nameImage)
         let size = CGSize(width: width, height: height) //proporcion 0.625
         UIGraphicsBeginImageContext(size)
         pinImage!.draw(in: CGRect(x: 0, y: 0, width: size.width, height: size.height))
