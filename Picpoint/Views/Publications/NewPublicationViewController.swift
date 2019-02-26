@@ -17,6 +17,8 @@ class NewPublicationViewController: UIViewController, UITextFieldDelegate , UICo
     public static var tagsId:[Tag] = [Tag]()
     public static var clase: NewPublicationViewController?
     
+    public static var spotId: Spot?
+    
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var titleTextField: UITextField!
     
@@ -26,6 +28,7 @@ class NewPublicationViewController: UIViewController, UITextFieldDelegate , UICo
     
     @IBOutlet weak var personalRadioBtn: UIButton!
     @IBOutlet weak var portfolioRadiobtn: UIButton!
+    @IBOutlet weak var addTagsBtn: UIButton!
     
     let utils = Utils()
     
@@ -53,6 +56,15 @@ class NewPublicationViewController: UIViewController, UITextFieldDelegate , UICo
         }
     }
     
+    func checkTagsState() {
+        
+        if NewPublicationViewController.tagsId.count > 0 {
+            tagCollectionView.isHidden = false
+        }
+        else {
+            tagCollectionView.isHidden = true
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -79,6 +91,8 @@ class NewPublicationViewController: UIViewController, UITextFieldDelegate , UICo
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        
+        checkTagsState()
         return NewPublicationViewController.tagsId.count
     }
     
