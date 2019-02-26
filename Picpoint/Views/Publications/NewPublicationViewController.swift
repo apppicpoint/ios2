@@ -22,6 +22,10 @@ class NewPublicationViewController: UIViewController, UITextFieldDelegate , UICo
     
     @IBOutlet weak var tagCollectionView: UICollectionView!
     
+    @IBOutlet weak var CancelBtn: UIBarButtonItem!
+    
+    @IBOutlet weak var personalRadioBtn: UIButton!
+    @IBOutlet weak var portfolioRadiobtn: UIButton!
     
     let utils = Utils()
     
@@ -36,9 +40,18 @@ class NewPublicationViewController: UIViewController, UITextFieldDelegate , UICo
         self.present(myAlert, animated: true, completion: nil)
     }
     
-    
-    
-    @IBOutlet weak var CancelBtn: UIBarButtonItem!
+    @IBAction func touchRadioBtn(_ sender: UIButton) {
+        
+        sender.setImage(UIImage(named: "radiobuttontrue"), for: UIControlState.normal)
+        
+        if sender.titleLabel?.text == "personal"{
+            
+            portfolioRadiobtn.setImage(UIImage(named: "radiobuttonfalse"), for: UIControlState.normal)
+        }
+        else {
+            personalRadioBtn.setImage(UIImage(named: "radiobuttonfalse"), for: UIControlState.normal)
+        }
+    }
     
     
     override func viewDidLoad() {
