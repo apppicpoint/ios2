@@ -644,9 +644,9 @@
                                                     <constraint firstItem="goe-ny-pbO" firstAttribute="leading" secondItem="veF-SD-QU2" secondAttribute="leading" id="qTZ-0S-oip"/>
                                                 </constraints>
                                             </stackView>
-                                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ptQ-Op-XJT" userLabel="Collection View Tags">
+                                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ptQ-Op-XJT" userLabel="Collection View Tags" customClass="SpotsCollectionViewController" customModule="Picpoint" customModuleProvider="target">
                                                 <rect key="frame" x="23" y="475" width="274" height="57"/>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="backgroundColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="57" id="eeY-Fz-bVm"/>
                                                 </constraints>
@@ -657,7 +657,7 @@
                                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                 </collectionViewFlowLayout>
                                                 <cells>
-                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="uzI-hQ-p6y">
+                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="uzI-hQ-p6y" customClass="TagsCollectionViewCell" customModule="Picpoint" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
@@ -673,12 +673,19 @@
                                                                 </label>
                                                             </subviews>
                                                         </view>
+                                                        <color key="backgroundColor" red="0.058823529409999999" green="0.73725490199999999" blue="0.97647058819999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <constraints>
                                                             <constraint firstItem="Nh1-KX-aEp" firstAttribute="top" secondItem="uzI-hQ-p6y" secondAttribute="top" id="8ah-xO-F1M"/>
                                                             <constraint firstItem="Nh1-KX-aEp" firstAttribute="leading" secondItem="uzI-hQ-p6y" secondAttribute="leading" id="Fjc-JI-IPQ"/>
                                                             <constraint firstAttribute="bottom" secondItem="Nh1-KX-aEp" secondAttribute="bottom" id="Hd7-3q-8BA"/>
                                                             <constraint firstAttribute="trailing" secondItem="Nh1-KX-aEp" secondAttribute="trailing" id="scx-tT-qin"/>
                                                         </constraints>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                                <integer key="value" value="10"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
                                                     </collectionViewCell>
                                                 </cells>
                                             </collectionView>
@@ -745,6 +752,7 @@
                     <navigationItem key="navigationItem" id="vk3-cg-l0S"/>
                     <size key="freeformSize" width="320" height="1000"/>
                     <connections>
+                        <outlet property="TagCollectionView" destination="ptQ-Op-XJT" id="tqP-JH-Dz3"/>
                         <outlet property="author" destination="y2d-cI-a0L" id="vVm-ed-iei"/>
                         <outlet property="createdBy" destination="mmZ-Aj-cRM" id="W5d-qa-RPt"/>
                         <outlet property="image" destination="K0e-C3-bOD" id="RKP-3C-2Pc"/>
@@ -754,7 +762,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cA2-Ge-Xr8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-4320" y="4721"/>
+            <point key="canvasLocation" x="-4320" y="4720.7746478873241"/>
         </scene>
         <!--Tags View Controller-->
         <scene sceneID="Vg2-eQ-J4u">
