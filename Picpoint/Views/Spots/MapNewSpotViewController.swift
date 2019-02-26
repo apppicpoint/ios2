@@ -41,6 +41,18 @@ class MapNewSpotViewController: UIViewController, CLLocationManagerDelegate, MKM
         }
     }
     
+    @IBAction func changeMap(_ sender: UISegmentedControl) {
+        
+        if(sender.selectedSegmentIndex == 0) {
+            
+            self.map.mapType = MKMapType.standard
+        }else {
+            
+            self.map.mapType = MKMapType.satellite
+        }
+        
+    }
+    
     @IBAction func CurrentLocation(_ sender: UIButton) {
         pointInCurrentLocation()
     }
@@ -106,12 +118,14 @@ class MapNewSpotViewController: UIViewController, CLLocationManagerDelegate, MKM
 
         if annotation.title == "new" {
             annotationView.image = UIImage(named: "pin_blank") // Establece la imagen del pin.
+            annotationView.centerOffset = CGPoint(x:0, y:(annotationView.image!.size.height / -2));
 
         } else {
-            annotationView.image = UIImage(named: "pin_full") // Establece la imagen del pin.
+            annotationView.image = UIImage(named: "circle_point") // Establece la imagen del pin.
+            annotationView.centerOffset = CGPoint(x:0, y:0);
 
         }
-        annotationView.centerOffset = CGPoint(x:0, y:(annotationView.image!.size.height / -2));
+        
 
         return annotationView
     }
