@@ -28,7 +28,12 @@ class MapFeedViewController:MKMapView , CLLocationManagerDelegate, MKMapViewDele
         centerMap()
     }
     
-    
+    func centerMapLocation(latitude:Double,longitude:Double) {
+        let coordinates = CLLocationCoordinate2D.init(latitude: latitude, longitude: longitude)
+        let span = MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)
+        let region = MKCoordinateRegion(center: coordinates, span: span)
+        self.setRegion(region, animated: true)
+    }
     // Centra el mapa
     func centerMap(){
         let coordinates = CLLocationCoordinate2D.init(latitude: locationManager.location!.coordinate.latitude, longitude: locationManager.location!.coordinate.longitude)
@@ -64,7 +69,7 @@ class MapFeedViewController:MKMapView , CLLocationManagerDelegate, MKMapViewDele
         annotationView.isEnabled = true // Activa el marcador.
         annotationView.canShowCallout = true // Establece si puede mostrar informacion extra en la burbuja
         annotationView.image = UIImage(named: "circle_point") // Establece la imagen del pin.
-        annotationView.centerOffset = CGPoint(x:0, y:(annotationView.image!.size.height / -2));
+        annotationView.centerOffset = CGPoint(x:0, y:0);
         
         //Crea un botón derecho en la burbuja personalizado.
         let calloutRightImage = UIImage(named: "pin_full")
@@ -86,7 +91,7 @@ class MapFeedViewController:MKMapView , CLLocationManagerDelegate, MKMapViewDele
     }
     
     func mapViewDidFinishLoadingMap(_ mapView: MKMapView) {
-        
+      
         if(self.spots.count > 0) {
             
             let id = self.spots[0].id

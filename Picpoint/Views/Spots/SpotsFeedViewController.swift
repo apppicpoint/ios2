@@ -1,3 +1,4 @@
+
 //
 //  SpotsFeedViewController.swift
 //  Picpoint
@@ -129,12 +130,14 @@ class SpotsFeedViewController: UIViewController,  UICollectionViewDelegate, UICo
                 {
                     //print(cell.id! , "celda", pinSelected.id! , "pin" , "true")
                     //print("-------------------------------------------")
+                    
+                    map.centerMapLocation(latitude: spots[cell.index!].latitude! , longitude: spots[cell.index!].longitude!)
                     resizePinImage(pin: pin, width: 40, height: 65, nameImage: "pin_full")
                 }else
                 {
                     //print(cell.id! , "celda", pinSelected.id! , "pin" , "false")
                     //print("-------------------------------------------")
-                    resizePinImage(pin: pin, width: 10, height: 10, nameImage: "circle_point")
+                    resizePinImage(pin: pin, width: 15, height: 15, nameImage: "circle_point")
                 }
             }
         }
@@ -153,7 +156,13 @@ class SpotsFeedViewController: UIViewController,  UICollectionViewDelegate, UICo
         let resizedImage = UIGraphicsGetImageFromCurrentImageContext()
         
         pinView?.image = resizedImage
-        pinView?.centerOffset = CGPoint(x:0, y:((pinView?.image!.size.height)! / -2));
+        if(nameImage == "pin_full") {
+            pinView?.centerOffset = CGPoint(x:0, y:((pinView?.image!.size.height)! / -2));
+        }else {
+            pinView?.centerOffset = CGPoint(x:0, y:0);
+        }
+        
+        
     }
     
     func getSpots() {
