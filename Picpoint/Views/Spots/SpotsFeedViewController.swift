@@ -35,8 +35,8 @@ class SpotsFeedViewController: UIViewController,  UICollectionViewDelegate, UICo
         spotsCollecionView.dataSource = self
         
         map.tintColor = UIColor.init(red: 15, green: 188, blue: 249, alpha: 1)
-
-
+        
+        
         //spotsTableView.scroll(to: .top, animated: true) // Se actualiza la tabla al hacer scroll hacia arriba
         
         // Comprobacines de conectividad y ubicación
@@ -64,8 +64,6 @@ class SpotsFeedViewController: UIViewController,  UICollectionViewDelegate, UICo
         navigationController?.setNavigationBarHidden(false, animated: animated)
     }
     
-    
-    
     @IBAction func centerMapBtn(_ sender: UIButton) {
         map.centerMap()
     }
@@ -81,6 +79,17 @@ class SpotsFeedViewController: UIViewController,  UICollectionViewDelegate, UICo
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return (spots.count)
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print("SELECTED")
+        /*let vc = self.storyboard?.instantiateViewController(withIdentifier: "SpotDetailViewController" ) as! SpotDetailViewController
+         vc.spot = spots[indexPath.row]*/
+        let sender = collectionView.cellForItem(at: indexPath)
+        performSegue(withIdentifier: "goToDetail", sender: sender)
+        //self.present(vc, animated: true, completion: nil)
+        //navigationController?.pushViewController(vc, animated: true)
+    }
+    
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
@@ -188,6 +197,16 @@ class SpotsFeedViewController: UIViewController,  UICollectionViewDelegate, UICo
                     let data = jsonResponse["spots"] as! [[String: Any]]
                     for dataItem in data {
                         let distance = dataItem["distance_user"] as! Double
+                        
+                        let dataTag = dataItem["tags"] as! [[String:Any]]
+                        
+                        var tags = [Tag]()
+                        for dataTagItem in dataTag {
+                            let tag = Tag(id: dataTagItem["id"] as! Int, name: dataTagItem["name"] as! String)
+                            tags.append(tag)
+                        }
+                        
+                        
                         let spot = Spot(id: dataItem["id"] as! Int,
                                         name: dataItem["name"] as! String,
                                         desc: dataItem["description"] as? String,
@@ -195,8 +214,10 @@ class SpotsFeedViewController: UIViewController,  UICollectionViewDelegate, UICo
                                         latitude: dataItem["latitude"] as! Double,
                                         user_id: dataItem["user_id"] as! Int,
                                         distance: Float(round(10*distance)/10),
-                                        imageName: dataItem["image"] as! String
-                                        )
+                                        imageName: dataItem["image"] as? String,
+                                        tags: tags)
+                        //print("*** tags ", spot.tags!.count)
+                        print("*** spot ", spot.tags?.count)
                         self.spots.append(spot) //Por cada objeto en el json se añade un spot al array.
                         self.getSpotImage(imageName: spot.imageName!, spot: spot)
                         
@@ -239,16 +260,15 @@ class SpotsFeedViewController: UIViewController,  UICollectionViewDelegate, UICo
             
         }
     }
-
+    
     
     //Prepara la clase de destino.
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.destination is SpotDetailViewController {            
+        if segue.destination is SpotDetailViewController {
             let destination = segue.destination as! SpotDetailViewController
             let cell = sender as! SpotCollectionViewCell
             print(cell.id!)
             destination.spot = spots[cell.index!]
-            
             
         }
     }

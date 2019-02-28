@@ -3,7 +3,7 @@ import Alamofire
 import UIKit
 
 class SpotDetailViewController: UIViewController, UICollectionViewDelegate , UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-
+    
     @IBOutlet weak var image: UIImageView!
     @IBOutlet weak var spotName: UILabel!
     @IBOutlet weak var author: UIButton!
@@ -13,6 +13,7 @@ class SpotDetailViewController: UIViewController, UICollectionViewDelegate , UIC
     
     var spot = Spot()
     var tags:[Tag] = [Tag]()
+    var tagsHardcoded = [Tag]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,11 +27,15 @@ class SpotDetailViewController: UIViewController, UICollectionViewDelegate , UIC
         getUserName()
         getSpotImage(imageName: spot.imageName!)
         getTagsSpot()
+        print(spot.id!)
         
+        //tagsHardcoded.append(Tag(id: 2, name: "Hola"))
         
         let flowLayout = TagCollectionView.collectionViewLayout as? UICollectionViewFlowLayout
         
         flowLayout?.scrollDirection = .horizontal
+        
+        self.TagCollectionView.reloadData()
     }
     
     @IBAction func showInMapButton(_ sender: Any) {
@@ -46,10 +51,6 @@ class SpotDetailViewController: UIViewController, UICollectionViewDelegate , UIC
         
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        navigationController?.setNavigationBarHidden(true, animated: animated)
-    }
-    
     func getTagsSpot(){
         let url = Constants.url+"spotHasTags"
         let headers: HTTPHeaders = [
@@ -59,7 +60,7 @@ class SpotDetailViewController: UIViewController, UICollectionViewDelegate , UIC
         
         let parameters: Parameters = [
             "spot_id": spot.id,
-        ]
+            ]
         
         Alamofire.request(url, method: .post, parameters: parameters, encoding: URLEncoding.httpBody, headers: headers).responseJSON {
             response in
@@ -75,11 +76,10 @@ class SpotDetailViewController: UIViewController, UICollectionViewDelegate , UIC
                     let tags = jsonResponse["tags"] as! [[String: Any]]
                     
                     for tag in tags{
-                        
                         self.tags.append(Tag(id: tag["id"] as! Int, name: tag["name"] as! String))
-                        
                     }
-                    print(tags.count)
+                    
+                    print("tags.count",tags.count)
                 }
                 break
                 
@@ -96,7 +96,7 @@ class SpotDetailViewController: UIViewController, UICollectionViewDelegate , UIC
                 break
                 
             }
-        
+            
         }
     }
     
@@ -119,7 +119,7 @@ class SpotDetailViewController: UIViewController, UICollectionViewDelegate , UIC
             
         }
     }
-
+    
     func getUserName(){
         let url = Constants.url+"users/"+String(spot.user_id!)
         let _headers : HTTPHeaders = [
@@ -131,26 +131,29 @@ class SpotDetailViewController: UIViewController, UICollectionViewDelegate , UIC
             response in
             let jsonResponse = response.result.value as! [String:Any]
             let data = jsonResponse["user"] as! [String: Any]
-            self.author.titleLabel?.text = data["name"] as! String
+            self.author.titleLabel?.text = data["nickName"] as? String
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return tags.count
+        return spot.tags!.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         var cell = SpotDetailTagCollectionViewCell()
         cell = collectionView.dequeueReusableCell(withReuseIdentifier: "spotDetailTagCell", for: indexPath) as! SpotDetailTagCollectionViewCell
-        cell.SpotTagName.text = tags[indexPath.row].name
-        print(cell.SpotTagName.text)
+        print("cell tag name",cell.SpotTagName.text)
+        cell.SpotTagName.text = spot.tags![indexPath.row].name
+        
+        
         return cell
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        let letras = tags[indexPath.row].name?.count
+        let letras = spot.tags![indexPath.row].name?.count
         let dimensions = CGFloat((8 * letras!) + 20)
         return CGSize(width: dimensions,height: 40)
     }

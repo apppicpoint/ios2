@@ -765,7 +765,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cA2-Ge-Xr8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-4320" y="4720.7746478873241"/>
+            <point key="canvasLocation" x="-4320" y="5354"/>
         </scene>
         <!--Tags View Controller-->
         <scene sceneID="Vg2-eQ-J4u">
@@ -933,7 +933,7 @@
                     <rectEdge key="edges" left="YES"/>
                 </screenEdgePanGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1125" y="2353.5211267605632"/>
+            <point key="canvasLocation" x="1140" y="2344"/>
         </scene>
         <!--Map New Spot-->
         <scene sceneID="ETi-kp-Rty">
@@ -1068,7 +1068,7 @@
         <!--Item-->
         <scene sceneID="FqK-tO-cu7">
             <objects>
-                <navigationController id="0pS-o9-Ihf" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="feedSpotNavigation" useStoryboardIdentifierAsRestorationIdentifier="YES" id="0pS-o9-Ihf" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="PHH-mc-plN"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="c5M-gl-rYS">
                         <rect key="frame" x="0.0" y="20" width="320" height="44"/>
@@ -1080,7 +1080,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="n8y-gT-lHZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-5115" y="3293"/>
+            <point key="canvasLocation" x="-4320" y="3610"/>
         </scene>
         <!--Feed spots-->
         <scene sceneID="Fww-jz-h8N">
@@ -1172,7 +1172,7 @@
                                             <outlet property="distanceTextField" destination="UqT-35-sOH" id="Xsa-J4-aPb"/>
                                             <outlet property="spotImage" destination="ra6-zO-MYF" id="qor-pA-9VY"/>
                                             <outlet property="titleTextField" destination="7Pd-1W-Ide" id="NZy-DT-Eib"/>
-                                            <segue destination="WWy-d6-uyH" kind="show" id="BUX-WQ-yIp"/>
+                                            <segue destination="WWy-d6-uyH" kind="show" identifier="goToDetail" id="BUX-WQ-yIp"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -1221,7 +1221,7 @@
                     </connections>
                 </searchDisplayController>
             </objects>
-            <point key="canvasLocation" x="-4320" y="3609.5070422535214"/>
+            <point key="canvasLocation" x="-4320" y="4304"/>
         </scene>
         <!--Custom Alert-->
         <scene sceneID="SS1-Q2-70x">
@@ -2089,8 +2089,8 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="fOT-Tv-ZUK"/>
-        <segue reference="Wpa-CT-FGJ"/>
-        <segue reference="A6h-nQ-ZBq"/>
+        <segue reference="DHZ-9d-wH5"/>
+        <segue reference="3OC-wB-Wwj"/>
         <segue reference="LHQ-Wi-Wg0"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.36862745098039218" green="0.0" blue="0.5725490196078431" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
