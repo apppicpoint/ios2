@@ -29,6 +29,13 @@ class CameraViewController: UIViewController, UINavigationControllerDelegate, UI
         setupPreviewLayer()
         startRunningCaptureSession() */
         
+        let vc = UIImagePickerController()
+        vc.sourceType = .camera
+        vc.sourceType = .savedPhotosAlbum
+        vc.allowsEditing = true
+        vc.delegate = self
+        present(vc, animated: true)
+        
     }
 
     @IBAction func backAct(_ sender: Any) {
